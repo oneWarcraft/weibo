@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  WJWMessageViewController.h
 //  weibo
 //
 //  Created by Wang Wei on 16/6/20.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface WJWMessageViewController : UIViewController
 
 @end
-

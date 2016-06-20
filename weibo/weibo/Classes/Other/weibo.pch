@@ -1,0 +1,35 @@
+//
+//  weibo.pch
+//  weibo
+//
+//  Created by Wang Wei on 16/6/19.
+//  Copyright © 2016年 WangJiwei. All rights reserved.
+//
+
+#ifndef weibo_pch
+#define weibo_pch
+
+
+//-----objc sec---start-----
+#ifdef __OBJC__
+#define ABCDEFGH222 10
+
+#define WJWLogs NSLog(@"%s", __func___)
+
+#ifdef DEBUG
+
+#define WJWLog(...) NSLog(__VA_ARGS__)
+#else
+
+#define WJWLog(...)
+#endif
+
+#endif
+//-----objc sec---end-----
+
+//OC和C公有的宏
+#define OC_C 10
+
+
+
+#endif /* weibo_pch */
