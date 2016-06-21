@@ -126,11 +126,9 @@
 		0CC7AE5E1D17F92100340CD0 /* WJWAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7AE5A1D17F92100340CD0 /* WJWAdvertViewController.m */; };
 		0CC7AE5F1D17F92100340CD0 /* WJWAdvertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CC7AE5B1D17F92100340CD0 /* WJWAdvertViewController.xib */; };
 		0CE971BA1D17A5350033732F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CE971B91D17A5350033732F /* Assets.xcassets */; };
-		0CE971BE1D17A53B0033732F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CE971BC1D17A53B0033732F /* LaunchScreen.storyboard */; };
 		0CE971DB1D17A5A30033732F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CE971DA1D17A5A30033732F /* Info.plist */; };
 		0CF185BE1D179550001EF1D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF185BD1D179550001EF1D9 /* main.m */; };
 		0CF185C11D179550001EF1D9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF185C01D179550001EF1D9 /* AppDelegate.m */; };
-		0CF185CC1D179550001EF1D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CF185CA1D179550001EF1D9 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -267,13 +265,11 @@
 		0CC7AE5A1D17F92100340CD0 /* WJWAdvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWAdvertViewController.m; sourceTree = "<group>"; };
 		0CC7AE5B1D17F92100340CD0 /* WJWAdvertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWAdvertViewController.xib; sourceTree = "<group>"; };
 		0CE971B91D17A5350033732F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0CE971BD1D17A53B0033732F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CE971DA1D17A5A30033732F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CF185B91D179550001EF1D9 /* weibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF185BD1D179550001EF1D9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0CF185BF1D179550001EF1D9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0CF185C01D179550001EF1D9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0CF185CB1D179550001EF1D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,7 +488,6 @@
 		0CE971BB1D17A53B0033732F /* Base.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				0CE971BC1D17A53B0033732F /* LaunchScreen.storyboard */,
 			);
 			path = Base.lproj;
 			sourceTree = "<group>";
@@ -771,7 +766,6 @@
 				0C749E9C1D17E2080018F680 /* AppIcons */,
 				0CE971BB1D17A53B0033732F /* Base.lproj */,
 				0CE971B91D17A5350033732F /* Assets.xcassets */,
-				0CF185CA1D179550001EF1D9 /* LaunchScreen.storyboard */,
 				0CE971DA1D17A5A30033732F /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -835,7 +829,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CF185CC1D179550001EF1D9 /* LaunchScreen.storyboard in Resources */,
 				0C749F331D17E2080018F680 /* nav_coin_icon_click@2x.png in Resources */,
 				0C749F591D17E2080018F680 /* tabBar_friendTrends_click_icon@2x.png in Resources */,
 				0C749F2F1D17E2080018F680 /* nav_coin_icon.png in Resources */,
@@ -853,7 +846,6 @@
 				0C749F0C1D17E2080018F680 /* LaunchImage-800-Portrait-736h@3x.png in Resources */,
 				0C749F351D17E2080018F680 /* nav_item_game_click_icon.png in Resources */,
 				0C749F6E1D17E2080018F680 /* tabBar_publish_icon@2x.png in Resources */,
-				0CE971BE1D17A53B0033732F /* LaunchScreen.storyboard in Resources */,
 				0C749F3F1D17E2080018F680 /* nav_item_game_iconN@2x.png in Resources */,
 				0C749F171D17E2080018F680 /* MainTagSubIcon@3x.png in Resources */,
 				0C749F451D17E2080018F680 /* navigationButtonRandomClick@2x.png in Resources */,
@@ -973,25 +965,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		0CE971BC1D17A53B0033732F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0CE971BD1D17A53B0033732F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		0CF185CA1D179550001EF1D9 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0CF185CB1D179550001EF1D9 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0CF185CE1D179550001EF1D9 /* Debug */ = {

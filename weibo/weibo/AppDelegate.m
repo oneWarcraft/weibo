@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "WJWTabBarController.h"
+#import "WJWAdvertViewController.h"
 
 @interface AppDelegate ()
 
@@ -23,9 +24,12 @@
     
     //设置窗口的根控制器
     //创建窗口根控制器 TabBarController
-    WJWTabBarController *RootVC = [[WJWTabBarController alloc] init];
-    self.window.rootViewController = RootVC;
+//    WJWTabBarController *RootVC = [[WJWTabBarController alloc] init];
+//    self.window.rootViewController = RootVC;
     
+    WJWAdvertViewController *adverVC = [[WJWAdvertViewController alloc] init];
+    
+    self.window.rootViewController = adverVC;
     //显示窗口
     [self.window makeKeyAndVisible];
     
