@@ -9,7 +9,6 @@
 #import "WJWSettingTableViewController.h"
 #import "WJWFileManager.h"
 
-
 #define cachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]
 @interface WJWSettingTableViewController () <UITableViewDelegate>
 
@@ -71,23 +70,37 @@ static NSString *ID = @"cleanRubbishID";
     NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:0 inSection:3];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath2];
 //    cell.textLabel.text = @"清理缓存";
-    NSLog(@"==%@", cell.detailTextLabel.text);
     cell.detailTextLabel.text = [self getFileSizeStr];
-    NSLog(@"==%@", cell.detailTextLabel.text);
 }
 
 
 #pragma mark -- Table View data Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WJWLog(@"清理完毕 %zd,  %zd", indexPath.section, indexPath.row);
+    //ios8之后的  //弹窗询问用户是否确定删除缓存空间文件
+    UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:nil message:@"确定清除缓存吗" preferredStyle:(UIAlertControllerStyleAlert)];
     
-    [WJWFileManager removeDirectoryPath:cachePath];
- 
+    UIAlertAction *confirmAct = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [WJWFileManager removeDirectoryPath:cachePath];
+        
+        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:0 inSection:3];
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath2];
+        cell.detailTextLabel.text = @"0KB";
+    }];
+    
+    UIAlertAction *CancleAct = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//        NSLog(@"点击了取消按钮完成。。。。。。");
+    }];
+    
+    [alertCon addAction:CancleAct];
+    [alertCon addAction:confirmAct];
+    
+    [self presentViewController:alertCon animated:YES completion:^{
+    }];
+    
+//    WJWLog(@"清理完毕 %zd,  %zd", indexPath.section, indexPath.row);
 
-    NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:0 inSection:3];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath2];
-    cell.detailTextLabel.text = @"0KB";
 }
 
 - (NSString*)getFileSizeStr
