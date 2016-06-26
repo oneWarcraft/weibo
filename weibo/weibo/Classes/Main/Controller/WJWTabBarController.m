@@ -45,9 +45,9 @@
 #pragma mark - 添加所有子控制器
 - (void) setupAllTabBarChildrenController
 {
-    WJWHomePageViewController *vcEssen = [[WJWHomePageViewController alloc] init];
+    WJWHomePageViewController *homePageVC = [[WJWHomePageViewController alloc] init];
     //initWithRootViewController 相当于Push，把nav的根控制器push入栈
-    WJWNavigationController *navEssen = [[WJWNavigationController alloc] initWithRootViewController:vcEssen];
+    WJWNavigationController *navEssen = [[WJWNavigationController alloc] initWithRootViewController:homePageVC];
     [self addChildViewController:navEssen];
     
     WJWMessageViewController *latestPostVC = [[WJWMessageViewController alloc] init];
