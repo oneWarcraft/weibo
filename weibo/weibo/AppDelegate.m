@@ -24,12 +24,12 @@
     
     //设置窗口的根控制器
     //创建窗口根控制器 TabBarController
-//    WJWTabBarController *RootVC = [[WJWTabBarController alloc] init];
-//    self.window.rootViewController = RootVC;
+    WJWTabBarController *RootVC = [[WJWTabBarController alloc] init];
+    self.window.rootViewController = RootVC;
     //为了测试方便，暂时把启动界面屏蔽起来
-    WJWAdvertViewController *adverVC = [[WJWAdvertViewController alloc] init];
-    
-    self.window.rootViewController = adverVC;
+//    WJWAdvertViewController *adverVC = [[WJWAdvertViewController alloc] init];
+//    
+//    self.window.rootViewController = adverVC;
     //显示窗口
     [self.window makeKeyAndVisible];
     
