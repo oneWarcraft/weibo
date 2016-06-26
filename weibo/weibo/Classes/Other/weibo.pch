@@ -12,9 +12,20 @@
 
 //-----objc sec---start-----
 #ifdef __OBJC__
-#define ABCDEFGH222 10
+#import "UIView+Frame.h"
+#import "WJWConst.h"
 
-#define WJWLogs NSLog(@"%s", __func___)
+#define iphone6P (WJWScreenH == 736)
+#define iphone6 (WJWScreenH == 667)
+#define iphone5 (WJWScreenH == 568)
+#define iphone4 (WJWScreenH == 480)
+#define WJWScreenH [UIScreen mainScreen].bounds.size.height
+#define WJWScreenW [UIScreen mainScreen].bounds.size.width
+#define WJWColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+#define WJWGlobeColor WJWColor(215, 215, 215)
+#define WJWRandomColor WJWColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
+
+#define WJWLogError NSLog(@"error!: %s, %d", __func___, __Line__)
 
 #ifdef DEBUG
 
@@ -29,6 +40,7 @@
 
 //OC和C公有的宏
 #define OC_C 10
+
 
 
 

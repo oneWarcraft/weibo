@@ -25,7 +25,7 @@
     
     NSMutableDictionary *attriDic = [NSMutableDictionary dictionary];
     
-    attriDic[NSFontAttributeName] = [UIFont systemFontOfSize:20];
+    attriDic[NSFontAttributeName] = [UIFont systemFontOfSize:18];
     
     naviBar.titleTextAttributes = attriDic;
     

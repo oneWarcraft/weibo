@@ -19,16 +19,19 @@
 - (UIButton *)plusButton
 {
     if (_plusButton == nil) {
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIButton *plusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        [btn setImage:[UIImage imageNamed:@"tabBar_publish_icon"] forState:(UIControlStateNormal)];
-        [btn setImage:[UIImage imageNamed:@"tabBar_publish_click_icon"] forState:(UIControlStateHighlighted)];
+        [plusBtn setImage:[UIImage imageNamed:@"tabbar_compose_icon_add"]forState:UIControlStateNormal];
+        [plusBtn setBackgroundImage:[UIImage imageNamed:@"tabbar_compose_button"]forState:UIControlStateNormal];
+        [plusBtn setBackgroundImage:[UIImage imageNamed:@"tabbar_compose_button_highlighted"]forState:UIControlStateHighlighted];
+//        [plusBtn setImage:[UIImage imageNamed:@"tabBar_publish_icon.png"] forState:(UIControlStateNormal)];
+//        [plusBtn setImage:[UIImage imageNamed:@"tabBar_publish_click_icon.png"] forState:(UIControlStateHighlighted)];
         
-        [btn sizeToFit];
+        [plusBtn sizeToFit];
         
-        _plusButton = btn;
+        _plusButton = plusBtn;
         
-        [self addSubview:btn];
+        [self addSubview:plusBtn];
     }
     return _plusButton;
 }
@@ -41,8 +44,8 @@
     
     CGFloat btnX = 0;
     CGFloat btnY = 0;
-    CGFloat btnW = self.WJW_Width / count;
-    CGFloat btnH = self.WJW_Height;
+    CGFloat btnW = self.wjw_width / count;
+    CGFloat btnH = self.wjw_height;
     
     int i = 0;
 //    WJWLog(@" --------- %@", [self class]);
@@ -59,7 +62,7 @@
         }
     }
     
-    self.plusButton.center = CGPointMake(self.WJW_Width * 0.5, self.WJW_Height * 0.5);
+    self.plusButton.center = CGPointMake(self.wjw_width * 0.5, self.wjw_height * 0.5);
 }
 
 @end

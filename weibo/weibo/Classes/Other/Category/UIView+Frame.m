@@ -1,61 +1,83 @@
 //
 //  UIView+Frame.m
-//  weibo
 //
-//  Created by Wang Wei on 16/6/19.
-//  Copyright © 2016年 WangJiwei. All rights reserved.
+//
+//  Copyright © 2016年 王继伟. All rights reserved.
 //
 
 #import "UIView+Frame.h"
 
 @implementation UIView (Frame)
 
-- (CGFloat) WJW_X
+- (CGFloat)wjw_centerX
 {
-    return self.frame.origin.x;
+    return self.center.x;
+}
+- (void)setWjw_centerX:(CGFloat)wjw_centerX
+{
+    CGPoint center = self.center;
+    center.x = wjw_centerX;
+    self.center = center;
 }
 
-- (void)setWJW_X:(CGFloat)WJW_X
+- (CGFloat)wjw_centerY
 {
-    CGRect temp = self.frame;
-    temp.origin.x = WJW_X;
-    self.frame = temp;
+    return self.center.y;
+}
+- (void)setWjw_centerY:(CGFloat)wjw_centerY
+{
+    CGPoint center = self.center;
+    center.y = wjw_centerY;
+    self.center = center;
 }
 
-- (CGFloat) WJW_Y
-{
-    return self.frame.origin.y;
-}
-
-- (void) setWJW_Y:(CGFloat)WJW_Y
-{
-    CGRect temp = self.frame;
-    temp.origin.y = WJW_Y;
-    self.frame = temp;
-}
-
-- (CGFloat)WJW_Width
-{
-    return self.frame.size.width;
-}
-
-- (void)setWJW_Width:(CGFloat)WJW_Width
-{
-    CGRect temp = self.frame;
-    temp.size.width = WJW_Width;
-    self.frame = temp;
-}
-
-- (CGFloat)WJW_Height
+- (CGFloat)wjw_height
 {
     return self.frame.size.height;
 }
 
-- (void)setWJW_Height:(CGFloat)WJW_Height
+- (void)setWjw_height:(CGFloat)wjw_height
 {
-    CGRect temp = self.frame;
-    temp.size.height = WJW_Height;
-    self.frame = temp;
+    CGRect rect = self.frame;
+    rect.size.height = wjw_height;
+    self.frame = rect;
 }
 
+- (CGFloat)wjw_width
+{
+    return self.frame.size.width;
+}
+
+- (void)setWjw_width:(CGFloat)wjw_width
+{
+    CGRect rect = self.frame;
+    rect.size.width = wjw_width;
+    self.frame = rect;
+
+}
+
+- (CGFloat)wjw_x
+{
+    return self.frame.origin.x;
+}
+
+- (void)setWjw_x:(CGFloat)wjw_x
+{
+    CGRect rect = self.frame;
+    rect.origin.x = wjw_x;
+    self.frame = rect;
+
+}
+
+- (CGFloat)wjw_y
+{
+    return self.frame.origin.y;
+}
+- (void)setWjw_y:(CGFloat)wjw_y
+{
+    CGRect rect = self.frame;
+    rect.origin.y = wjw_y;
+    self.frame = rect;
+
+}
 @end

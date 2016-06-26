@@ -1,19 +1,17 @@
 //
 //  UIView+Frame.h
-//  weibo
 //
-//  Created by Wang Wei on 16/6/19.
-//  Copyright © 2016年 WangJiwei. All rights reserved.
+//
+//  Copyright © 2016年 王继伟. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface UIView (Frame)
-
-@property CGFloat WJW_X;
-@property CGFloat WJW_Y;
-@property CGFloat WJW_Width;
-@property CGFloat WJW_Height;
-
-
+@property CGFloat wjw_width;
+@property CGFloat wjw_height;
+@property CGFloat wjw_x;
+@property CGFloat wjw_y;
+@property CGFloat wjw_centerY;
+@property CGFloat wjw_centerX;
 @end

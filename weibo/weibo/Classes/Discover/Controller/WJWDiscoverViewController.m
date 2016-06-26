@@ -24,17 +24,17 @@
 
 - (void) setNavBarItem
 {
-    //设置导航条左边按钮
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:[UIImage imageNamed:@"friendsRecommentIcon"] highImage:[UIImage imageNamed:@"friendsRecommentIcon-click"] target:self action:@selector(leftNavClick)];
-    
-    //设置导航条中间按钮
-    self.navigationItem.title = @"我的关注";
+//    //设置导航条左边按钮
+//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImage:[UIImage imageNamed:@"friendsRecommentIcon"] highImage:[UIImage imageNamed:@"friendsRecommentIcon-click"] target:self action:@selector(leftNavClick)];
+//    
+//    //设置导航条中间按钮
+//    self.navigationItem.title = @"我的关注";
 }
 
-- (void) leftNavClick
-{
-    WJWLog(@"左键");
-}
+//- (void) leftNavClick
+//{
+//    WJWLog(@"左键");
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

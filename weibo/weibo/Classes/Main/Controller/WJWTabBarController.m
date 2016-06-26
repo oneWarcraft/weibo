@@ -26,17 +26,18 @@
 + (void)load
 {
     //获得全局的tabBarItem,设置统一风格  app所有？
-    UITabBarItem *item = [UITabBarItem appearance];
+    UITabBarItem *tabBarItem = [UITabBarItem appearance];
+//    UITabBarItem *tabBarItem = [UITabBarItem appearanceWhenContainedInInstancesOfClasses:@[self]];
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
     //统一设置字体颜色  UIControlStateSelected
     dict[NSForegroundColorAttributeName] = [UIColor blackColor];
-    [item setTitleTextAttributes:dict forState:(UIControlStateSelected)];
+    [tabBarItem setTitleTextAttributes:dict forState:(UIControlStateSelected)];
     
     //统一设置字体大小  字体需要分开设置才有效 state不同  
-    dict[NSFontAttributeName] = [UIFont systemFontOfSize:13];
-    [item setTitleTextAttributes:dict forState:UIControlStateNormal];
+    dict[NSFontAttributeName] = [UIFont systemFontOfSize:11];
+    [tabBarItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     
 }
 
@@ -93,23 +94,25 @@
     
 //    WJWLog(@"%@", self.childViewControllers);
     
-    // 1. 精华按钮
+    // 1. 首页
     UINavigationController *navEss = self.childViewControllers[0];
     //标题
     navEss.tabBarItem.title = @"首页";
     //默认图片
-    navEss.tabBarItem.image = [UIImage imageNamed:@"tabBar_essence_icon"];
+    navEss.tabBarItem.image = [UIImage imageNamed:@"tabbar_home"];
     //选中时显示图片
-    navEss.tabBarItem.selectedImage = [UIImage imageNameWithOriginal:@"tabBar_essence_click_icon"];
+    navEss.tabBarItem.selectedImage = [UIImage imageNameWithOriginal:@"tabbar_home_selected"];
+ 
+//     UIBarButtonItem *nightItem = [UIBarButtonItem itemWithSelectedImage:[UIImage imageNamed:@"mine-moon-icon"] selectedImage:[UIImage imageNamed:@"mine-moon-icon-click"] target:self action:@selector(night:)];
     
     // 2. 新帖按钮
     UINavigationController *navNewP = self.childViewControllers[1];
     //标题
     navNewP.tabBarItem.title = @"消息";
     //默认图片
-    navNewP.tabBarItem.image = [UIImage imageNamed:@"tabBar_new_icon"];
+    navNewP.tabBarItem.image = [UIImage imageNamed:@"tabbar_message_center"];
     //选中时显示图片
-    navNewP.tabBarItem.selectedImage = [UIImage imageNameWithOriginal:@"tabBar_new_click_icon"];
+    navNewP.tabBarItem.selectedImage = [UIImage imageNameWithOriginal:@"tabbar_message_center_selected"];
     
     //    // 3. 发布按钮
     //    WJWPublishViewController *pubNav = self.childViewControllers[2];
@@ -121,14 +124,14 @@
     //    pubNav.tabBarItem.selectedImage = [UIImage imageNameWithOriginal:@"tabBar_publish_click_icon.png"];
     
     
-    // 4. 关注按钮
+    // 4. 发现
     UINavigationController *focusNav = self.childViewControllers[2];
     //标题
-    focusNav.tabBarItem.title = @"关注";
+    focusNav.tabBarItem.title = @"发现";
     //默认图片
-    focusNav.tabBarItem.image = [UIImage imageNamed:@"tabBar_friendTrends_icon.png"];
+    focusNav.tabBarItem.image = [UIImage imageNamed:@"tabbar_discover"];
     //选中时显示图片
-    focusNav.tabBarItem.selectedImage = [UIImage imageNameWithOriginal:@"tabBar_friendTrends_click_icon.png"];
+    focusNav.tabBarItem.selectedImage = [UIImage imageNameWithOriginal:@"tabbar_discover_selected"];
     
     
     // 5. 我 按钮
@@ -136,17 +139,9 @@
     //标题
     myNav.tabBarItem.title = @"我";
     //默认图片
-    myNav.tabBarItem.image = [UIImage imageNamed:@"tabBar_me_icon.png"];
+    myNav.tabBarItem.image = [UIImage imageNamed:@"tabbar_profile"];
     //选中时显示图片
-    myNav.tabBarItem.selectedImage = [UIImage imageNameWithOriginal:@"tabBar_me_click_icon.png"];
-    
-//    UITabBarItem  UITabBar
-    
-//    self.tabBar
-    
-    
-    
-    
+    myNav.tabBarItem.selectedImage = [UIImage imageNameWithOriginal:@"tabbar_profile_selected"];
 }
 
 - (void)didReceiveMemoryWarning {
