@@ -7,13 +7,17 @@
 //
 
 #import "WJWSettingTableViewController.h"
+#import "WJWFileManager.h"
 
+
+#define cachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]
 @interface WJWSettingTableViewController () <UITableViewDelegate>
 
 @end
 
 @implementation WJWSettingTableViewController
 
+static NSString *ID = @"cleanRubbishID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -27,9 +31,13 @@
     //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"jump" style:(UIBarButtonItemStyleDone) target:self action:@selector(jump)];
     
     self.tableView.delegate = self;
+//    self.tableView.dataSource = self;
+    
     self.tableView.sectionHeaderHeight = 6;
     self.tableView.sectionFooterHeight = 6;
     self.tableView.contentInset = UIEdgeInsetsMake(-25, 0, 0, 0);
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
 }
 
 //- (void) jump
@@ -46,14 +54,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
-#pragma mark -- Table View data Delegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    WJWLog(@"%zd", indexPath.row);
-}
-
+/**
+ *  加载storyBoard中设置控制器
+ */
 + (instancetype)loadSettingVC
 {
     UIStoryboard *settingVCSB = [UIStoryboard storyboardWithName:@"globalStoryBoard" bundle:nil];
@@ -61,27 +64,96 @@
     return [settingVCSB instantiateViewControllerWithIdentifier:@"Mine-SettingVC-ID"];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //计算显示当前缓存有多少垃圾文件
+    NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:0 inSection:3];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath2];
+//    cell.textLabel.text = @"清理缓存";
+    NSLog(@"==%@", cell.detailTextLabel.text);
+    cell.detailTextLabel.text = [self getFileSizeStr];
+    NSLog(@"==%@", cell.detailTextLabel.text);
+}
+
+
+#pragma mark -- Table View data Delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    WJWLog(@"清理完毕 %zd,  %zd", indexPath.section, indexPath.row);
+    
+    [WJWFileManager removeDirectoryPath:cachePath];
+ 
+
+    NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:0 inSection:3];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath2];
+    cell.detailTextLabel.text = @"0KB";
+}
+
+- (NSString*)getFileSizeStr
+{
+    NSInteger totalSize = [WJWFileManager getDirectorySize:cachePath];
+    
+    NSString *str = @"0KB"; //清除缓存
+    
+    if (totalSize > 1000 * 1000) { //MB
+        CGFloat totalSizeF = totalSize / 1000.0 /1000.0;
+        str = [NSString stringWithFormat:@"%@(%.1fMB)", str, totalSizeF];
+    }else if (totalSize > 1000) { // KB
+        CGFloat totalSizeF = totalSize / 1000.0;
+        str = [NSString stringWithFormat:@"%@(%.1fKB)", str, totalSizeF];
+    }else if (totalSize > 0) //B
+    {
+        str = [NSString stringWithFormat:@"%@(%.1ldB)", str, (long)totalSize];
+    }
+//    else
+//    {
+//        str = @"0KB";
+//    }
+    
+    return str;
+}
+
+
 //#pragma mark - Table view data source
-//
+
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//#warning Incomplete implementation, return the number of sections
-//    return 0;
+//    return 5;
 //}
 //
 //- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//#warning Incomplete implementation, return the number of rows
-//    return 0;
+//    return 1;
+//}
+//
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//
+//    if (indexPath.section == 3 && indexPath.row == 0) {
+//    }
+//    
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+//    }
+//    
+//    cell.textLabel.text = @"清理垃圾";
+//    cell.detailTextLabel.text = @"128M";
+//    
+////    self.tableView
+//    
+//    return cell;
 //}
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
+//+ (instancetype)indexPathForRow:(NSInteger)row inSection:(NSInteger)section
+//{
+//    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+//
+//    cell.textLabel.text = @"清理垃圾";
+//    cell.detailTextLabel.text = @"128M";
+//    
+//    return cell;
+//}
 
 /*
 // Override to support conditional editing of the table view.
