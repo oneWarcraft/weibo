@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0082653BC7C078CD44AC82DD /* libPods-weibo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C27454225A9D7DF19851A1B5 /* libPods-weibo.a */; };
+		0C2DF20D1D1F72E800C48AD9 /* WJWADItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DF20C1D1F72E800C48AD9 /* WJWADItem.m */; };
 		0C749E7A1D17D7030018F680 /* WJWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E791D17D7030018F680 /* WJWTabBarController.m */; };
 		0C749E801D17DAB00018F680 /* WJWNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E7F1D17DAB00018F680 /* WJWNavigationController.m */; };
 		0C749E831D17DB310018F680 /* WJWDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E821D17DB310018F680 /* WJWDiscoverViewController.m */; };
@@ -19,13 +20,6 @@
 		0C749E971D17DC290018F680 /* UIImage+Render.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E931D17DC290018F680 /* UIImage+Render.m */; };
 		0C749E981D17DC290018F680 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E951D17DC290018F680 /* UIView+Frame.m */; };
 		0C749E9B1D17DC6A0018F680 /* WJWTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E9A1D17DC6A0018F680 /* WJWTabBar.m */; };
-		0C749F081D17E2080018F680 /* LaunchImage-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749E9E1D17E2080018F680 /* LaunchImage-568h@2x.png */; };
-		0C749F091D17E2080018F680 /* LaunchImage-700-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749E9F1D17E2080018F680 /* LaunchImage-700-568h@2x.png */; };
-		0C749F0A1D17E2080018F680 /* LaunchImage-700@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749EA01D17E2080018F680 /* LaunchImage-700@2x.png */; };
-		0C749F0B1D17E2080018F680 /* LaunchImage-800-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749EA11D17E2080018F680 /* LaunchImage-800-667h@2x.png */; };
-		0C749F0C1D17E2080018F680 /* LaunchImage-800-Portrait-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749EA21D17E2080018F680 /* LaunchImage-800-Portrait-736h@3x.png */; };
-		0C749F0D1D17E2080018F680 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749EA31D17E2080018F680 /* LaunchImage.png */; };
-		0C749F0E1D17E2080018F680 /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749EA41D17E2080018F680 /* LaunchImage@2x.png */; };
 		0C749F0F1D17E2080018F680 /* friendsRecommentIcon-click.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749EA61D17E2080018F680 /* friendsRecommentIcon-click.png */; };
 		0C749F101D17E2080018F680 /* friendsRecommentIcon-click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749EA71D17E2080018F680 /* friendsRecommentIcon-click@2x.png */; };
 		0C749F111D17E2080018F680 /* friendsRecommentIcon-click@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749EA81D17E2080018F680 /* friendsRecommentIcon-click@3x.png */; };
@@ -133,6 +127,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C2DF20B1D1F72E800C48AD9 /* WJWADItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWADItem.h; sourceTree = "<group>"; };
+		0C2DF20C1D1F72E800C48AD9 /* WJWADItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWADItem.m; sourceTree = "<group>"; };
 		0C749E781D17D7030018F680 /* WJWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWTabBarController.h; sourceTree = "<group>"; };
 		0C749E791D17D7030018F680 /* WJWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWTabBarController.m; sourceTree = "<group>"; };
 		0C749E7E1D17DAB00018F680 /* WJWNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWNavigationController.h; sourceTree = "<group>"; };
@@ -155,13 +151,6 @@
 		0C749E951D17DC290018F680 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		0C749E991D17DC6A0018F680 /* WJWTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWTabBar.h; sourceTree = "<group>"; };
 		0C749E9A1D17DC6A0018F680 /* WJWTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWTabBar.m; sourceTree = "<group>"; };
-		0C749E9E1D17E2080018F680 /* LaunchImage-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage-568h@2x.png"; sourceTree = "<group>"; };
-		0C749E9F1D17E2080018F680 /* LaunchImage-700-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage-700-568h@2x.png"; sourceTree = "<group>"; };
-		0C749EA01D17E2080018F680 /* LaunchImage-700@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage-700@2x.png"; sourceTree = "<group>"; };
-		0C749EA11D17E2080018F680 /* LaunchImage-800-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage-800-667h@2x.png"; sourceTree = "<group>"; };
-		0C749EA21D17E2080018F680 /* LaunchImage-800-Portrait-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage-800-Portrait-736h@3x.png"; sourceTree = "<group>"; };
-		0C749EA31D17E2080018F680 /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
-		0C749EA41D17E2080018F680 /* LaunchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage@2x.png"; sourceTree = "<group>"; };
 		0C749EA61D17E2080018F680 /* friendsRecommentIcon-click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friendsRecommentIcon-click.png"; sourceTree = "<group>"; };
 		0C749EA71D17E2080018F680 /* friendsRecommentIcon-click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friendsRecommentIcon-click@2x.png"; sourceTree = "<group>"; };
 		0C749EA81D17E2080018F680 /* friendsRecommentIcon-click@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friendsRecommentIcon-click@3x.png"; sourceTree = "<group>"; };
@@ -291,25 +280,10 @@
 		0C749E9C1D17E2080018F680 /* AppIcons */ = {
 			isa = PBXGroup;
 			children = (
-				0C749E9D1D17E2080018F680 /* LauchImage */,
 				0C749EA51D17E2080018F680 /* Navigation */,
 				0C749EE71D17E2080018F680 /* TabBar */,
 			);
 			path = AppIcons;
-			sourceTree = "<group>";
-		};
-		0C749E9D1D17E2080018F680 /* LauchImage */ = {
-			isa = PBXGroup;
-			children = (
-				0C749E9E1D17E2080018F680 /* LaunchImage-568h@2x.png */,
-				0C749E9F1D17E2080018F680 /* LaunchImage-700-568h@2x.png */,
-				0C749EA01D17E2080018F680 /* LaunchImage-700@2x.png */,
-				0C749EA11D17E2080018F680 /* LaunchImage-800-667h@2x.png */,
-				0C749EA21D17E2080018F680 /* LaunchImage-800-Portrait-736h@3x.png */,
-				0C749EA31D17E2080018F680 /* LaunchImage.png */,
-				0C749EA41D17E2080018F680 /* LaunchImage@2x.png */,
-			);
-			path = LauchImage;
 			sourceTree = "<group>";
 		};
 		0C749EA51D17E2080018F680 /* Navigation */ = {
@@ -479,6 +453,8 @@
 		0CC7AE5C1D17F92100340CD0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0C2DF20B1D1F72E800C48AD9 /* WJWADItem.h */,
+				0C2DF20C1D1F72E800C48AD9 /* WJWADItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -870,7 +846,6 @@
 				0C749F2B1D17E2080018F680 /* mine-sun-icon-click@3x.png in Resources */,
 				0C749F511D17E2080018F680 /* tabbar-light@2x.png in Resources */,
 				0C749F3E1D17E2080018F680 /* nav_item_game_iconN.png in Resources */,
-				0C749F0C1D17E2080018F680 /* LaunchImage-800-Portrait-736h@3x.png in Resources */,
 				0C749F351D17E2080018F680 /* nav_item_game_click_icon.png in Resources */,
 				0C749F6E1D17E2080018F680 /* tabBar_publish_icon@2x.png in Resources */,
 				0C749F3F1D17E2080018F680 /* nav_item_game_iconN@2x.png in Resources */,
@@ -885,7 +860,6 @@
 				0C749F5E1D17E2080018F680 /* tabBar_me_click_icon.png in Resources */,
 				0C749F611D17E2080018F680 /* tabBar_me_icon.png in Resources */,
 				0C749F281D17E2080018F680 /* mine-setting-icon@3x.png in Resources */,
-				0C749F0E1D17E2080018F680 /* LaunchImage@2x.png in Resources */,
 				0C749F481D17E2080018F680 /* navigationButtonRandomN.png in Resources */,
 				0C749F1F1D17E2080018F680 /* mine-moon-icon-click@2x.png in Resources */,
 				0C749F101D17E2080018F680 /* friendsRecommentIcon-click@2x.png in Resources */,
@@ -914,11 +888,8 @@
 				0C749F371D17E2080018F680 /* nav_item_game_click_icon@3x.png in Resources */,
 				0C749F141D17E2080018F680 /* friendsRecommentIcon@3x.png in Resources */,
 				0C749F631D17E2080018F680 /* tabBar_me_icon@3x.png in Resources */,
-				0C749F091D17E2080018F680 /* LaunchImage-700-568h@2x.png in Resources */,
 				0C749F2A1D17E2080018F680 /* mine-sun-icon-click@2x.png in Resources */,
 				0C749F341D17E2080018F680 /* nav_coin_icon_click@3x.png in Resources */,
-				0C749F0B1D17E2080018F680 /* LaunchImage-800-667h@2x.png in Resources */,
-				0C749F081D17E2080018F680 /* LaunchImage-568h@2x.png in Resources */,
 				0C749F601D17E2080018F680 /* tabBar_me_click_icon@3x.png in Resources */,
 				0C749F6F1D17E2080018F680 /* tabBar_publish_icon@3x.png in Resources */,
 				0C749F4C1D17E2080018F680 /* navigationButtonReturn@3x.png in Resources */,
@@ -945,13 +916,11 @@
 				0C749F6A1D17E2080018F680 /* tabBar_publish_click_icon.png in Resources */,
 				0C749F1A1D17E2080018F680 /* MainTagSubIconClick@3x.png in Resources */,
 				0C749F671D17E2080018F680 /* tabBar_new_icon.png in Resources */,
-				0C749F0D1D17E2080018F680 /* LaunchImage.png in Resources */,
 				0C749F4A1D17E2080018F680 /* navigationButtonReturn.png in Resources */,
 				0C749F561D17E2080018F680 /* tabBar_essence_icon@2x.png in Resources */,
 				0C749F151D17E2080018F680 /* MainTagSubIcon.png in Resources */,
 				0CE971BA1D17A5350033732F /* Assets.xcassets in Resources */,
 				0C749F441D17E2080018F680 /* navigationButtonRandomClick.png in Resources */,
-				0C749F0A1D17E2080018F680 /* LaunchImage-700@2x.png in Resources */,
 				0C749F651D17E2080018F680 /* tabBar_new_click_icon@2x.png in Resources */,
 				0C749F321D17E2080018F680 /* nav_coin_icon_click.png in Resources */,
 				0C749F0F1D17E2080018F680 /* friendsRecommentIcon-click.png in Resources */,
@@ -1023,6 +992,7 @@
 			files = (
 				0C749E8F1D17DB710018F680 /* WJWNewViewController.m in Sources */,
 				0C749E831D17DB310018F680 /* WJWDiscoverViewController.m in Sources */,
+				0C2DF20D1D1F72E800C48AD9 /* WJWADItem.m in Sources */,
 				0C749E891D17DB4C0018F680 /* WJWMeViewController.m in Sources */,
 				0C749E801D17DAB00018F680 /* WJWNavigationController.m in Sources */,
 				0C749E981D17DC290018F680 /* UIView+Frame.m in Sources */,
@@ -1129,6 +1099,7 @@
 			baseConfigurationReference = 5505A3A0D61D35B28A8FD9BA /* Pods-weibo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				GCC_PREFIX_HEADER = weibo/Classes/Other/weibo.pch;
 				INFOPLIST_FILE = weibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1142,6 +1113,7 @@
 			baseConfigurationReference = 28699F99CC8D928B8D275F82 /* Pods-weibo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				GCC_PREFIX_HEADER = weibo/Classes/Other/weibo.pch;
 				INFOPLIST_FILE = weibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
