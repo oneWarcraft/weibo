@@ -119,7 +119,8 @@
     }else if (iphone4)
     {
         image = [UIImage imageNamed:@"LaunchImage"];
-    }else
+    }
+    else
     {//需要弄个默认的图片#####
         image = [UIImage imageNamed:@"LaunchImage"];
     }
@@ -134,14 +135,12 @@
 
 - (IBAction)countDownBTNClick
 {
+    NSLog(@"countDownBTNClick");
     [UIApplication sharedApplication].keyWindow.rootViewController = [[WJWTabBarController alloc] init];
     
     [self.timer invalidate];
 }
 
-/**
- *  加载网络数据 -- 启动画面的广告图片，由于没有微博的广告图片接口，就用百思不得姐的广告了
- */
 /**
  *  加载网络数据 -- 启动画面的广告图片，由于没有微博的广告图片接口，就用百思不得姐的广告了
  */
@@ -154,7 +153,7 @@
     mDict[@"code2"] = @"phcqnauGuHYkFMRquANhmgN_IauBThfqmgKsUARhIWdGULPxnz3vndtkQW08nau_I1Y1P1Rhmhwz5Hb8nBuL5HDknWRhTA_qmvqVQhGGUhI_py4MQhF1TvChmgKY5H6hmyPW5RFRHzuET1dGULnhuAN85HchUy7s5HDhIywGujY3P1n3mWb1PvDLnvF-Pyf4mHR4nyRvmWPBmhwBPjcLPyfsPHT3uWm4FMPLpHYkFh7sTA-b5yRzPj6sPvRdFhPdTWYsFMKzuykEmyfqnauGuAu95Rnsnbfknbm1QHnkwW6VPjujnBdKfWD1QHnsnbRsnHwKfYwAwiu9mLfqHbD_H70hTv6qnHn1PauVmynqnjclnj0lnj0lnj0lnj0lnj0hThYqniuVujYkFhkC5HRvnB3dFh7spyfqnW0srj64nBu9TjYsFMub5HDhTZFEujdzTLK_mgPCFMP85Rnsnbfknbm1QHnkwW6VPjujnBdKfWD1QHnsnbRsnHwKfYwAwiuBnHfdnjD4rjnvPWYkFh7sTZu-TWY1QW68nBuWUHYdnHchIAYqPHDzFhqsmyPGIZbqniuYThuYTjd1uAVxnz3vnzu9IjYzFh6qP1RsFMws5y-fpAq8uHT_nBuYmycqnau1IjYkPjRsnHb3n1mvnHDkQWD4niuVmybqniu1uy3qwD-HQDFKHakHHNn_HR7fQ7uDQ7PcHzkHiR3_RYqNQD7jfzkPiRn_wdKHQDP5HikPfRb_fNc_NbwPQDdRHzkDiNchTvwW5HnvPj0zQWndnHRvnBsdPWb4ri3kPW0kPHmhmLnqPH6LP1ndm1-WPyDvnHKBrAw9nju9PHIhmH9WmH6zrjRhTv7_5iu85HDhTvd15HDhTLTqP1RsFh4ETjYYPW0sPzuVuyYqn1mYnjc8nWbvrjTdQjRvrHb4QWDvnjDdPBuk5yRzPj6sPvRdgvPsTBu_my4bTvP9TARqnam";
     
     [manager GET:@"http://mobads.baidu.com/cpro/ui/mads.php" parameters:mDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        WJWLog(@"%@", responseObject);
+//        WJWLog(@"%@", responseObject);
         
         NSDictionary *adDict = [responseObject[@"ad"] firstObject];
         
@@ -174,8 +173,6 @@
         [self.adverImageView sd_setImageWithURL:[NSURL URLWithString:item.w_picurl]];
         
         //        [responseObject writeToFile:@"/Users/wangjiwei/Desktop/wjw.plist" atomically:YES];
-//        [self.adView addSubview:self.adverImageView];
-        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         WJWLog(@"%@", error);

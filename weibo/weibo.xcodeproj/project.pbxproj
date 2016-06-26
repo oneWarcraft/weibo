@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		0082653BC7C078CD44AC82DD /* libPods-weibo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C27454225A9D7DF19851A1B5 /* libPods-weibo.a */; };
 		0C2DF20D1D1F72E800C48AD9 /* WJWADItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DF20C1D1F72E800C48AD9 /* WJWADItem.m */; };
+		0C2DF2251D1F8AD700C48AD9 /* LaunchImage-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DF21E1D1F8AD700C48AD9 /* LaunchImage-568h@2x.png */; };
+		0C2DF2261D1F8AD700C48AD9 /* LaunchImage-700-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DF21F1D1F8AD700C48AD9 /* LaunchImage-700-568h@2x.png */; };
+		0C2DF2271D1F8AD700C48AD9 /* LaunchImage-700@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DF2201D1F8AD700C48AD9 /* LaunchImage-700@2x.png */; };
+		0C2DF2281D1F8AD700C48AD9 /* LaunchImage-800-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DF2211D1F8AD700C48AD9 /* LaunchImage-800-667h@2x.png */; };
+		0C2DF2291D1F8AD700C48AD9 /* LaunchImage-800-Portrait-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DF2221D1F8AD700C48AD9 /* LaunchImage-800-Portrait-736h@3x.png */; };
+		0C2DF22A1D1F8AD700C48AD9 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DF2231D1F8AD700C48AD9 /* LaunchImage.png */; };
+		0C2DF22B1D1F8AD700C48AD9 /* LaunchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DF2241D1F8AD700C48AD9 /* LaunchImage@2x.png */; };
 		0C749E7A1D17D7030018F680 /* WJWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E791D17D7030018F680 /* WJWTabBarController.m */; };
 		0C749E801D17DAB00018F680 /* WJWNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E7F1D17DAB00018F680 /* WJWNavigationController.m */; };
 		0C749E831D17DB310018F680 /* WJWDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E821D17DB310018F680 /* WJWDiscoverViewController.m */; };
@@ -129,6 +136,13 @@
 /* Begin PBXFileReference section */
 		0C2DF20B1D1F72E800C48AD9 /* WJWADItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWADItem.h; sourceTree = "<group>"; };
 		0C2DF20C1D1F72E800C48AD9 /* WJWADItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWADItem.m; sourceTree = "<group>"; };
+		0C2DF21E1D1F8AD700C48AD9 /* LaunchImage-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage-568h@2x.png"; sourceTree = "<group>"; };
+		0C2DF21F1D1F8AD700C48AD9 /* LaunchImage-700-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage-700-568h@2x.png"; sourceTree = "<group>"; };
+		0C2DF2201D1F8AD700C48AD9 /* LaunchImage-700@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage-700@2x.png"; sourceTree = "<group>"; };
+		0C2DF2211D1F8AD700C48AD9 /* LaunchImage-800-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage-800-667h@2x.png"; sourceTree = "<group>"; };
+		0C2DF2221D1F8AD700C48AD9 /* LaunchImage-800-Portrait-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage-800-Portrait-736h@3x.png"; sourceTree = "<group>"; };
+		0C2DF2231D1F8AD700C48AD9 /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
+		0C2DF2241D1F8AD700C48AD9 /* LaunchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage@2x.png"; sourceTree = "<group>"; };
 		0C749E781D17D7030018F680 /* WJWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWTabBarController.h; sourceTree = "<group>"; };
 		0C749E791D17D7030018F680 /* WJWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWTabBarController.m; sourceTree = "<group>"; };
 		0C749E7E1D17DAB00018F680 /* WJWNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWNavigationController.h; sourceTree = "<group>"; };
@@ -277,6 +291,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C2DF21D1D1F8AD700C48AD9 /* LauchImage */ = {
+			isa = PBXGroup;
+			children = (
+				0C2DF21E1D1F8AD700C48AD9 /* LaunchImage-568h@2x.png */,
+				0C2DF21F1D1F8AD700C48AD9 /* LaunchImage-700-568h@2x.png */,
+				0C2DF2201D1F8AD700C48AD9 /* LaunchImage-700@2x.png */,
+				0C2DF2211D1F8AD700C48AD9 /* LaunchImage-800-667h@2x.png */,
+				0C2DF2221D1F8AD700C48AD9 /* LaunchImage-800-Portrait-736h@3x.png */,
+				0C2DF2231D1F8AD700C48AD9 /* LaunchImage.png */,
+				0C2DF2241D1F8AD700C48AD9 /* LaunchImage@2x.png */,
+			);
+			name = LauchImage;
+			path = AppIcons/LauchImage;
+			sourceTree = "<group>";
+		};
 		0C749E9C1D17E2080018F680 /* AppIcons */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +775,7 @@
 		0CF185BC1D179550001EF1D9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0C2DF21D1D1F8AD700C48AD9 /* LauchImage */,
 				0C749E9C1D17E2080018F680 /* AppIcons */,
 				0CE971BB1D17A53B0033732F /* Base.lproj */,
 				0CE971B91D17A5350033732F /* Assets.xcassets */,
@@ -845,11 +875,13 @@
 				0C749F191D17E2080018F680 /* MainTagSubIconClick@2x.png in Resources */,
 				0C749F2B1D17E2080018F680 /* mine-sun-icon-click@3x.png in Resources */,
 				0C749F511D17E2080018F680 /* tabbar-light@2x.png in Resources */,
+				0C2DF2291D1F8AD700C48AD9 /* LaunchImage-800-Portrait-736h@3x.png in Resources */,
 				0C749F3E1D17E2080018F680 /* nav_item_game_iconN.png in Resources */,
 				0C749F351D17E2080018F680 /* nav_item_game_click_icon.png in Resources */,
 				0C749F6E1D17E2080018F680 /* tabBar_publish_icon@2x.png in Resources */,
 				0C749F3F1D17E2080018F680 /* nav_item_game_iconN@2x.png in Resources */,
 				0C749F171D17E2080018F680 /* MainTagSubIcon@3x.png in Resources */,
+				0C2DF2271D1F8AD700C48AD9 /* LaunchImage-700@2x.png in Resources */,
 				0C749F451D17E2080018F680 /* navigationButtonRandomClick@2x.png in Resources */,
 				0C749F271D17E2080018F680 /* mine-setting-icon@2x.png in Resources */,
 				0C749F121D17E2080018F680 /* friendsRecommentIcon.png in Resources */,
@@ -859,6 +891,7 @@
 				0C749F4B1D17E2080018F680 /* navigationButtonReturn@2x.png in Resources */,
 				0C749F5E1D17E2080018F680 /* tabBar_me_click_icon.png in Resources */,
 				0C749F611D17E2080018F680 /* tabBar_me_icon.png in Resources */,
+				0C2DF22B1D1F8AD700C48AD9 /* LaunchImage@2x.png in Resources */,
 				0C749F281D17E2080018F680 /* mine-setting-icon@3x.png in Resources */,
 				0C749F481D17E2080018F680 /* navigationButtonRandomN.png in Resources */,
 				0C749F1F1D17E2080018F680 /* mine-moon-icon-click@2x.png in Resources */,
@@ -886,6 +919,7 @@
 				0C749F501D17E2080018F680 /* tabbar-light.png in Resources */,
 				0C749F411D17E2080018F680 /* navigationbarBackgroundWhite.png in Resources */,
 				0C749F371D17E2080018F680 /* nav_item_game_click_icon@3x.png in Resources */,
+				0C2DF22A1D1F8AD700C48AD9 /* LaunchImage.png in Resources */,
 				0C749F141D17E2080018F680 /* friendsRecommentIcon@3x.png in Resources */,
 				0C749F631D17E2080018F680 /* tabBar_me_icon@3x.png in Resources */,
 				0C749F2A1D17E2080018F680 /* mine-sun-icon-click@2x.png in Resources */,
@@ -898,6 +932,7 @@
 				0C749F681D17E2080018F680 /* tabBar_new_icon@2x.png in Resources */,
 				0C749F3C1D17E2080018F680 /* nav_item_game_icon@2x.png in Resources */,
 				0C749F2C1D17E2080018F680 /* mine-sun-icon.png in Resources */,
+				0C2DF2281D1F8AD700C48AD9 /* LaunchImage-800-667h@2x.png in Resources */,
 				0C749F381D17E2080018F680 /* nav_item_game_click_iconN.png in Resources */,
 				0C749F301D17E2080018F680 /* nav_coin_icon@2x.png in Resources */,
 				0C749F541D17E2080018F680 /* tabBar_essence_click_icon@3x.png in Resources */,
@@ -914,9 +949,11 @@
 				0C749F621D17E2080018F680 /* tabBar_me_icon@2x.png in Resources */,
 				0C749F661D17E2080018F680 /* tabBar_new_click_icon@3x.png in Resources */,
 				0C749F6A1D17E2080018F680 /* tabBar_publish_click_icon.png in Resources */,
+				0C2DF2251D1F8AD700C48AD9 /* LaunchImage-568h@2x.png in Resources */,
 				0C749F1A1D17E2080018F680 /* MainTagSubIconClick@3x.png in Resources */,
 				0C749F671D17E2080018F680 /* tabBar_new_icon.png in Resources */,
 				0C749F4A1D17E2080018F680 /* navigationButtonReturn.png in Resources */,
+				0C2DF2261D1F8AD700C48AD9 /* LaunchImage-700-568h@2x.png in Resources */,
 				0C749F561D17E2080018F680 /* tabBar_essence_icon@2x.png in Resources */,
 				0C749F151D17E2080018F680 /* MainTagSubIcon.png in Resources */,
 				0CE971BA1D17A5350033732F /* Assets.xcassets in Resources */,
