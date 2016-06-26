@@ -31,6 +31,9 @@
 		0C2DF2631D1FBE7100C48AD9 /* WJWTitleViewListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DF25D1D1FBE7100C48AD9 /* WJWTitleViewListVC.m */; };
 		0C2DF2641D1FBE7100C48AD9 /* WJWTitleViewListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DF25E1D1FBE7100C48AD9 /* WJWTitleViewListVC.xib */; };
 		0C2DF2671D1FC26D00C48AD9 /* UIImage+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DF2661D1FC26D00C48AD9 /* UIImage+Image.m */; };
+		0C2DF26C1D1FCF7D00C48AD9 /* WJWFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DF26B1D1FCF7D00C48AD9 /* WJWFileManager.m */; };
+		0C2DF2D71D1FE6D000C48AD9 /* WJWSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DF2D61D1FE6D000C48AD9 /* WJWSettingTableViewController.m */; };
+		0C2DF2D91D1FEB0100C48AD9 /* globalStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DF2D81D1FEB0100C48AD9 /* globalStoryBoard.storyboard */; };
 		0C749E7A1D17D7030018F680 /* WJWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E791D17D7030018F680 /* WJWTabBarController.m */; };
 		0C749E801D17DAB00018F680 /* WJWNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E7F1D17DAB00018F680 /* WJWNavigationController.m */; };
 		0C749E831D17DB310018F680 /* WJWDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E821D17DB310018F680 /* WJWDiscoverViewController.m */; };
@@ -136,7 +139,6 @@
 		0C749F6D1D17E2080018F680 /* tabBar_publish_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749F051D17E2080018F680 /* tabBar_publish_icon.png */; };
 		0C749F6E1D17E2080018F680 /* tabBar_publish_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749F061D17E2080018F680 /* tabBar_publish_icon@2x.png */; };
 		0C749F6F1D17E2080018F680 /* tabBar_publish_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749F071D17E2080018F680 /* tabBar_publish_icon@3x.png */; };
-		0C749F781D17F84E0018F680 /* WJWSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749F751D17F84E0018F680 /* WJWSettingTableViewController.m */; };
 		0CC7AE5E1D17F92100340CD0 /* WJWAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7AE5A1D17F92100340CD0 /* WJWAdvertViewController.m */; };
 		0CC7AE5F1D17F92100340CD0 /* WJWAdvertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CC7AE5B1D17F92100340CD0 /* WJWAdvertViewController.xib */; };
 		0CE971BA1D17A5350033732F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CE971B91D17A5350033732F /* Assets.xcassets */; };
@@ -182,6 +184,11 @@
 		0C2DF25E1D1FBE7100C48AD9 /* WJWTitleViewListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWTitleViewListVC.xib; sourceTree = "<group>"; };
 		0C2DF2651D1FC26D00C48AD9 /* UIImage+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Image.h"; sourceTree = "<group>"; };
 		0C2DF2661D1FC26D00C48AD9 /* UIImage+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Image.m"; sourceTree = "<group>"; };
+		0C2DF26A1D1FCF7D00C48AD9 /* WJWFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWFileManager.h; sourceTree = "<group>"; };
+		0C2DF26B1D1FCF7D00C48AD9 /* WJWFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWFileManager.m; sourceTree = "<group>"; };
+		0C2DF2D51D1FE6D000C48AD9 /* WJWSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWSettingTableViewController.h; sourceTree = "<group>"; };
+		0C2DF2D61D1FE6D000C48AD9 /* WJWSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWSettingTableViewController.m; sourceTree = "<group>"; };
+		0C2DF2D81D1FEB0100C48AD9 /* globalStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = globalStoryBoard.storyboard; sourceTree = "<group>"; };
 		0C749E781D17D7030018F680 /* WJWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWTabBarController.h; sourceTree = "<group>"; };
 		0C749E791D17D7030018F680 /* WJWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWTabBarController.m; sourceTree = "<group>"; };
 		0C749E7E1D17DAB00018F680 /* WJWNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWNavigationController.h; sourceTree = "<group>"; };
@@ -296,8 +303,6 @@
 		0C749F061D17E2080018F680 /* tabBar_publish_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabBar_publish_icon@2x.png"; sourceTree = "<group>"; };
 		0C749F071D17E2080018F680 /* tabBar_publish_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabBar_publish_icon@3x.png"; sourceTree = "<group>"; };
 		0C749F711D17E5470018F680 /* weibo.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = weibo.pch; sourceTree = "<group>"; };
-		0C749F741D17F84E0018F680 /* WJWSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWSettingTableViewController.h; sourceTree = "<group>"; };
-		0C749F751D17F84E0018F680 /* WJWSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWSettingTableViewController.m; sourceTree = "<group>"; };
 		0CC7AE591D17F92100340CD0 /* WJWAdvertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWAdvertViewController.h; sourceTree = "<group>"; };
 		0CC7AE5A1D17F92100340CD0 /* WJWAdvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWAdvertViewController.m; sourceTree = "<group>"; };
 		0CC7AE5B1D17F92100340CD0 /* WJWAdvertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWAdvertViewController.xib; sourceTree = "<group>"; };
@@ -354,6 +359,56 @@
 				0C2DF25E1D1FBE7100C48AD9 /* WJWTitleViewListVC.xib */,
 			);
 			path = navigationTitleView;
+			sourceTree = "<group>";
+		};
+		0C2DF2681D1FCF7D00C48AD9 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				0C2DF2691D1FCF7D00C48AD9 /* File */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		0C2DF2691D1FCF7D00C48AD9 /* File */ = {
+			isa = PBXGroup;
+			children = (
+				0C2DF26A1D1FCF7D00C48AD9 /* WJWFileManager.h */,
+				0C2DF26B1D1FCF7D00C48AD9 /* WJWFileManager.m */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
+		0C2DF26D1D1FCF9C00C48AD9 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				0C2DF26E1D1FCF9C00C48AD9 /* Controller */,
+				0C2DF26F1D1FCF9C00C48AD9 /* Model */,
+				0C2DF2701D1FCF9C00C48AD9 /* View */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		0C2DF26E1D1FCF9C00C48AD9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0C2DF2D51D1FE6D000C48AD9 /* WJWSettingTableViewController.h */,
+				0C2DF2D61D1FE6D000C48AD9 /* WJWSettingTableViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0C2DF26F1D1FCF9C00C48AD9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0C2DF2701D1FCF9C00C48AD9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		0C749E9C1D17E2080018F680 /* AppIcons */ = {
@@ -476,39 +531,6 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		0C749F721D17F84E0018F680 /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				0C749F731D17F84E0018F680 /* Controller */,
-				0C749F761D17F84E0018F680 /* Model */,
-				0C749F771D17F84E0018F680 /* View */,
-			);
-			path = Setting;
-			sourceTree = "<group>";
-		};
-		0C749F731D17F84E0018F680 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				0C749F741D17F84E0018F680 /* WJWSettingTableViewController.h */,
-				0C749F751D17F84E0018F680 /* WJWSettingTableViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		0C749F761D17F84E0018F680 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		0C749F771D17F84E0018F680 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		0CC7AE571D17F92100340CD0 /* Advertisement */ = {
 			isa = PBXGroup;
 			children = (
@@ -555,8 +577,8 @@
 		0CE971BF1D17A58E0033732F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0C2DF2681D1FCF7D00C48AD9 /* Tools */,
 				0CC7AE571D17F92100340CD0 /* Advertisement */,
-				0C749F721D17F84E0018F680 /* Setting */,
 				0CE971C81D17A58E0033732F /* Main */,
 				0CE971C41D17A58E0033732F /* homePage */,
 				0CE971D01D17A58E0033732F /* Message */,
@@ -659,6 +681,7 @@
 		0CE971CA1D17A58E0033732F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0C2DF2D81D1FEB0100C48AD9 /* globalStoryBoard.storyboard */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -701,6 +724,7 @@
 		0CE971CF1D17A58E0033732F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0C2DF26D1D1FCF9C00C48AD9 /* Setting */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1004,6 +1028,7 @@
 				0C749F241D17E2080018F680 /* mine-setting-icon-click@2x.png in Resources */,
 				0C749F641D17E2080018F680 /* tabBar_new_click_icon.png in Resources */,
 				0C749F1E1D17E2080018F680 /* mine-moon-icon-click.png in Resources */,
+				0C2DF2D91D1FEB0100C48AD9 /* globalStoryBoard.storyboard in Resources */,
 				0CC7AE5F1D17F92100340CD0 /* WJWAdvertViewController.xib in Resources */,
 				0C749F4F1D17E2080018F680 /* navigationButtonReturnClick@3x.png in Resources */,
 				0C749F161D17E2080018F680 /* MainTagSubIcon@2x.png in Resources */,
@@ -1093,6 +1118,7 @@
 			files = (
 				0C749E8F1D17DB710018F680 /* WJWNewViewController.m in Sources */,
 				0C2DF23D1D1FB25100C48AD9 /* UIImage+Render.m in Sources */,
+				0C2DF2D71D1FE6D000C48AD9 /* WJWSettingTableViewController.m in Sources */,
 				0C2DF23A1D1FB25100C48AD9 /* UIBarButtonItem+Item.m in Sources */,
 				0C2DF2391D1FB25100C48AD9 /* Foundation+Log.m in Sources */,
 				0C749E831D17DB310018F680 /* WJWDiscoverViewController.m in Sources */,
@@ -1109,10 +1135,10 @@
 				0CF185BE1D179550001EF1D9 /* main.m in Sources */,
 				0C749E9B1D17DC6A0018F680 /* WJWTabBar.m in Sources */,
 				0CC7AE5E1D17F92100340CD0 /* WJWAdvertViewController.m in Sources */,
-				0C749F781D17F84E0018F680 /* WJWSettingTableViewController.m in Sources */,
 				0C749E7A1D17D7030018F680 /* WJWTabBarController.m in Sources */,
 				0C2DF2631D1FBE7100C48AD9 /* WJWTitleViewListVC.m in Sources */,
 				0C2DF23E1D1FB25100C48AD9 /* UITextField+Placeholder.m in Sources */,
+				0C2DF26C1D1FCF7D00C48AD9 /* WJWFileManager.m in Sources */,
 				0C2DF23C1D1FB25100C48AD9 /* UIImage+CircleIcon.m in Sources */,
 				0C2DF25F1D1FBE7100C48AD9 /* WJWanimationModel.m in Sources */,
 				0C749E8C1D17DB580018F680 /* WJWMessageViewController.m in Sources */,

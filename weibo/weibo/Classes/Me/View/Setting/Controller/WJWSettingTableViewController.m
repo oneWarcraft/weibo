@@ -1,14 +1,14 @@
 //
 //  WJWSettingTableViewController.m
-//  baiSiBuDeJie
+//  weibo
 //
-//  Created by Wang Wei on 16/6/19.
+//  Created by 王继伟 on 16/6/26.
 //  Copyright © 2016年 WangJiwei. All rights reserved.
 //
 
 #import "WJWSettingTableViewController.h"
 
-@interface WJWSettingTableViewController ()
+@interface WJWSettingTableViewController () <UITableViewDelegate>
 
 @end
 
@@ -22,41 +22,56 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    
-//    self.navigationItem.leftBarButtonItem.title = @"返回";
-    
     self.title = @"设置";
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"jump" style:(UIBarButtonItemStyleDone) target:self action:@selector(jump)];
+    //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"jump" style:(UIBarButtonItemStyleDone) target:self action:@selector(jump)];
+    
+    self.tableView.delegate = self;
+    self.tableView.sectionHeaderHeight = 6;
+    self.tableView.sectionFooterHeight = 6;
+    self.tableView.contentInset = UIEdgeInsetsMake(-25, 0, 0, 0);
 }
 
-- (void) jump
-{
-    UIViewController *vc = [[UIViewController alloc] init];
-    
-    vc.view.backgroundColor = [UIColor redColor];
-    
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
+//- (void) jump
+//{
+//    UIViewController *vc = [[UIViewController alloc] init];
+//
+//    vc.view.backgroundColor = [UIColor redColor];
+//
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+#pragma mark -- Table View data Delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    WJWLog(@"%zd", indexPath.row);
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
++ (instancetype)loadSettingVC
+{
+    UIStoryboard *settingVCSB = [UIStoryboard storyboardWithName:@"globalStoryBoard" bundle:nil];
+    
+    return [settingVCSB instantiateViewControllerWithIdentifier:@"Mine-SettingVC-ID"];
 }
+
+//#pragma mark - Table view data source
+//
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//#warning Incomplete implementation, return the number of sections
+//    return 0;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//#warning Incomplete implementation, return the number of rows
+//    return 0;
+//}
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

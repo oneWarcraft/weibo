@@ -1,8 +1,8 @@
 //
 //  WJWSettingTableViewController.h
-//  baiSiBuDeJie
+//  weibo
 //
-//  Created by Wang Wei on 16/6/19.
+//  Created by 王继伟 on 16/6/26.
 //  Copyright © 2016年 WangJiwei. All rights reserved.
 //
 
@@ -10,4 +10,5 @@
 
 @interface WJWSettingTableViewController : UITableViewController
 
++ (instancetype)loadSettingVC;
 @end

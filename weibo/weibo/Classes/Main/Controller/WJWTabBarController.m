@@ -12,7 +12,6 @@
 #import "WJWNewViewController.h"
 #import "WJWMeViewController.h"
 #import "WJWDiscoverViewController.h"
-
 #import "UIImage+Render.h"
 #import "WJWTabBar.h"
 #import "WJWNavigationController.h"

@@ -9,6 +9,7 @@
 #import "WJWMeViewController.h"
 #import "WJWSettingTableViewController.h"
 #import "UIBarButtonItem+Item.h"
+#import "WJWSettingTableViewController.h"
 
 @interface WJWMeViewController ()
 
@@ -53,7 +54,10 @@
 
 - (void)rightNavClick
 {
-    WJWLog(@"rightNavClick");
+    WJWSettingTableViewController *settingVC = [WJWSettingTableViewController loadSettingVC];
+    
+    [self.navigationController pushViewController:settingVC animated:YES];
+    
 }
 
 
