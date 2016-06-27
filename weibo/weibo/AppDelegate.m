@@ -29,8 +29,17 @@
 //    self.window.rootViewController = RootVC;
     //为了测试方便，暂时把启动界面屏蔽起来
 //    WJWAdvertViewController *adverVC = [[WJWAdvertViewController alloc] init];
-    WJWAuthoController *authoVc = [[WJWAuthoController alloc] init];
+    
+    //正规做法
+//    WJWAuthoController *authoVc = [[WJWAuthoController alloc] init];
+//    //为了测试方便，先把上一行注释了，跳过每次登陆都需要密码验证；
+//    WJWAuthoController *authoVc = [[WJWAuthoController alloc] init];
+    
+    WJWTabBarController *authoVc = [[WJWTabBarController alloc] init];
+    
     self.window.rootViewController = authoVc;
+    
+//    self.window.rootViewController = adverVC;
     //显示窗口
     [self.window makeKeyAndVisible];
     

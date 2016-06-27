@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WJWHomePageViewController : UIViewController
+@interface WJWHomePageViewController : UITableViewController
 
 @end

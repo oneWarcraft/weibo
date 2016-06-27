@@ -17,12 +17,17 @@
 #import "WJWAccount.h"
 #import "WJWAuthoController.h"
 #import "WJWAccountTool.h"
+#import "WJWHomePageItem.h"
 
 @interface WJWHomePageViewController () <UIViewControllerTransitioningDelegate>
 
+/** 保存首页微博全部模型数据 */
+@property (nonatomic, strong) NSMutableArray *hpWeiboArray;
 @end
 
 @implementation WJWHomePageViewController
+
+NSString *ID = @"hpCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,11 +37,15 @@
     //设置本导航控制器上的内容  左中右按钮
     [self setNavBarItem];
     
-    
+    //第一次启动App时，首页默认加第一批数据
     [self loadNewData];
     
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
 }
 
+
+#pragma mark -- 获取网络数据
 - (void)loadNewData
 {
     WJWAccount *Caccount  = [WJWAccountTool shareAccountTool].currentAccount;
@@ -48,25 +57,35 @@
     
     NSString *urlstr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@",token];
     
-    
+    NSLog(@"%@", urlstr);
     
     NSDictionary *dict = @{
-                           @"count":@(80),
+                           @"count":@(50),
                            @"max_id":@(0)
                            };
     
     
-    [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
         
         NSLog(@"%@", responseObject);
         
         //解析JSON对象
         NSArray *array = responseObject[@"statuses"];
         
+//        NSArray *weiArray = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:<#(id)#>];
+//        NSError *error = nil;
+//        BOOL result = [responseObject writeToFile:@"/Users/wangjiwei/Desktop/weibo.plist" atomically:YES];
+//        [responseObject writ];
+//        BOOL result = [responseObject writeToFile:@"/Users/wangjiwei/Desktop/weibo2.plist" atomically:YES];
         
-//        NSArray *tempArray = [WJWHomePageMainItem mj_objectArrayWithKeyValuesArray:array];
+//        BOOL result = [responseObject writeToFile:@"/Users/wangjiwei/Desktop/weibo.plist" options:NSDataWritingAtomic error:&error];
         
-        NSLog(@"数据:%@",responseObject);
+        
+        self.hpWeiboArray = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:array];
+        
+        [self.tableView reloadData];
+        
+//        NSLog(@"数据:%@",responseObject);
         NSLog(@"+++++++++++++++++++++++");
 //        [self.tableView reloadData];
         
@@ -77,6 +96,31 @@
     }];
 }
 
+#pragma mark -- 设置首页TableView显示内容
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.hpWeiboArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+    }
+    
+    WJWHomePageItem *item = self.hpWeiboArray[indexPath.item];
+    
+    cell.textLabel.text = item.user[@"name"];
+    cell.detailTextLabel.text = item.text;
+    return cell;
+}
+
+
+
+#pragma mark -- 设置本页面导航栏内容
 - (void) setNavBarItem
 {
     //设置导航条左边按钮

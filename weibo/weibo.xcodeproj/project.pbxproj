@@ -139,6 +139,7 @@
 		0C749F6D1D17E2080018F680 /* tabBar_publish_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749F051D17E2080018F680 /* tabBar_publish_icon.png */; };
 		0C749F6E1D17E2080018F680 /* tabBar_publish_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749F061D17E2080018F680 /* tabBar_publish_icon@2x.png */; };
 		0C749F6F1D17E2080018F680 /* tabBar_publish_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C749F071D17E2080018F680 /* tabBar_publish_icon@3x.png */; };
+		0C84D3BA1D2129BC005078BE /* WJWHomePageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C84D3B91D2129BC005078BE /* WJWHomePageItem.m */; };
 		0CC7AE5E1D17F92100340CD0 /* WJWAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7AE5A1D17F92100340CD0 /* WJWAdvertViewController.m */; };
 		0CC7AE5F1D17F92100340CD0 /* WJWAdvertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CC7AE5B1D17F92100340CD0 /* WJWAdvertViewController.xib */; };
 		0CE971BA1D17A5350033732F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CE971B91D17A5350033732F /* Assets.xcassets */; };
@@ -306,6 +307,8 @@
 		0C749F061D17E2080018F680 /* tabBar_publish_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabBar_publish_icon@2x.png"; sourceTree = "<group>"; };
 		0C749F071D17E2080018F680 /* tabBar_publish_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabBar_publish_icon@3x.png"; sourceTree = "<group>"; };
 		0C749F711D17E5470018F680 /* weibo.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = weibo.pch; sourceTree = "<group>"; };
+		0C84D3B81D2129BC005078BE /* WJWHomePageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWHomePageItem.h; sourceTree = "<group>"; };
+		0C84D3B91D2129BC005078BE /* WJWHomePageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWHomePageItem.m; sourceTree = "<group>"; };
 		0CC7AE591D17F92100340CD0 /* WJWAdvertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWAdvertViewController.h; sourceTree = "<group>"; };
 		0CC7AE5A1D17F92100340CD0 /* WJWAdvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWAdvertViewController.m; sourceTree = "<group>"; };
 		0CC7AE5B1D17F92100340CD0 /* WJWAdvertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWAdvertViewController.xib; sourceTree = "<group>"; };
@@ -655,6 +658,8 @@
 		0CE971C61D17A58E0033732F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0C84D3B81D2129BC005078BE /* WJWHomePageItem.h */,
+				0C84D3B91D2129BC005078BE /* WJWHomePageItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1141,6 +1146,7 @@
 			files = (
 				0CFF70E31D20CC7E00668E21 /* WJWAccount.m in Sources */,
 				0C749E8F1D17DB710018F680 /* WJWNewViewController.m in Sources */,
+				0C84D3BA1D2129BC005078BE /* WJWHomePageItem.m in Sources */,
 				0C2DF23D1D1FB25100C48AD9 /* UIImage+Render.m in Sources */,
 				0C2DF2D71D1FE6D000C48AD9 /* WJWSettingTableViewController.m in Sources */,
 				0CFF70E51D20CC7E00668E21 /* WJWAuthoController.m in Sources */,

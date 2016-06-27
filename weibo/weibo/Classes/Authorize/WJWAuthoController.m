@@ -5,22 +5,18 @@
 //  Created by wangjiwei on 16/6/13.
 //  Copyright © 2016年 王继伟. All rights reserved.
 //
-
-
-#define kAppKey @"1035259269"
-#define kRedirectURI @"http://www.520it.com" //####### 最终版需要改掉
-#define kAppsecret @"491c9ebbfcce9ca1b41fa62efc8a4567"
-#define kAccessTokenURL @"https://api.weibo.com/oauth2/access_token"
-#define kBaseURL @"https://api.weibo.com"
-#define kAuthorizeURL [kBaseURL stringByAppendingPathComponent:@"oauth2/authorize"]
-
-
 #import "WJWAuthoController.h"
 #import "AFNetworking.h"
 #import "WJWAccountTool.h"
 #import "WJWAccount.h"
 #import "WJWTabBarController.h"
 
+#define kAppKey @"3319318993"
+#define kRedirectURI @"http://www.baidu.com"
+#define kAppsecret @"42ab25f151570b29727013da15d046e2"
+#define kAccessTokenURL @"https://api.weibo.com/oauth2/access_token"
+#define kBaseURL @"https://api.weibo.com"
+#define kAuthorizeURL [kBaseURL stringByAppendingPathComponent:@"oauth2/authorize"]
 
 @interface WJWAuthoController ()<UIWebViewDelegate>
 
