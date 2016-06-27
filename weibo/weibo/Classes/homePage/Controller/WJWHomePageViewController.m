@@ -19,10 +19,24 @@
 #import "WJWAccountTool.h"
 #import "WJWHomePageItem.h"
 
+//#define MAS_SHORTHAND
+//#define MAS_SHORTHAND_GLOBALS
+//#import <Masonry.h>
+//pod 'Masonry'
+
 @interface WJWHomePageViewController () <UIViewControllerTransitioningDelegate>
 
 /** 保存首页微博全部模型数据 */
 @property (nonatomic, strong) NSMutableArray *hpWeiboArray;
+/** 上拉刷新条的属性 */
+//@property (nonatomic, strong) UIView *footView;
+@property (nonatomic, strong) UILabel *footView;
+/** 用来加载下一页数据的参数 */
+@property (nonatomic, assign) NSInteger page;
+
+/** 是否正在加载更多数据... */
+@property (nonatomic, assign, getter=isFooterRefreshing) BOOL footerRefreshing;
+
 @end
 
 @implementation WJWHomePageViewController
@@ -32,21 +46,137 @@ NSString *ID = @"hpCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor redColor];
+//    self.view.backgroundColor = [UIColor redColor];
+    //设置要展示的TableView的内边距，刚好全部展示，其它地方用内边距填充，扩大展示范围
+//    self.tableView.contentInset = UIEdgeInsetsMake(WJWNavBarMaxY, 0, WJWTabBarH, 0);
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -WJWTabBarH, 0);
+    //tableView内边距调整了，它对应的滚动条也需要调整
+//    self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
+
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
     
     //设置本导航控制器上的内容  左中右按钮
     [self setNavBarItem];
     
     //第一次启动App时，首页默认加第一批数据
-    [self loadNewData];
+    [self loadNewTopics];
     
-    
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
+    self.page = 1;
+    //建立底部刷新提示条，上拉后变色变字，获取新一批数据
+    [self setupRefresh];
 }
 
 
+//UIView *gfooterView = nil;
+//- (UIView*)footerLoadingBar
+//{
+//    if (gfooterView == nil)
+//    {
+//        //创建View条
+//        UIView *footerView = [[UIView alloc] init];
+//        footerView.backgroundColor = [UIColor redColor];
+//        //创建旋转进度演示图片
+//        UIActivityIndicatorView *activIndiView = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
+//        [activIndiView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+//        //    [self.bb setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//        //    [self.bb setBackgroundColor:[UIColor lightGrayColor]];
+//        [footerView addSubview:activIndiView];
+//        footerView.wjw_height = WJWTabBarH;
+//        [activIndiView startAnimating];
+//        
+//        //创建问题图片
+//        UILabel *textLable = [[UILabel alloc] init];
+//        textLable.textAlignment = NSTextAlignmentCenter;
+//        textLable.text = @"上拉加载更多数据";
+//        textLable.wjw_height = WJWTabBarH;
+//        [footerView addSubview:textLable];
+//        
+//        CGFloat centerX = footerView.center.x;
+//        CGFloat centerY = footerView.center.y;
+//        
+//        activIndiView.frame = CGRectMake(centerX-40, centerY - 20, 40, 40);
+//        [textLable makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(activIndiView.right);
+//            make.centerY.equalTo(activIndiView.centerY);
+//        }];
+//    }
+//    
+////    return footerView;
+//    return gfooterView;
+//    
+////    [activIndiView makeConstraints:^(MASConstraintMaker *make) {
+////        make.left
+////    }]
+////    
+////    [blueView makeConstraints:^(MASConstraintMaker *make) {
+////        make.left.equalTo(self.view.left).offset(30);
+////        make.bottom.equalTo(self.view.bottom).offset(-30);
+////        make.right.equalTo(redView.left).offset(-30);
+////        make.width.equalTo(redView.width);
+////        //        make.height.equalTo(50);
+////    }];
+//    
+////    self.tableView.tableFooterView = footerView;
+//
+//}
+
+- (void)setupRefresh
+{
+    UILabel *footView = [[UILabel alloc] init];
+//    footView.backgroundColor = [UIColor redColor];
+    footView.textAlignment = NSTextAlignmentCenter;
+    footView.text = @"上拉加载更多数据";
+    footView.wjw_height = WJWTabBarH;
+
+    
+//    UIView *footView = [self footerLoadingBar ];
+    
+    self.tableView.tableFooterView = footView;
+    self.footView = footView;
+}
+
 #pragma mark -- 获取网络数据
-- (void)loadNewData
+/** 加载最新微博 */
+- (void)loadNewTopics
+{
+    WJWAccount *Caccount  = [WJWAccountTool shareAccountTool].currentAccount;
+    
+    NSString *token = Caccount.access_token;
+    
+    self.page = 1;
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    NSString *urlstr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@",token];
+    
+    NSLog(@"%@", urlstr);
+    
+    NSDictionary *dict = @{
+                           @"count":@(50),
+                           @"max_id":@(0),
+                           @"page":@(self.page)
+                           };
+    
+    
+    [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        
+        //解析JSON对象
+        NSArray *array = responseObject[@"statuses"];
+
+        self.hpWeiboArray = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:array];
+        
+        [self.tableView reloadData];
+        
+//        NSLog(@"数据:%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"error===%@",error);
+    }];
+}
+
+/** 加载更多微博 */
+- (void)loadMoreTopics
 {
     WJWAccount *Caccount  = [WJWAccountTool shareAccountTool].currentAccount;
     
@@ -61,7 +191,8 @@ NSString *ID = @"hpCellID";
     
     NSDictionary *dict = @{
                            @"count":@(50),
-                           @"max_id":@(0)
+                           @"max_id":@(0),
+                           @"page":@(self.page)
                            };
     
     
@@ -70,25 +201,22 @@ NSString *ID = @"hpCellID";
         NSLog(@"%@", responseObject);
         
         //解析JSON对象
-        NSArray *array = responseObject[@"statuses"];
+        self.page++;
+        NSArray *moreTopics = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         
-//        NSArray *weiArray = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:<#(id)#>];
-//        NSError *error = nil;
-//        BOOL result = [responseObject writeToFile:@"/Users/wangjiwei/Desktop/weibo.plist" atomically:YES];
-//        [responseObject writ];
-//        BOOL result = [responseObject writeToFile:@"/Users/wangjiwei/Desktop/weibo2.plist" atomically:YES];
-        
-//        BOOL result = [responseObject writeToFile:@"/Users/wangjiwei/Desktop/weibo.plist" options:NSDataWritingAtomic error:&error];
-        
-        
-        self.hpWeiboArray = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:array];
+        [self.hpWeiboArray addObjectsFromArray:moreTopics];
+        // 结束刷新(恢复刷新控件的状态)
+        self.footerRefreshing = NO;
         
         [self.tableView reloadData];
+        //重新复制footerView试试
         
-//        NSLog(@"数据:%@",responseObject);
-        NSLog(@"+++++++++++++++++++++++");
-//        [self.tableView reloadData];
         
+        // 结束刷新(恢复刷新控件的状态)
+        self.footerRefreshing = NO;
+        self.footView.text = @"上拉加载更多数据";
+        self.footView.backgroundColor = [UIColor redColor];
+
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -96,25 +224,49 @@ NSString *ID = @"hpCellID";
     }];
 }
 
-#pragma mark -- 设置首页TableView显示内容
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+#pragma mark -- 代理
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    //如果还没有数据，不需要处理FooterView
+    if (self.hpWeiboArray.count == 0) return;
+    //如果正在上拉刷新（加载更多数据）,直接返回
+    if (self.isFooterRefreshing) return;
+    
+    //当偏移量超过 >= offsetY时，footerView就会完全出现，进入上拉加载数据状态
+    CGFloat offsetY = self.tableView.contentSize.height + self.tableView.contentInset.bottom - self.tableView.wjw_height;
+    
+    if (self.tableView.contentOffset.y >= offsetY) {
+        //进入刷新状态
+        self.footerRefreshing = YES;
+        self.footView.text = @"正在加载更多数据......";
+        self.footView.backgroundColor = [UIColor blueColor];
+        
+        //发送请求给服务器，加载更多数据
+        [self loadMoreTopics];
+    }
+}
+
+
+
+#pragma mark - Table view data source
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    //如果数据不满一个页面时，上拉条如何显示？
+    self.footView.hidden = (self.hpWeiboArray.count == 0);
+    
     return self.hpWeiboArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
-    }
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+//    }
     WJWHomePageItem *item = self.hpWeiboArray[indexPath.item];
-    
     cell.textLabel.text = item.user[@"name"];
     cell.detailTextLabel.text = item.text;
+    cell.backgroundColor = [UIColor clearColor];
+    
     return cell;
 }
 
