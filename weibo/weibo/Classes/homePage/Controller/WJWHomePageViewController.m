@@ -12,6 +12,11 @@
 #import "WJWPresentVC.h"
 #import "WJWanimationModel.h"
 #import "UIImage+Image.h"
+#import <AFNetworking.h>
+#import <MJExtension/MJExtension.h>
+#import "WJWAccount.h"
+#import "WJWAuthoController.h"
+#import "WJWAccountTool.h"
 
 @interface WJWHomePageViewController () <UIViewControllerTransitioningDelegate>
 
@@ -28,7 +33,48 @@
     [self setNavBarItem];
     
     
+    [self loadNewData];
     
+}
+
+- (void)loadNewData
+{
+    WJWAccount *Caccount  = [WJWAccountTool shareAccountTool].currentAccount;
+    
+    NSString *token = Caccount.access_token;
+    
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    NSString *urlstr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@",token];
+    
+    
+    
+    NSDictionary *dict = @{
+                           @"count":@(80),
+                           @"max_id":@(0)
+                           };
+    
+    
+    [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        
+        //解析JSON对象
+        NSArray *array = responseObject[@"statuses"];
+        
+        
+//        NSArray *tempArray = [WJWHomePageMainItem mj_objectArrayWithKeyValuesArray:array];
+        
+        NSLog(@"数据:%@",responseObject);
+        NSLog(@"+++++++++++++++++++++++");
+//        [self.tableView reloadData];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"error===%@",error);
+    }];
 }
 
 - (void) setNavBarItem

@@ -145,6 +145,9 @@
 		0CE971DB1D17A5A30033732F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CE971DA1D17A5A30033732F /* Info.plist */; };
 		0CF185BE1D179550001EF1D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF185BD1D179550001EF1D9 /* main.m */; };
 		0CF185C11D179550001EF1D9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CF185C01D179550001EF1D9 /* AppDelegate.m */; };
+		0CFF70E31D20CC7E00668E21 /* WJWAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF70DE1D20CC7E00668E21 /* WJWAccount.m */; };
+		0CFF70E41D20CC7E00668E21 /* WJWAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF70E01D20CC7E00668E21 /* WJWAccountTool.m */; };
+		0CFF70E51D20CC7E00668E21 /* WJWAuthoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF70E21D20CC7E00668E21 /* WJWAuthoController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -312,6 +315,12 @@
 		0CF185BD1D179550001EF1D9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0CF185BF1D179550001EF1D9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0CF185C01D179550001EF1D9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0CFF70DD1D20CC7E00668E21 /* WJWAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWAccount.h; sourceTree = "<group>"; };
+		0CFF70DE1D20CC7E00668E21 /* WJWAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWAccount.m; sourceTree = "<group>"; };
+		0CFF70DF1D20CC7E00668E21 /* WJWAccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWAccountTool.h; sourceTree = "<group>"; };
+		0CFF70E01D20CC7E00668E21 /* WJWAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWAccountTool.m; sourceTree = "<group>"; };
+		0CFF70E11D20CC7E00668E21 /* WJWAuthoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWAuthoController.h; sourceTree = "<group>"; };
+		0CFF70E21D20CC7E00668E21 /* WJWAuthoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWAuthoController.m; sourceTree = "<group>"; };
 		28699F99CC8D928B8D275F82 /* Pods-weibo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weibo.release.xcconfig"; path = "Pods/Target Support Files/Pods-weibo/Pods-weibo.release.xcconfig"; sourceTree = "<group>"; };
 		5505A3A0D61D35B28A8FD9BA /* Pods-weibo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weibo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-weibo/Pods-weibo.debug.xcconfig"; sourceTree = "<group>"; };
 		C27454225A9D7DF19851A1B5 /* libPods-weibo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-weibo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -577,6 +586,7 @@
 		0CE971BF1D17A58E0033732F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0CFF70DC1D20CC7E00668E21 /* Authorize */,
 				0C2DF2681D1FCF7D00C48AD9 /* Tools */,
 				0CC7AE571D17F92100340CD0 /* Advertisement */,
 				0CE971C81D17A58E0033732F /* Main */,
@@ -870,6 +880,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0CFF70DC1D20CC7E00668E21 /* Authorize */ = {
+			isa = PBXGroup;
+			children = (
+				0CFF70DD1D20CC7E00668E21 /* WJWAccount.h */,
+				0CFF70DE1D20CC7E00668E21 /* WJWAccount.m */,
+				0CFF70DF1D20CC7E00668E21 /* WJWAccountTool.h */,
+				0CFF70E01D20CC7E00668E21 /* WJWAccountTool.m */,
+				0CFF70E11D20CC7E00668E21 /* WJWAuthoController.h */,
+				0CFF70E21D20CC7E00668E21 /* WJWAuthoController.m */,
+			);
+			path = Authorize;
+			sourceTree = "<group>";
+		};
 		80A86A4D9708662CB83E298C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1116,10 +1139,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CFF70E31D20CC7E00668E21 /* WJWAccount.m in Sources */,
 				0C749E8F1D17DB710018F680 /* WJWNewViewController.m in Sources */,
 				0C2DF23D1D1FB25100C48AD9 /* UIImage+Render.m in Sources */,
 				0C2DF2D71D1FE6D000C48AD9 /* WJWSettingTableViewController.m in Sources */,
+				0CFF70E51D20CC7E00668E21 /* WJWAuthoController.m in Sources */,
 				0C2DF23A1D1FB25100C48AD9 /* UIBarButtonItem+Item.m in Sources */,
+				0CFF70E41D20CC7E00668E21 /* WJWAccountTool.m in Sources */,
 				0C2DF2391D1FB25100C48AD9 /* Foundation+Log.m in Sources */,
 				0C749E831D17DB310018F680 /* WJWDiscoverViewController.m in Sources */,
 				0C2DF20D1D1F72E800C48AD9 /* WJWADItem.m in Sources */,
