@@ -33,6 +33,18 @@
 @property (nonatomic, strong) NSMutableArray *hpWeiboArray;
 /** 用来加载下一页数据的参数 */
 @property (nonatomic, assign) NSInteger page;
+
+
+/**
+ *  cell遮罩部分的处理
+ */
+@property (nonatomic, strong) UIView *converView;
+@property (nonatomic, strong) UIButton *storeBTN;
+@property (nonatomic, strong) UIButton *helpHeadlineBTN;
+@property (nonatomic, strong) UIButton *cancleAttentionBTN;
+@property (nonatomic, strong) UIButton *shieldBTN;
+@property (nonatomic, strong) UIButton *reportBTN;
+
 @end
 
 @implementation WJWHomePageViewController
@@ -65,7 +77,7 @@ NSString *ID = @"hompageCellID";
 //    //第一次启动App时，首页默认加第一批数据
 //    [self loadNewTopics];
     
-    self.tableView.rowHeight = 150;
+    self.tableView.rowHeight = 230;
     
     self.page = 1;
 }
@@ -160,18 +172,31 @@ NSString *ID = @"hompageCellID";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-//    WJWHomePageCellCell *cell = [WJWHomePageCellCell homePageCellCellWithTableView:tableView];
+  
+    // 直接加载xib
+    //WJWHomePageCellCell *cell = [WJWHomePageCellCell homePageCellCellWithTableView:tableView];
+    //注册xib，根据ID加载
     WJWHomePageCellCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
+//    cell.delegate = self;
+    cell.hpCellItem = self.hpWeiboArray[indexPath.item];
     
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
+    
+    
+//    //广告框？搜索框？tableViewHeaderView？
+//    if (0 == indexPath.row)
+//    {
+//        WJWSearchBarCell *cell = [WJWSearchBarCell loadSearchBarNib];
+//        return cell;
 //    }
-//    WJWHomePageItem *item = self.hpWeiboArray[indexPath.item];
-//    cell.textLabel.text = item.user[@"name"];
-//    cell.detailTextLabel.text = item.text;
-//    cell.backgroundColor = [UIColor clearColor];
+    //    else if (1 == indexPath.row)
+
+
+
+
+    
+    
+    cell.backgroundColor = [UIColor clearColor];
     
     return cell;
 }
