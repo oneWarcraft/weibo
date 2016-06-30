@@ -34,6 +34,8 @@
 		0C2DF26C1D1FCF7D00C48AD9 /* WJWFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DF26B1D1FCF7D00C48AD9 /* WJWFileManager.m */; };
 		0C2DF2D71D1FE6D000C48AD9 /* WJWSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DF2D61D1FE6D000C48AD9 /* WJWSettingTableViewController.m */; };
 		0C2DF2D91D1FEB0100C48AD9 /* globalStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DF2D81D1FEB0100C48AD9 /* globalStoryBoard.storyboard */; };
+		0C470B201D2500DC0002FAF9 /* WJWHomePageCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C470B1E1D2500DC0002FAF9 /* WJWHomePageCellCell.m */; };
+		0C470B211D2500DC0002FAF9 /* WJWHomePageCellCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C470B1F1D2500DC0002FAF9 /* WJWHomePageCellCell.xib */; };
 		0C749E7A1D17D7030018F680 /* WJWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E791D17D7030018F680 /* WJWTabBarController.m */; };
 		0C749E801D17DAB00018F680 /* WJWNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E7F1D17DAB00018F680 /* WJWNavigationController.m */; };
 		0C749E831D17DB310018F680 /* WJWDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E821D17DB310018F680 /* WJWDiscoverViewController.m */; };
@@ -193,6 +195,9 @@
 		0C2DF2D51D1FE6D000C48AD9 /* WJWSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWSettingTableViewController.h; sourceTree = "<group>"; };
 		0C2DF2D61D1FE6D000C48AD9 /* WJWSettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWSettingTableViewController.m; sourceTree = "<group>"; };
 		0C2DF2D81D1FEB0100C48AD9 /* globalStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = globalStoryBoard.storyboard; sourceTree = "<group>"; };
+		0C470B1D1D2500DC0002FAF9 /* WJWHomePageCellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWHomePageCellCell.h; sourceTree = "<group>"; };
+		0C470B1E1D2500DC0002FAF9 /* WJWHomePageCellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWHomePageCellCell.m; sourceTree = "<group>"; };
+		0C470B1F1D2500DC0002FAF9 /* WJWHomePageCellCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWHomePageCellCell.xib; sourceTree = "<group>"; };
 		0C749E781D17D7030018F680 /* WJWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWTabBarController.h; sourceTree = "<group>"; };
 		0C749E791D17D7030018F680 /* WJWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWTabBarController.m; sourceTree = "<group>"; };
 		0C749E7E1D17DAB00018F680 /* WJWNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWNavigationController.h; sourceTree = "<group>"; };
@@ -668,6 +673,9 @@
 			isa = PBXGroup;
 			children = (
 				0C2DF2541D1FBE7100C48AD9 /* navigationTitleView */,
+				0C470B1D1D2500DC0002FAF9 /* WJWHomePageCellCell.h */,
+				0C470B1E1D2500DC0002FAF9 /* WJWHomePageCellCell.m */,
+				0C470B1F1D2500DC0002FAF9 /* WJWHomePageCellCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1000,6 +1008,7 @@
 				0C749F451D17E2080018F680 /* navigationButtonRandomClick@2x.png in Resources */,
 				0C749F271D17E2080018F680 /* mine-setting-icon@2x.png in Resources */,
 				0C749F121D17E2080018F680 /* friendsRecommentIcon.png in Resources */,
+				0C470B211D2500DC0002FAF9 /* WJWHomePageCellCell.xib in Resources */,
 				0C749F5C1D17E2080018F680 /* tabBar_friendTrends_icon@2x.png in Resources */,
 				0C749F2E1D17E2080018F680 /* mine-sun-icon@3x.png in Resources */,
 				0C749F471D17E2080018F680 /* navigationButtonRandomClickN@2x.png in Resources */,
@@ -1158,6 +1167,7 @@
 				0C2DF2601D1FBE7100C48AD9 /* WJWListBTNCell.m in Sources */,
 				0C2DF2671D1FC26D00C48AD9 /* UIImage+Image.m in Sources */,
 				0C2DF2421D1FB26D00C48AD9 /* WJWConst.m in Sources */,
+				0C470B201D2500DC0002FAF9 /* WJWHomePageCellCell.m in Sources */,
 				0C2DF23B1D1FB25100C48AD9 /* UIColor+Hex.m in Sources */,
 				0C749E891D17DB4C0018F680 /* WJWMeViewController.m in Sources */,
 				0C2DF23F1D1FB25100C48AD9 /* UIView+Frame.m in Sources */,

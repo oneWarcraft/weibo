@@ -19,6 +19,8 @@
 #import "WJWAccountTool.h"
 #import "WJWHomePageItem.h"
 #import <MJRefresh/MJRefresh.h>
+#import "WJWHomePageCellCell.h"
+
 
 //#define MAS_SHORTHAND
 //#define MAS_SHORTHAND_GLOBALS
@@ -35,7 +37,7 @@
 
 @implementation WJWHomePageViewController
 
-NSString *ID = @"hpCellID";
+NSString *ID = @"hompageCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,13 +56,16 @@ NSString *ID = @"hpCellID";
     // 添加上拉刷新功能
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTopics)];
 
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WJWHomePageCellCell" bundle:nil] forCellReuseIdentifier:ID];
     
     //设置本导航控制器上的内容  左中右按钮
     [self setNavBarItem];
     
 //    //第一次启动App时，首页默认加第一批数据
 //    [self loadNewTopics];
+    
+    self.tableView.rowHeight = 150;
     
     self.page = 1;
 }
@@ -90,7 +95,7 @@ NSString *ID = @"hpCellID";
     
     [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
         
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         
         //解析JSON对象
         NSArray *array = responseObject[@"statuses"];
@@ -129,7 +134,7 @@ NSString *ID = @"hpCellID";
     
     [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
         
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         
         //解析JSON对象
         self.page++;
@@ -153,15 +158,20 @@ NSString *ID = @"hpCellID";
     return self.hpWeiboArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+//    WJWHomePageCellCell *cell = [WJWHomePageCellCell homePageCellCellWithTableView:tableView];
+    WJWHomePageCellCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    
+    
 //    if (cell == nil) {
 //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
 //    }
-    WJWHomePageItem *item = self.hpWeiboArray[indexPath.item];
-    cell.textLabel.text = item.user[@"name"];
-    cell.detailTextLabel.text = item.text;
-    cell.backgroundColor = [UIColor clearColor];
+//    WJWHomePageItem *item = self.hpWeiboArray[indexPath.item];
+//    cell.textLabel.text = item.user[@"name"];
+//    cell.detailTextLabel.text = item.text;
+//    cell.backgroundColor = [UIColor clearColor];
     
     return cell;
 }
