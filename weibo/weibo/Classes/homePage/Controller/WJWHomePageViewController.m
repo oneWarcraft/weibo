@@ -30,7 +30,7 @@
 @interface WJWHomePageViewController () <UIViewControllerTransitioningDelegate>
 
 /** 保存首页微博全部模型数据 */
-@property (nonatomic, strong) NSMutableArray *hpWeiboArray;
+@property (nonatomic, strong) NSMutableArray <WJWHomePageItem*> *hpWeiboArray;
 /** 用来加载下一页数据的参数 */
 @property (nonatomic, assign) NSInteger page;
 
@@ -78,7 +78,7 @@ NSString *ID = @"hompageCellID";
 //    //第一次启动App时，首页默认加第一批数据
 //    [self loadNewTopics];
     
-    self.tableView.rowHeight = 230;
+//    self.tableView.rowHeight = 230;
     
     self.page = 1;
 }
@@ -100,7 +100,7 @@ NSString *ID = @"hompageCellID";
     NSLog(@"%@", urlstr);
     
     NSDictionary *dict = @{
-                           @"count":@(50),
+                           @"count":@(100),
                            @"max_id":@(0),
                            @"page":@(self.page)
                            };
@@ -108,7 +108,7 @@ NSString *ID = @"hompageCellID";
     
     [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
         
-//        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
         
         //解析JSON对象
         NSArray *array = responseObject[@"statuses"];
@@ -139,7 +139,7 @@ NSString *ID = @"hompageCellID";
     NSLog(@"%@", urlstr);
     
     NSDictionary *dict = @{
-                           @"count":@(50),
+                           @"count":@(100),
                            @"max_id":@(0),
                            @"page":@(self.page)
                            };
@@ -147,7 +147,7 @@ NSString *ID = @"hompageCellID";
     
     [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
         
-//        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
         
         //解析JSON对象
         self.page++;
@@ -192,14 +192,16 @@ NSString *ID = @"hompageCellID";
 //    }
     //    else if (1 == indexPath.row)
 
-
-
-
-    
-    
     cell.backgroundColor = [UIColor clearColor];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = self.hpWeiboArray[indexPath.item].cellHeight;
+    NSLog(@"heightForRowAtIndexPath   -------  %@", [NSString stringWithFormat:@"%f", height]);
+    return height;
 }
 
 #pragma mark -- 点击Cell下拉按钮，弹出遮罩的处理

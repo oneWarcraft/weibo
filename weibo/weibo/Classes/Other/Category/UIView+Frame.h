@@ -14,4 +14,6 @@
 @property CGFloat wjw_y;
 @property CGFloat wjw_centerY;
 @property CGFloat wjw_centerX;
+
++ (instancetype)wjw_viewFromXib;
 @end

@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+//typedef NS_ENUM(NSUInteger, WJWTopicType) {
+//    /** 全部 */
+//    WJWTopicTypeAll = 1,
+//    /** 图片 */
+//    WJWTopicTypePicture = 10,
+//    /** 文字 */
+//    WJWTopicTypeWord = 29,
+//    /** 声音 */
+//    WJWTopicTypeVoice = 31,
+//    /** 视频 */
+//    WJWTopicTypeVideo = 41
+//};
+
 typedef enum {
     kVerifiedTypeNone = - 1, // 没有认证
     kVerifiedTypePersonal = 0, // 个人认证
@@ -33,4 +46,16 @@ typedef enum {
 @property (nonatomic, assign) int mbtype; //什么会员
 @property (nonatomic, assign) int mbrank; // 会员等级
 
+/*
+ humbnail_pic	string	缩略图片地址，没有时不返回此字段
+ bmiddle_pic	string	中等尺寸图片地址，没有时不返回此字段
+ original_pic	string	原始图片地址，没有时不返回此字段
+ */
+
+
+/* 额外增加的属性（为了方便开发） */
+/** 根据当前模型数据计算出来的cell高度 */
+@property (nonatomic, assign) CGFloat cellHeight;
+/** 中间内容的frame */
+@property (nonatomic, assign) CGRect middleF;
 @end

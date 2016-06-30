@@ -9,7 +9,9 @@
 #import "WJWHomePageCellCell.h"
 #import "WJWHomePageItem.h"
 #import "UIImageView+WebCache.h"
-
+#import "WJWTopicPictureView.h"
+#import "WJWTopicVideoView.h"
+#import "WJWTopicVoiceView.h"
 
 // 获得RGB颜色
 #define kColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
@@ -39,11 +41,52 @@
 @property (weak, nonatomic) IBOutlet UIView *picturesView;
 
 
+/* 中间控件 */
+/** 图片控件 */
+@property (nonatomic, weak) WJWTopicPictureView *pictureView;
+/** 声音控件 */
+@property (nonatomic, weak) WJWTopicVoiceView *voiceView;
+/** 视频控件 */
+@property (nonatomic, weak) WJWTopicVideoView *videoView;
 
 @end
 
 
 @implementation WJWHomePageCellCell
+
+#pragma mark - 懒加载
+- (WJWTopicPictureView *)pictureView
+{
+    if (!_pictureView) {
+        WJWTopicPictureView *pictureView = [WJWTopicPictureView wjw_viewFromXib];
+        [self.contentView addSubview:pictureView];
+        
+        _pictureView = pictureView;
+    }
+    return _pictureView;
+}
+
+- (WJWTopicVoiceView *)voiceView
+{
+    if (!_voiceView) {
+        WJWTopicVoiceView *voiceView = [WJWTopicVoiceView wjw_viewFromXib];
+        [self.contentView addSubview:voiceView];
+        
+        _voiceView = voiceView;
+    }
+    return _voiceView;
+}
+
+- (WJWTopicVideoView *)videoView
+{
+    if (!_videoView) {
+        WJWTopicVideoView *videoView = [WJWTopicVideoView wjw_viewFromXib];
+        [self.contentView addSubview:videoView];
+        
+        _videoView = videoView;
+    }
+    return _videoView;
+}
 
 //+ (instancetype)homePageCellCellWithTableView:(UITableView *)tableView {
 //    
@@ -123,13 +166,14 @@
     
     //设置来自xxxxxx
     NSString *resultStr = hpCellItem.source;
-    
-    NSUInteger loc = [resultStr rangeOfString:@"nofollow\">"].location+10;
-    NSUInteger len = [resultStr rangeOfString:@"</a>"].location - loc; // /不需要转吗？？
-    NSString *msgSec = [resultStr substringWithRange:NSMakeRange(loc,len)];
-    
-    self.fromSource_Lable.text = [NSString stringWithFormat:@"来自 %@",msgSec];
-    
+    if (resultStr.length>0)
+    {
+        NSUInteger loc = [resultStr rangeOfString:@"nofollow\">"].location+10;
+        NSUInteger len = [resultStr rangeOfString:@"</a>"].location - loc; // /不需要转吗？？
+        NSString *msgSec = [resultStr substringWithRange:NSMakeRange(loc,len)];
+        
+        self.fromSource_Lable.text = [NSString stringWithFormat:@"来自 %@",msgSec];
+    }
     //微博头像
     //sd_setImageWithURL:[NSURL URLWithString:homePageCellItem.user[@"profile_image_url"]]
     [self.headIcon_ImageView sd_setImageWithURL:[NSURL URLWithString:hpCellItem.user[@"profile_image_url"]] placeholderImage:[UIImage imageNamed:@"avatar_default"]];
@@ -193,7 +237,7 @@
         _VIP_ImageView.hidden = NO;
         
         
-        NSLog(@"会员等级是--%zd",[hpCellItem.user[@"mbrank"] integerValue]);
+//        NSLog(@"会员等级是--%zd",[hpCellItem.user[@"mbrank"] integerValue]);
         switch ([hpCellItem.user[@"mbrank"] integerValue]) {
             case 1:
                 _VIP_ImageView.image = [UIImage imageNamed:@"common_icon_membership_level1"];
@@ -223,6 +267,42 @@
 
     // 配图处理 collection处理
 //    [self picture:homePageCellItem.pic_urls];
+#warning 待确定如何从返回的一堆数据中如何区分视频 声音 图片 再修改这里
+#warning 现在中间段先只添加图片
+//    // 添加中间段内容
+//    switch (hpCellItem.type) {
+//        case WJWTopicTypePicture:
+//            self.voiceView.hidden = YES;
+//            self.videoView.hidden = YES;
+//            self.pictureView.hidden = NO;
+//            break;
+//            
+//        case WJWTopicTypeVoice:
+//            self.voiceView.hidden = NO;
+//            self.voiceView.voiceItem = topicItem;
+//            self.videoView.hidden = YES;
+//            self.pictureView.hidden = YES;
+//            break;
+//            
+//        case WJWTopicTypeVideo:
+//            self.voiceView.hidden = YES;
+//            self.videoView.hidden = NO;
+//            self.pictureView.hidden = YES;
+//            break;
+//            
+//        case WJWTopicTypeWord:
+//            self.voiceView.hidden = YES;
+//            self.videoView.hidden = YES;
+//            self.pictureView.hidden = YES;
+//            break;
+//            
+//        default:
+//            break;
+//    }
+    //如果是图片，此处图片用collectionView来展示
+    
+    
+    
     
     NSString *transmitCount = [NSString stringWithFormat:@"%  i",hpCellItem.reposts_count];
     NSString *commentCount = [NSString stringWithFormat:@"%  i",hpCellItem.comments_count];
@@ -236,6 +316,34 @@
     [self.comment_Button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [self.favourCount_Button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
 
+}
+
+
+
+
+#warning 待确定如何从返回的一堆数据中如何区分视频 声音 图片 再修改这里
+#warning 现在中间段先只添加图片
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+//    switch (self.topicItem.type) {
+//        case WJWTopicTypePicture: //图片
+            self.pictureView.frame = self.hpCellItem.middleF;
+//            break;
+//            
+//        case WJWTopicTypeVoice: //声音
+//            self.voiceView.frame = self.topicItem.middleF;
+//            break;
+//            
+//        case WJWTopicTypeVideo: //声音
+//            self.videoView.frame = self.topicItem.middleF;
+//            break;
+//            
+//            
+//        default:
+//            break;
+//    }
 }
 
 /**
@@ -286,5 +394,6 @@
     }
     
 }
+
 
 @end

@@ -36,6 +36,12 @@
 		0C2DF2D91D1FEB0100C48AD9 /* globalStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C2DF2D81D1FEB0100C48AD9 /* globalStoryBoard.storyboard */; };
 		0C470B201D2500DC0002FAF9 /* WJWHomePageCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C470B1E1D2500DC0002FAF9 /* WJWHomePageCellCell.m */; };
 		0C470B211D2500DC0002FAF9 /* WJWHomePageCellCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C470B1F1D2500DC0002FAF9 /* WJWHomePageCellCell.xib */; };
+		0C470B531D2535DD0002FAF9 /* WJWTopicVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C470B521D2535DD0002FAF9 /* WJWTopicVideoView.m */; };
+		0C470B561D2535F20002FAF9 /* WJWTopicVoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C470B551D2535F20002FAF9 /* WJWTopicVoiceView.m */; };
+		0C470B591D2536020002FAF9 /* WJWTopicPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C470B581D2536020002FAF9 /* WJWTopicPictureView.m */; };
+		0C470B5D1D25363E0002FAF9 /* WJWTopicVoiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C470B5C1D25363E0002FAF9 /* WJWTopicVoiceView.xib */; };
+		0C470B5F1D2536500002FAF9 /* WJWTopicPictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C470B5E1D2536500002FAF9 /* WJWTopicPictureView.xib */; };
+		0C470B611D2536670002FAF9 /* WJWTopicVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C470B601D2536670002FAF9 /* WJWTopicVideoView.xib */; };
 		0C749E7A1D17D7030018F680 /* WJWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E791D17D7030018F680 /* WJWTabBarController.m */; };
 		0C749E801D17DAB00018F680 /* WJWNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E7F1D17DAB00018F680 /* WJWNavigationController.m */; };
 		0C749E831D17DB310018F680 /* WJWDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E821D17DB310018F680 /* WJWDiscoverViewController.m */; };
@@ -198,6 +204,15 @@
 		0C470B1D1D2500DC0002FAF9 /* WJWHomePageCellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWHomePageCellCell.h; sourceTree = "<group>"; };
 		0C470B1E1D2500DC0002FAF9 /* WJWHomePageCellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWHomePageCellCell.m; sourceTree = "<group>"; };
 		0C470B1F1D2500DC0002FAF9 /* WJWHomePageCellCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWHomePageCellCell.xib; sourceTree = "<group>"; };
+		0C470B511D2535DD0002FAF9 /* WJWTopicVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWTopicVideoView.h; sourceTree = "<group>"; };
+		0C470B521D2535DD0002FAF9 /* WJWTopicVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWTopicVideoView.m; sourceTree = "<group>"; };
+		0C470B541D2535F20002FAF9 /* WJWTopicVoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWTopicVoiceView.h; sourceTree = "<group>"; };
+		0C470B551D2535F20002FAF9 /* WJWTopicVoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWTopicVoiceView.m; sourceTree = "<group>"; };
+		0C470B571D2536020002FAF9 /* WJWTopicPictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWTopicPictureView.h; sourceTree = "<group>"; };
+		0C470B581D2536020002FAF9 /* WJWTopicPictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWTopicPictureView.m; sourceTree = "<group>"; };
+		0C470B5C1D25363E0002FAF9 /* WJWTopicVoiceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWTopicVoiceView.xib; sourceTree = "<group>"; };
+		0C470B5E1D2536500002FAF9 /* WJWTopicPictureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWTopicPictureView.xib; sourceTree = "<group>"; };
+		0C470B601D2536670002FAF9 /* WJWTopicVideoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWTopicVideoView.xib; sourceTree = "<group>"; };
 		0C749E781D17D7030018F680 /* WJWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWTabBarController.h; sourceTree = "<group>"; };
 		0C749E791D17D7030018F680 /* WJWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWTabBarController.m; sourceTree = "<group>"; };
 		0C749E7E1D17DAB00018F680 /* WJWNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWNavigationController.h; sourceTree = "<group>"; };
@@ -676,6 +691,15 @@
 				0C470B1D1D2500DC0002FAF9 /* WJWHomePageCellCell.h */,
 				0C470B1E1D2500DC0002FAF9 /* WJWHomePageCellCell.m */,
 				0C470B1F1D2500DC0002FAF9 /* WJWHomePageCellCell.xib */,
+				0C470B511D2535DD0002FAF9 /* WJWTopicVideoView.h */,
+				0C470B521D2535DD0002FAF9 /* WJWTopicVideoView.m */,
+				0C470B601D2536670002FAF9 /* WJWTopicVideoView.xib */,
+				0C470B541D2535F20002FAF9 /* WJWTopicVoiceView.h */,
+				0C470B551D2535F20002FAF9 /* WJWTopicVoiceView.m */,
+				0C470B5C1D25363E0002FAF9 /* WJWTopicVoiceView.xib */,
+				0C470B571D2536020002FAF9 /* WJWTopicPictureView.h */,
+				0C470B581D2536020002FAF9 /* WJWTopicPictureView.m */,
+				0C470B5E1D2536500002FAF9 /* WJWTopicPictureView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -986,6 +1010,7 @@
 			files = (
 				0C749F331D17E2080018F680 /* nav_coin_icon_click@2x.png in Resources */,
 				0C749F591D17E2080018F680 /* tabBar_friendTrends_click_icon@2x.png in Resources */,
+				0C470B5F1D2536500002FAF9 /* WJWTopicPictureView.xib in Resources */,
 				0C749F2F1D17E2080018F680 /* nav_coin_icon.png in Resources */,
 				0C749F5D1D17E2080018F680 /* tabBar_friendTrends_icon@3x.png in Resources */,
 				0C749F1C1D17E2080018F680 /* MainTitle@2x.png in Resources */,
@@ -1014,6 +1039,7 @@
 				0C749F471D17E2080018F680 /* navigationButtonRandomClickN@2x.png in Resources */,
 				0C749F4B1D17E2080018F680 /* navigationButtonReturn@2x.png in Resources */,
 				0C749F5E1D17E2080018F680 /* tabBar_me_click_icon.png in Resources */,
+				0C470B5D1D25363E0002FAF9 /* WJWTopicVoiceView.xib in Resources */,
 				0C749F611D17E2080018F680 /* tabBar_me_icon.png in Resources */,
 				0C2DF22B1D1F8AD700C48AD9 /* LaunchImage@2x.png in Resources */,
 				0C749F281D17E2080018F680 /* mine-setting-icon@3x.png in Resources */,
@@ -1071,6 +1097,7 @@
 				0C749F161D17E2080018F680 /* MainTagSubIcon@2x.png in Resources */,
 				0C749F1B1D17E2080018F680 /* MainTitle.png in Resources */,
 				0C749F111D17E2080018F680 /* friendsRecommentIcon-click@3x.png in Resources */,
+				0C470B611D2536670002FAF9 /* WJWTopicVideoView.xib in Resources */,
 				0C749F211D17E2080018F680 /* mine-moon-icon@2x.png in Resources */,
 				0C749F621D17E2080018F680 /* tabBar_me_icon@2x.png in Resources */,
 				0C749F661D17E2080018F680 /* tabBar_new_click_icon@3x.png in Resources */,
@@ -1161,10 +1188,12 @@
 				0CFF70E51D20CC7E00668E21 /* WJWAuthoController.m in Sources */,
 				0C2DF23A1D1FB25100C48AD9 /* UIBarButtonItem+Item.m in Sources */,
 				0CFF70E41D20CC7E00668E21 /* WJWAccountTool.m in Sources */,
+				0C470B591D2536020002FAF9 /* WJWTopicPictureView.m in Sources */,
 				0C2DF2391D1FB25100C48AD9 /* Foundation+Log.m in Sources */,
 				0C749E831D17DB310018F680 /* WJWDiscoverViewController.m in Sources */,
 				0C2DF20D1D1F72E800C48AD9 /* WJWADItem.m in Sources */,
 				0C2DF2601D1FBE7100C48AD9 /* WJWListBTNCell.m in Sources */,
+				0C470B561D2535F20002FAF9 /* WJWTopicVoiceView.m in Sources */,
 				0C2DF2671D1FC26D00C48AD9 /* UIImage+Image.m in Sources */,
 				0C2DF2421D1FB26D00C48AD9 /* WJWConst.m in Sources */,
 				0C470B201D2500DC0002FAF9 /* WJWHomePageCellCell.m in Sources */,
@@ -1183,6 +1212,7 @@
 				0C2DF26C1D1FCF7D00C48AD9 /* WJWFileManager.m in Sources */,
 				0C2DF23C1D1FB25100C48AD9 /* UIImage+CircleIcon.m in Sources */,
 				0C2DF25F1D1FBE7100C48AD9 /* WJWanimationModel.m in Sources */,
+				0C470B531D2535DD0002FAF9 /* WJWTopicVideoView.m in Sources */,
 				0C749E8C1D17DB580018F680 /* WJWMessageViewController.m in Sources */,
 				0C749E861D17DB3E0018F680 /* WJWHomePageViewController.m in Sources */,
 			);

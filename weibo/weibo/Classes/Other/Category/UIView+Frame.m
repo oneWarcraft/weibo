@@ -80,4 +80,9 @@
     self.frame = rect;
 
 }
+
++ (instancetype)wjw_viewFromXib
+{
+    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
+}
 @end
