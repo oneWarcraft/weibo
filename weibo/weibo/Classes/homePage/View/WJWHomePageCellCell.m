@@ -226,13 +226,16 @@
     
     NSString *transmitCount = [NSString stringWithFormat:@"%  i",hpCellItem.reposts_count];
     NSString *commentCount = [NSString stringWithFormat:@"%  i",hpCellItem.comments_count];
-    
     NSString *favourCount = [NSString stringWithFormat:@"%  i",hpCellItem.attitudes_count];
-    
+ 
     [self.repost_Button setTitle:transmitCount forState:UIControlStateNormal];
     [self.comment_Button setTitle:commentCount forState:UIControlStateNormal];
     [self.favourCount_Button setTitle:favourCount forState:UIControlStateNormal];
-    
+
+    [self.repost_Button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [self.comment_Button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [self.favourCount_Button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
 }
 
 /**
