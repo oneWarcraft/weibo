@@ -18,6 +18,7 @@
 #import "WJWAuthoController.h"
 #import "WJWAccountTool.h"
 #import "WJWHomePageItem.h"
+#import <MJRefresh/MJRefresh.h>
 
 //#define MAS_SHORTHAND
 //#define MAS_SHORTHAND_GLOBALS
@@ -28,15 +29,8 @@
 
 /** 保存首页微博全部模型数据 */
 @property (nonatomic, strong) NSMutableArray *hpWeiboArray;
-/** 上拉刷新条的属性 */
-//@property (nonatomic, strong) UIView *footView;
-@property (nonatomic, strong) UILabel *footView;
 /** 用来加载下一页数据的参数 */
 @property (nonatomic, assign) NSInteger page;
-
-/** 是否正在加载更多数据... */
-@property (nonatomic, assign, getter=isFooterRefreshing) BOOL footerRefreshing;
-
 @end
 
 @implementation WJWHomePageViewController
@@ -52,88 +46,25 @@ NSString *ID = @"hpCellID";
 //    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -WJWTabBarH, 0);
     //tableView内边距调整了，它对应的滚动条也需要调整
 //    self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
+    //添加下拉刷新功能
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTopics)];
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    [self.tableView.mj_header beginRefreshing];
+    // 添加上拉刷新功能
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTopics)];
 
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
     
     //设置本导航控制器上的内容  左中右按钮
     [self setNavBarItem];
     
-    //第一次启动App时，首页默认加第一批数据
-    [self loadNewTopics];
+//    //第一次启动App时，首页默认加第一批数据
+//    [self loadNewTopics];
     
     self.page = 1;
-    //建立底部刷新提示条，上拉后变色变字，获取新一批数据
-    [self setupRefresh];
 }
 
-
-//UIView *gfooterView = nil;
-//- (UIView*)footerLoadingBar
-//{
-//    if (gfooterView == nil)
-//    {
-//        //创建View条
-//        UIView *footerView = [[UIView alloc] init];
-//        footerView.backgroundColor = [UIColor redColor];
-//        //创建旋转进度演示图片
-//        UIActivityIndicatorView *activIndiView = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-//        [activIndiView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
-//        //    [self.bb setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//        //    [self.bb setBackgroundColor:[UIColor lightGrayColor]];
-//        [footerView addSubview:activIndiView];
-//        footerView.wjw_height = WJWTabBarH;
-//        [activIndiView startAnimating];
-//        
-//        //创建问题图片
-//        UILabel *textLable = [[UILabel alloc] init];
-//        textLable.textAlignment = NSTextAlignmentCenter;
-//        textLable.text = @"上拉加载更多数据";
-//        textLable.wjw_height = WJWTabBarH;
-//        [footerView addSubview:textLable];
-//        
-//        CGFloat centerX = footerView.center.x;
-//        CGFloat centerY = footerView.center.y;
-//        
-//        activIndiView.frame = CGRectMake(centerX-40, centerY - 20, 40, 40);
-//        [textLable makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(activIndiView.right);
-//            make.centerY.equalTo(activIndiView.centerY);
-//        }];
-//    }
-//    
-////    return footerView;
-//    return gfooterView;
-//    
-////    [activIndiView makeConstraints:^(MASConstraintMaker *make) {
-////        make.left
-////    }]
-////    
-////    [blueView makeConstraints:^(MASConstraintMaker *make) {
-////        make.left.equalTo(self.view.left).offset(30);
-////        make.bottom.equalTo(self.view.bottom).offset(-30);
-////        make.right.equalTo(redView.left).offset(-30);
-////        make.width.equalTo(redView.width);
-////        //        make.height.equalTo(50);
-////    }];
-//    
-////    self.tableView.tableFooterView = footerView;
-//
-//}
-
-- (void)setupRefresh
-{
-    UILabel *footView = [[UILabel alloc] init];
-//    footView.backgroundColor = [UIColor redColor];
-    footView.textAlignment = NSTextAlignmentCenter;
-    footView.text = @"上拉加载更多数据";
-    footView.wjw_height = WJWTabBarH;
-
-    
-//    UIView *footView = [self footerLoadingBar ];
-    
-    self.tableView.tableFooterView = footView;
-    self.footView = footView;
-}
 
 #pragma mark -- 获取网络数据
 /** 加载最新微博 */
@@ -168,9 +99,9 @@ NSString *ID = @"hpCellID";
         
         [self.tableView reloadData];
         
-//        NSLog(@"数据:%@",responseObject);
+        [self.tableView.mj_header endRefreshing];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        [self.tableView.mj_header endRefreshing];
         NSLog(@"error===%@",error);
     }];
 }
@@ -205,55 +136,20 @@ NSString *ID = @"hpCellID";
         NSArray *moreTopics = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         
         [self.hpWeiboArray addObjectsFromArray:moreTopics];
-        // 结束刷新(恢复刷新控件的状态)
-        self.footerRefreshing = NO;
         
         [self.tableView reloadData];
-        //重新复制footerView试试
-        
-        
-        // 结束刷新(恢复刷新控件的状态)
-        self.footerRefreshing = NO;
-        self.footView.text = @"上拉加载更多数据";
-        self.footView.backgroundColor = [UIColor redColor];
+        [self.tableView.mj_footer endRefreshing];
 
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        [self.tableView.mj_footer endRefreshing];
         NSLog(@"error===%@",error);
     }];
 }
 
-#pragma mark -- 代理
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    //如果还没有数据，不需要处理FooterView
-    if (self.hpWeiboArray.count == 0) return;
-    //如果正在上拉刷新（加载更多数据）,直接返回
-    if (self.isFooterRefreshing) return;
-    
-    //当偏移量超过 >= offsetY时，footerView就会完全出现，进入上拉加载数据状态
-    CGFloat offsetY = self.tableView.contentSize.height + self.tableView.contentInset.bottom - self.tableView.wjw_height;
-    
-    if (self.tableView.contentOffset.y >= offsetY) {
-        //进入刷新状态
-        self.footerRefreshing = YES;
-        self.footView.text = @"正在加载更多数据......";
-        self.footView.backgroundColor = [UIColor blueColor];
-        
-        //发送请求给服务器，加载更多数据
-        [self loadMoreTopics];
-    }
-}
-
-
-
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    //如果数据不满一个页面时，上拉条如何显示？
-    self.footView.hidden = (self.hpWeiboArray.count == 0);
-    
+        
     return self.hpWeiboArray.count;
 }
 
