@@ -45,6 +45,7 @@
 @property (nonatomic, strong) UIButton *shieldBTN;
 @property (nonatomic, strong) UIButton *reportBTN;
 
+@property (nonatomic, strong) UILabel *hudLabel;
 @end
 
 @implementation WJWHomePageViewController
@@ -178,7 +179,7 @@ NSString *ID = @"hompageCellID";
     //注册xib，根据ID加载
     WJWHomePageCellCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
-//    cell.delegate = self;
+    cell.delegate = self;
     cell.hpCellItem = self.hpWeiboArray[indexPath.item];
     
     
@@ -201,6 +202,180 @@ NSString *ID = @"hompageCellID";
     return cell;
 }
 
+#pragma mark -- 点击Cell下拉按钮，弹出遮罩的处理
+//点击cell右上角下拉框，弹出遮照 和 五条Button
+- (void)HPMCellHUDButton:(WJWHomePageCellCell *)cell
+{
+    //遮照
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    // 1.添加阴影
+    UIView *coverView = [[UIView alloc] init];
+    coverView.frame = screenBounds;
+    coverView.backgroundColor = [UIColor blackColor];
+    coverView.alpha = 0.3;
+    
+    [self.view.superview addSubview:coverView];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(coverBtnClick)];
+    [coverView addGestureRecognizer:tap];
+    self.converView = coverView;
+    
+    //    [self.view bringSubviewToFront:coverView];
+    
+    //添加五条Button按钮
+    //起始位置 x
+    CGFloat x = 60;
+    //每条button的高度
+    CGFloat h = 1.0 * screenBounds.size.height/13;
+    //起始位置 y
+    CGFloat y = 200;// 4 * h;
+    //button 宽度
+    CGFloat w = screenBounds.size.width - 2 * 60;
+    
+    UIButton *storeBTN = [[UIButton alloc] init];
+    [storeBTN setTitle:@"收藏" forState:(UIControlStateNormal)];
+    storeBTN.frame = CGRectMake(x, y, w, h);
+    [storeBTN setBackgroundColor:[UIColor whiteColor]];
+    [storeBTN setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    [storeBTN setTitleEdgeInsets:(UIEdgeInsetsMake(1, 1, 1, 1))];
+    //    [storeBTN setBackgroundImage:[UIImage imageWithColor:[UIColor grayColor]] forState:(UIControlStateHighlighted)];
+    [storeBTN setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:206/255.0 green:206/255.0 blue:206/255.0 alpha:1.0]] forState:(UIControlStateHighlighted)];
+    [storeBTN addTarget:self action:@selector(reptest:) forControlEvents:(UIControlEventTouchUpInside)];
+    self.storeBTN = storeBTN;
+    
+    
+    UIButton *helpHeadlineBTN = [[UIButton alloc] init];
+    [helpHeadlineBTN setTitle:@"帮上头条" forState:(UIControlStateNormal)];
+    helpHeadlineBTN.frame = CGRectMake(x, y + h, w, h);
+    [helpHeadlineBTN setBackgroundColor:[UIColor whiteColor]];
+    [helpHeadlineBTN setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    //    [helpHeadlineBTN setBackgroundImage:[UIImage imageWithColor:[UIColor grayColor]] forState:(UIControlStateHighlighted)];
+    [helpHeadlineBTN setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:206/255.0 green:206/255.0 blue:206/255.0 alpha:1.0]] forState:(UIControlStateHighlighted)];
+    [helpHeadlineBTN addTarget:self action:@selector(reptest:) forControlEvents:(UIControlEventTouchUpInside)];
+    self.helpHeadlineBTN = helpHeadlineBTN;
+    
+    UIButton *cancleAttentionBTN = [[UIButton alloc] init];
+    [cancleAttentionBTN setTitle:@"取消关注" forState:(UIControlStateNormal)];
+    cancleAttentionBTN.frame = CGRectMake(x, y + 2*h, w, h);
+    [cancleAttentionBTN setBackgroundColor:[UIColor whiteColor]];
+    [cancleAttentionBTN setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    [cancleAttentionBTN setBackgroundImage:[UIImage imageWithColor:[UIColor grayColor]] forState:(UIControlStateHighlighted)];
+    //    [cancleAttentionBTN setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:206/255.0 green:206/255.0 blue:206/255.0 alpha:1.0]] forState:(UIControlStateHighlighted)];
+    [cancleAttentionBTN addTarget:self action:@selector(reptest:) forControlEvents:(UIControlEventTouchUpInside)];
+    self.cancleAttentionBTN = cancleAttentionBTN;
+    
+    UIButton *shieldBTN = [[UIButton alloc] init];
+    [shieldBTN setTitle:@"屏蔽" forState:(UIControlStateNormal)];
+    shieldBTN.frame = CGRectMake(x, y + 3*h, w, h);
+    [shieldBTN setBackgroundColor:[UIColor whiteColor]];
+    [shieldBTN setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    //    [shieldBTN setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:(UIControlStateHighlighted)];
+    [shieldBTN setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:206/255.0 green:206/255.0 blue:206/255.0 alpha:1.0]] forState:(UIControlStateHighlighted)];
+    [shieldBTN addTarget:self action:@selector(reptest:) forControlEvents:(UIControlEventTouchUpInside)];
+    self.shieldBTN = shieldBTN;
+    
+    UIButton *reportBTN = [UIButton buttonWithType:UIButtonTypeCustom];
+    [reportBTN setTitle:@"举报" forState:(UIControlStateNormal)];
+    reportBTN.frame = CGRectMake(x, y + 4*h, w, h);
+    [reportBTN setBackgroundColor:[UIColor whiteColor]];
+    [reportBTN setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    [reportBTN setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:206/255.0 green:206/255.0 blue:206/255.0 alpha:1.0]] forState:(UIControlStateHighlighted)];
+    [reportBTN addTarget:self action:@selector(reptest:) forControlEvents:(UIControlEventTouchUpInside)];
+    self.reportBTN = reportBTN;
+    
+    
+    [self.view.superview addSubview:storeBTN];
+    [self.view.superview addSubview:helpHeadlineBTN];
+    [self.view.superview addSubview:cancleAttentionBTN];
+    [self.view.superview addSubview:shieldBTN];
+    [self.view.superview addSubview:reportBTN];
+}
+
+- (void)coverBtnClick {
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        self.converView.alpha = 0.001;
+        self.storeBTN.alpha = 0.001;
+        self.helpHeadlineBTN.alpha = 0.001;
+        self.helpHeadlineBTN.alpha = 0.001;
+        self.helpHeadlineBTN.alpha = 0.001;
+        self.helpHeadlineBTN.alpha = 0.001;
+    } completion:^(BOOL finished) {
+        [self.converView removeFromSuperview];
+        self.converView = nil;
+        
+        [self.storeBTN removeFromSuperview];
+        self.storeBTN = nil;
+        
+        [self.helpHeadlineBTN removeFromSuperview];
+        self.helpHeadlineBTN = nil;
+        
+        [self.cancleAttentionBTN removeFromSuperview];
+        self.cancleAttentionBTN = nil;
+        
+        [self.shieldBTN removeFromSuperview];
+        self.shieldBTN = nil;
+        
+        [self.reportBTN removeFromSuperview];
+        self.reportBTN = nil;
+        
+    }];
+}
+
+- (void)reptest:(UIButton*)btn
+{
+    NSLog(@"%@", btn.titleLabel.text);
+    
+    if ([btn.titleLabel.text isEqualToString:@"收藏"]) {
+        [self showHUD:btn.titleLabel.text];
+    }
+    else if ([btn.titleLabel.text isEqualToString:@"帮上头条"])
+    {
+        NSLog(@"帮上头条");
+    }else if ([btn.titleLabel.text isEqualToString:@"取消关注"])
+    {
+        NSLog(@"取消关注");
+    }else if ([btn.titleLabel.text isEqualToString:@"屏蔽"])
+    {
+        NSLog(@"屏蔽");
+    }else if ([btn.titleLabel.text isEqualToString:@"举报"])
+    {
+        NSLog(@"举报");
+    }
+    
+    [self coverBtnClick];
+}
+
+- (void)showHUD:(NSString *)text
+{
+    // 显示hudLabel
+    //        self.hudLabel.hidden = NO;
+    self.hudLabel = [[UILabel alloc] init];
+    self.hudLabel.backgroundColor = [UIColor blackColor];
+    self.hudLabel.alpha = 1;
+    self.hudLabel.textColor = [UIColor whiteColor];
+    //    self.hudLabel = hudLable;
+    
+    self.hudLabel.text = text;
+    // 慢慢出现(出现动画持续1s)
+    [UIView animateWithDuration:1.0 animations:^{
+        self.hudLabel.alpha = 1.0; // 完全不透明
+    } completion:^(BOOL finished) {
+        // 1.5s后慢慢消失(消失动画持续1s)
+        [UIView animateWithDuration:1.0 delay:1.5 options:kNilOptions animations:^{
+            self.hudLabel.alpha = 0.0;
+        } completion:nil];
+    }];
+}
+
+//- (void)ForwardWeiboCellDidClickBTN:(WJWHomePageMainTVCell *)cell
+//{
+//    WJWForwardWeiboVC *forwardWeiboVC = [[WJWForwardWeiboVC alloc] init];
+//    
+//    //cell赋值给新控制器
+//    // forwardWeiboVC === cell;
+//    
+//    [self.navigationController pushViewController:forwardWeiboVC animated:YES];
+//}
 
 
 #pragma mark -- 设置本页面导航栏内容

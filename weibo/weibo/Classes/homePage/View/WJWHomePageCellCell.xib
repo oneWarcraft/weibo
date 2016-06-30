@@ -92,6 +92,9 @@
                             <constraint firstAttribute="height" constant="15" id="pZN-kS-44O"/>
                         </constraints>
                         <state key="normal" image="detail_wares_icon_more"/>
+                        <connections>
+                            <action selector="pullDownMenuClik" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nSx-LQ-Dqh"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

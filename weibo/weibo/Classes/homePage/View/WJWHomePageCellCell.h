@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class WJWHomePageItem, WJWHomePageCellCell,userModel;
-@protocol WJWHPMainCellDelegate <NSObject>
+@protocol WJWHPCellDelegate <NSObject>
 
 @optional
 //点击下拉列框
@@ -36,7 +36,7 @@
 - (CGFloat)cellHeight;
 
 /** 代理属性 */
-@property (nonatomic, weak) id<WJWHPMainCellDelegate>delegate;
+@property (nonatomic, weak) id<WJWHPCellDelegate>delegate;
 
 
 @end

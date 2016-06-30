@@ -67,6 +67,50 @@
     // Configure the view for the selected state
 }
 
+
+#pragma mark -- cell 第三部分的处理
+////cell通知外面 用代理方法！！！！！！！
+////点击转发按钮
+//- (IBAction)transmitCountClickBTN
+//{
+//    //    WJWForwardWeiboVC *forwardVC = [[WJWForwardWeiboVC alloc] init];
+//    
+//    // 通知代理(调用代理的方法)
+//    if ([self.delegate respondsToSelector:@selector(ForwardWeiboCellDidClickBTN:)]) {
+//        [self.delegate ForwardWeiboCellDidClickBTN:self];
+//    }
+//    //    [self.navigationController pushViewController:forwardVC animated:YES];
+//}
+////点击评论按钮
+//- (IBAction)commentClikBTN
+//{
+//    // 通知代理(调用代理的方法)
+//    if ([self.delegate respondsToSelector:@selector(ForwardWeiboCellDidClickBTN:)])
+//    {
+//        [self.delegate ForwardWeiboCellDidClickBTN:self];
+//    }
+//}
+////点击点赞按钮
+//- (IBAction)favourCountClickBTN
+//{
+//}
+
+
+
+#pragma mark -- 点击Cell下拉按钮，实现遮罩
+//下拉菜单
+- (IBAction)pullDownMenuClik
+{
+    
+    //添加遮照
+    // 通知代理(调用代理的方法)
+    if ([self.delegate respondsToSelector:@selector(HPMCellHUDButton:)]) {
+        [self.delegate HPMCellHUDButton:self];
+    }
+    
+}
+
+#pragma mark -- 计算cell每个控件的高
 /**
  *  设置cell每个控件的值
  */
