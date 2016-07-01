@@ -13,6 +13,7 @@
 #import "WJWanimationModel.h"
 #import "UIImage+Image.h"
 #import <AFNetworking.h>
+
 #import <MJExtension/MJExtension.h>
 #import "WJWAccount.h"
 #import "WJWAuthoController.h"
@@ -20,14 +21,15 @@
 #import "WJWHomePageItem.h"
 #import <MJRefresh/MJRefresh.h>
 #import "WJWHomePageCellCell.h"
-
+#import "XMGVideo.h"
+#import "TFHpple.h"
 
 //#define MAS_SHORTHAND
 //#define MAS_SHORTHAND_GLOBALS
 //#import <Masonry.h>
 //pod 'Masonry'
 
-@interface WJWHomePageViewController () <UIViewControllerTransitioningDelegate>
+@interface WJWHomePageViewController () <UIViewControllerTransitioningDelegate> //, NSXMLParserDelegate
 
 /** 保存首页微博全部模型数据 */
 @property (nonatomic, strong) NSMutableArray <WJWHomePageItem*> *hpWeiboArray;
@@ -46,9 +48,21 @@
 @property (nonatomic, strong) UIButton *reportBTN;
 
 @property (nonatomic, strong) UILabel *hudLabel;
+
+
+/** 数据源*/
+@property (nonatomic ,strong) NSMutableArray *videos;
 @end
 
 @implementation WJWHomePageViewController
+
+-(NSMutableArray *)videos
+{
+    if (_videos == nil) {
+        _videos = [NSMutableArray array];
+    }
+    return _videos;
+}
 
 NSString *ID = @"hompageCellID";
 
@@ -84,9 +98,121 @@ NSString *ID = @"hompageCellID";
 }
 
 
+- (void)loadNewTopics
+{
+    /* Configure session, choose between:
+     * defaultSessionConfiguration
+     * ephemeralSessionConfiguration
+     * backgroundSessionConfigurationWithIdentifier:
+     And set session-wide properties, such as: HTTPAdditionalHeaders,
+     HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
+     */
+    NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    /* Create session, and optionally set a NSURLSessionDelegate. */
+    NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+    
+    /* Create the Request:
+     My API (GET http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm)
+     */
+    
+    NSURL* URL = [NSURL URLWithString:@"http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm"];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+    request.HTTPMethod = @"GET";
+    
+    // Headers
+    
+    [request addValue:@"U_TRS1=000000c4.2314f10.57765ae1.efc5ac50; U_TRS2=000000c4.2404f10.57765ae1.70a4ec99; cookie_id=57765ae118b7a; USRHAWB=usrmdinst_9" forHTTPHeaderField:@"Cookie"];
+    
+    /* Start a new Task */
+    NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error == nil) {
+            // Success
+            NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
+  
+//            NSData * htmlData = data;
+            
+            TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
+            
+            NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//embed"];
+            
+            for (TFHppleElement *hppleElement in dataArray)
+            {
+                NSLog(@"%@", hppleElement.raw);
+                
+                NSLog(@"%@", hppleElement.text);
+            }
+            
+            
+
+           
+            
+            
+            
+            
+            
+            
+            //            //解析XML Data
+            //            //2.1 创建XML解析器
+            //            NSXMLParser *parser = [[NSXMLParser alloc]initWithData:data];
+            //
+            //            //2.2 设置代理
+            //            parser.delegate = self;
+            //
+            //            //2.3 开始解析,该方法本身是阻塞的
+            //            [parser parse];
+            
+        } 
+        else {
+            // Failure
+            NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
+        }
+    }];
+    [task resume];
+}
+
+//#pragma mark --------------------
+//#pragma mark NSXMLParserDelegate
+////1.开始解析XML文档
+//-(void)parserDidStartDocument:(NSXMLParser *)parser
+//{
+//    NSLog(@"%s",__func__);
+//}
+//
+////2.开始解析某个元素
+//-(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict
+//{
+//    NSLog(@"%s--开始解析元素%@---\n%@",__func__,elementName,attributeDict);
+//    
+//    if ([elementName isEqualToString:@"videos"]) {
+//        //过滤根元素
+//        return;
+//    }
+//    XMGVideo *videoM = [[XMGVideo alloc]init];
+//    [videoM mj_setKeyValues:attributeDict];
+//    [self.videos addObject:videoM];
+//    
+//    //[self.videos addObject:[XMGVideo mj_objectWithKeyValues:attributeDict]];
+//}
+
+////3.某个元素解析完毕
+//-(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
+//{
+//    NSLog(@"%s--结束%@元素的解析",__func__,elementName);
+//}
+//
+////4.整个XML文档都已经解析完毕
+//-(void)parserDidEndDocument:(NSXMLParser *)parser
+//{
+//    NSLog(@"%s",__func__);
+//}
+
+
+
+
 #pragma mark -- 获取网络数据
 /** 加载最新微博 */
-- (void)loadNewTopics
+- (void)loadNewTopics1
 {
     WJWAccount *Caccount  = [WJWAccountTool shareAccountTool].currentAccount;
     
@@ -94,9 +220,10 @@ NSString *ID = @"hompageCellID";
     
     self.page = 1;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
-    NSString *urlstr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@",token];
-    
+//    manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObjects:@"text/html", nil];
+   
+//    NSString *urlstr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@",token];
+     NSString *urlstr = [NSString stringWithFormat:@"http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm"];
     NSLog(@"%@", urlstr);
     
     NSDictionary *dict = @{
@@ -104,9 +231,9 @@ NSString *ID = @"hompageCellID";
                            @"max_id":@(0),
                            @"page":@(self.page)
                            };
+   
     
-    
-    [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
+    [manager GET:urlstr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
         
         NSLog(@"%@", responseObject);
         

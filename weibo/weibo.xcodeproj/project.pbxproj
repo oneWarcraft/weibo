@@ -42,6 +42,11 @@
 		0C470B5D1D25363E0002FAF9 /* WJWTopicVoiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C470B5C1D25363E0002FAF9 /* WJWTopicVoiceView.xib */; };
 		0C470B5F1D2536500002FAF9 /* WJWTopicPictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C470B5E1D2536500002FAF9 /* WJWTopicPictureView.xib */; };
 		0C470B611D2536670002FAF9 /* WJWTopicVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C470B601D2536670002FAF9 /* WJWTopicVideoView.xib */; };
+		0C669B7C1D26968F00627805 /* XMGVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C669B7B1D26968F00627805 /* XMGVideo.m */; };
+		0C669B7E1D269B8100627805 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C669B7D1D269B8100627805 /* libxml2.2.tbd */; };
+		0C669B901D269DDE00627805 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C669B8B1D269DDE00627805 /* TFHpple.m */; };
+		0C669B911D269DDE00627805 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C669B8D1D269DDE00627805 /* TFHppleElement.m */; };
+		0C669B921D269DDE00627805 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C669B8F1D269DDE00627805 /* XPathQuery.m */; };
 		0C749E7A1D17D7030018F680 /* WJWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E791D17D7030018F680 /* WJWTabBarController.m */; };
 		0C749E801D17DAB00018F680 /* WJWNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E7F1D17DAB00018F680 /* WJWNavigationController.m */; };
 		0C749E831D17DB310018F680 /* WJWDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C749E821D17DB310018F680 /* WJWDiscoverViewController.m */; };
@@ -213,6 +218,15 @@
 		0C470B5C1D25363E0002FAF9 /* WJWTopicVoiceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWTopicVoiceView.xib; sourceTree = "<group>"; };
 		0C470B5E1D2536500002FAF9 /* WJWTopicPictureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWTopicPictureView.xib; sourceTree = "<group>"; };
 		0C470B601D2536670002FAF9 /* WJWTopicVideoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJWTopicVideoView.xib; sourceTree = "<group>"; };
+		0C669B7A1D26968F00627805 /* XMGVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMGVideo.h; sourceTree = "<group>"; };
+		0C669B7B1D26968F00627805 /* XMGVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMGVideo.m; sourceTree = "<group>"; };
+		0C669B7D1D269B8100627805 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		0C669B8A1D269DDE00627805 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		0C669B8B1D269DDE00627805 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		0C669B8C1D269DDE00627805 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		0C669B8D1D269DDE00627805 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		0C669B8E1D269DDE00627805 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		0C669B8F1D269DDE00627805 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		0C749E781D17D7030018F680 /* WJWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWTabBarController.h; sourceTree = "<group>"; };
 		0C749E791D17D7030018F680 /* WJWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJWTabBarController.m; sourceTree = "<group>"; };
 		0C749E7E1D17DAB00018F680 /* WJWNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJWNavigationController.h; sourceTree = "<group>"; };
@@ -354,6 +368,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C669B7E1D269B8100627805 /* libxml2.2.tbd in Frameworks */,
 				0082653BC7C078CD44AC82DD /* libPods-weibo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +411,7 @@
 		0C2DF2681D1FCF7D00C48AD9 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				0C669B891D269DDE00627805 /* TFHpple */,
 				0C2DF2691D1FCF7D00C48AD9 /* File */,
 			);
 			path = Tools;
@@ -441,6 +457,19 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0C669B891D269DDE00627805 /* TFHpple */ = {
+			isa = PBXGroup;
+			children = (
+				0C669B8A1D269DDE00627805 /* TFHpple.h */,
+				0C669B8B1D269DDE00627805 /* TFHpple.m */,
+				0C669B8C1D269DDE00627805 /* TFHppleElement.h */,
+				0C669B8D1D269DDE00627805 /* TFHppleElement.m */,
+				0C669B8E1D269DDE00627805 /* XPathQuery.h */,
+				0C669B8F1D269DDE00627805 /* XPathQuery.m */,
+			);
+			path = TFHpple;
 			sourceTree = "<group>";
 		};
 		0C749E9C1D17E2080018F680 /* AppIcons */ = {
@@ -678,6 +707,8 @@
 		0CE971C61D17A58E0033732F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0C669B7A1D26968F00627805 /* XMGVideo.h */,
+				0C669B7B1D26968F00627805 /* XMGVideo.m */,
 				0C84D3B81D2129BC005078BE /* WJWHomePageItem.h */,
 				0C84D3B91D2129BC005078BE /* WJWHomePageItem.m */,
 			);
@@ -942,6 +973,7 @@
 		BD2AA14B3D96E97B9F61B553 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0C669B7D1D269B8100627805 /* libxml2.2.tbd */,
 				C27454225A9D7DF19851A1B5 /* libPods-weibo.a */,
 			);
 			name = Frameworks;
@@ -1180,6 +1212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C669B911D269DDE00627805 /* TFHppleElement.m in Sources */,
 				0CFF70E31D20CC7E00668E21 /* WJWAccount.m in Sources */,
 				0C749E8F1D17DB710018F680 /* WJWNewViewController.m in Sources */,
 				0C84D3BA1D2129BC005078BE /* WJWHomePageItem.m in Sources */,
@@ -1200,6 +1233,8 @@
 				0C2DF23B1D1FB25100C48AD9 /* UIColor+Hex.m in Sources */,
 				0C749E891D17DB4C0018F680 /* WJWMeViewController.m in Sources */,
 				0C2DF23F1D1FB25100C48AD9 /* UIView+Frame.m in Sources */,
+				0C669B7C1D26968F00627805 /* XMGVideo.m in Sources */,
+				0C669B901D269DDE00627805 /* TFHpple.m in Sources */,
 				0C2DF2621D1FBE7100C48AD9 /* WJWPresentVC.m in Sources */,
 				0C749E801D17DAB00018F680 /* WJWNavigationController.m in Sources */,
 				0CF185C11D179550001EF1D9 /* AppDelegate.m in Sources */,
@@ -1211,6 +1246,7 @@
 				0C2DF23E1D1FB25100C48AD9 /* UITextField+Placeholder.m in Sources */,
 				0C2DF26C1D1FCF7D00C48AD9 /* WJWFileManager.m in Sources */,
 				0C2DF23C1D1FB25100C48AD9 /* UIImage+CircleIcon.m in Sources */,
+				0C669B921D269DDE00627805 /* XPathQuery.m in Sources */,
 				0C2DF25F1D1FBE7100C48AD9 /* WJWanimationModel.m in Sources */,
 				0C470B531D2535DD0002FAF9 /* WJWTopicVideoView.m in Sources */,
 				0C749E8C1D17DB580018F680 /* WJWMessageViewController.m in Sources */,
@@ -1258,6 +1294,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1296,6 +1333,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;

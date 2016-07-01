@@ -7,6 +7,7 @@
 //
 
 #import "WJWHomePageItem.h"
+#import <UIKit/UIKit.h>
 
 @implementation WJWHomePageItem
 
@@ -70,33 +71,81 @@
 //暂时这么写，应该不对，collection高度需要重新计算，还需要根据发来的图片等比例进行缩放
 - (CGFloat)middleHeight
 {//如果有视频或者其他的要修改这里，暂时只显示图片文字
-    CGFloat picHeight = 0;
+//看代码中的数据，貌似没有给出网络图片的宽高，就固定其大小
+    
+    CGFloat slotViewHeight = 0;
     if (self.pic_urls.count == 0) {
         //没有配图
-//        self.picturesView.hidden = YES;
-        return _cellHeight;
+        //        self.picturesView.hidden = YES;
+        return 0.0;
     }else{
         //有配图
 //        self.picturesView.hidden = NO;
         switch (self.pic_urls.count) {
             case 1:
-            case 2:
-            case 3:
-                picHeight = ((WJWScreenW-20) * 2) / 3;
-                break;
+            {
+                CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
+                CGFloat middleH = middleW;
+                CGFloat middleX = 0;
+                CGFloat middleY = 0;
+
+                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
                 
+                _cellHeight += middleH + WJWMargin;
+                break;
+            }
+            case 2:
+            {
+                CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
+                CGFloat middleH = middleW;
+                CGFloat middleX = 0;
+                CGFloat middleY = 0;
+                
+                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+                
+                _cellHeight += middleH + WJWMargin;
+                break;
+            }
+            case 3:
+            {
+                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
+                CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 1.0 /3.0;;
+                CGFloat middleX = 0;
+                CGFloat middleY = 0;
+                
+                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+                
+                _cellHeight += middleH + WJWMargin;
+                break;
+            }
             case 4:
             case 5:
             case 6:
-                picHeight = ((WJWScreenW-20) * 2) / 3;
-                break;
+            {
+                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
+                CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
+                CGFloat middleX = 0;
+                CGFloat middleY = 0;
                 
+                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+                
+                _cellHeight += middleH + WJWMargin;
+                break;
+            }
             case 7:
             case 8:
             case 9:
-                picHeight = WJWScreenW-20;
-                break;
+            {
+                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
+                CGFloat middleH = (WJWScreenW - 2 * WJWMargin);
+                CGFloat middleX = 0;
+                CGFloat middleY = 0;
                 
+                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+                
+                _cellHeight += middleH + WJWMargin;
+                break;
+            }
             default:
                 WJWLog(@"Error: %s, %zd", __FUNCTION__, __LINE__);
                 break;
@@ -104,5 +153,15 @@
     }
    return _cellHeight + WJWMargin;
 }
+//                CGFloat middleW = textMaxSize.width;
+//                CGFloat middleH = middleW * self.height / self.width;
+//                CGFloat middleX = WJWMargin;
+//                CGFloat middleY = _cellHeight;
+//
+//                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+//
+//                _cellHeight += middleH + WJWMargin;
+
+
 
 @end

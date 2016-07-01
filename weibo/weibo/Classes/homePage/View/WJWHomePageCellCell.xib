@@ -96,17 +96,30 @@
                             <action selector="pullDownMenuClik" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nSx-LQ-Dqh"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GXK-eW-Kpr" userLabel="卡槽">
+                        <rect key="frame" x="10" y="90.5" width="405" height="126.5"/>
+                        <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="126.5" id="WCg-Jf-bfE"/>
+                            <constraint firstAttribute="width" constant="405" id="pEN-cf-GCA"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="GXK-eW-Kpr" firstAttribute="top" secondItem="GXr-0z-ELG" secondAttribute="bottom" constant="10" id="0I9-qb-xW5"/>
                     <constraint firstItem="nEY-Md-NhN" firstAttribute="baseline" secondItem="zlM-zw-3gg" secondAttribute="baseline" id="82p-UN-UOV"/>
                     <constraint firstItem="zlM-zw-3gg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="8cF-da-ICY"/>
+                    <constraint firstItem="GXK-eW-Kpr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="C2h-JF-wPt"/>
                     <constraint firstItem="bwE-r7-Wit" firstAttribute="bottom" secondItem="zlM-zw-3gg" secondAttribute="bottom" id="F56-Ew-EvD"/>
                     <constraint firstItem="Ljj-1i-Nxm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="F5f-up-70k"/>
                     <constraint firstItem="lFz-FF-jhG" firstAttribute="leading" secondItem="h4x-HQ-mi9" secondAttribute="trailing" constant="10" id="HVT-tZ-tCu"/>
+                    <constraint firstAttribute="trailing" secondItem="GXK-eW-Kpr" secondAttribute="trailing" constant="10" id="LUw-IM-xJj"/>
                     <constraint firstItem="nEY-Md-NhN" firstAttribute="leading" secondItem="bwE-r7-Wit" secondAttribute="trailing" constant="10" id="MVZ-SQ-uLT"/>
+                    <constraint firstItem="GXK-eW-Kpr" firstAttribute="top" secondItem="zlM-zw-3gg" secondAttribute="bottom" priority="750" constant="10" id="Mim-eM-Qpc"/>
                     <constraint firstAttribute="trailing" secondItem="x05-Pi-Tv0" secondAttribute="trailing" constant="10" id="N4D-wl-0U1"/>
                     <constraint firstItem="HKv-GY-GrU" firstAttribute="bottom" secondItem="nEY-Md-NhN" secondAttribute="bottom" id="Rqx-fE-m1C"/>
                     <constraint firstAttribute="bottom" secondItem="Ljj-1i-Nxm" secondAttribute="bottom" id="T5U-Dl-ZAD"/>
+                    <constraint firstItem="Ljj-1i-Nxm" firstAttribute="top" secondItem="GXK-eW-Kpr" secondAttribute="bottom" constant="10" id="Zq8-Kl-KtM"/>
                     <constraint firstItem="x05-Pi-Tv0" firstAttribute="top" secondItem="zlM-zw-3gg" secondAttribute="top" id="aHR-fG-nsM"/>
                     <constraint firstItem="lFz-FF-jhG" firstAttribute="centerY" secondItem="h4x-HQ-mi9" secondAttribute="centerY" id="aSr-WB-LI7"/>
                     <constraint firstAttribute="trailing" secondItem="Ljj-1i-Nxm" secondAttribute="trailing" id="b8N-et-hu3"/>
@@ -128,6 +141,9 @@
                 <outlet property="favourCount_Button" destination="Lxs-dr-xrF" id="8nc-na-Lgv"/>
                 <outlet property="fromSource_Lable" destination="HKv-GY-GrU" id="CHa-he-4jL"/>
                 <outlet property="headIcon_ImageView" destination="zlM-zw-3gg" id="TaN-2X-mdv"/>
+                <outlet property="midSlotViewHeight_Constraint" destination="WCg-Jf-bfE" id="xPK-4I-V1K"/>
+                <outlet property="midSlotViewWidth_Constraint" destination="pEN-cf-GCA" id="buM-dM-sId"/>
+                <outlet property="midSlot_View" destination="GXK-eW-Kpr" id="uV1-zj-rsh"/>
                 <outlet property="name_Lable" destination="h4x-HQ-mi9" id="Tah-83-mgb"/>
                 <outlet property="pullDown_Button" destination="x05-Pi-Tv0" id="CAa-Na-yI7"/>
                 <outlet property="repost_Button" destination="jZI-B7-UNx" id="H6n-nY-DLB"/>

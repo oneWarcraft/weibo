@@ -49,6 +49,10 @@
 /** 视频控件 */
 @property (nonatomic, weak) WJWTopicVideoView *videoView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *midSlotViewHeight_Constraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *midSlotViewWidth_Constraint;
+@property (weak, nonatomic) IBOutlet UIView *midSlot_View;
+
 @end
 
 
