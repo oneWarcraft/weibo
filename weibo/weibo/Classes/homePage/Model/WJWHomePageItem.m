@@ -32,6 +32,8 @@
     CGSize textMaxSize = CGSizeMake(WJWScreenW - 2 * WJWMargin, MAXFLOAT);
     _cellHeight += [self.text boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15]} context:nil].size.height + WJWMargin;
     
+    NSLog(@"文字的底部位置：%f ", _cellHeight);
+    CGFloat temp = _cellHeight;
     //中间内容的高度
 //    if (self.type != WJWTopicTypeWord) // 非段子，可能是图片、声音、视频帖子
     if (self.pic_urls.count>0)
@@ -64,10 +66,10 @@
 //        NSString *topCmtText = [NSString stringWithFormat:@"%@ : %@", username, content];
 //        _cellHeight += [topCmtText boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.height + WJWMargin;
 //    }
-    
+    NSLog(@"图片底部位置%f  到 Cell 底部的间距：%f ",_cellHeight, _cellHeight - temp);
     //最下面第三部分 工具条的高度
     _cellHeight += 30 + WJWMargin;
-    
+    NSLog(@"文字底部位置 到 Cell 底部的间距：%f ", _cellHeight - temp);
     return _cellHeight;
 }
 
@@ -76,7 +78,7 @@
 {//如果有视频或者其他的要修改这里，暂时只显示图片文字
 //看代码中的数据，貌似没有给出网络图片的宽高，就固定其大小
     
-    CGFloat midHeight = cellHeight;
+    CGFloat midHeightTemp = 0;
     if (self.pic_urls.count == 0) {
         //没有配图
         //        self.picturesView.hidden = YES;
@@ -84,78 +86,80 @@
     }else{
         //有配图
 //        self.picturesView.hidden = NO;
-        switch (self.pic_urls.count) {
+        switch (1){ //self.pic_urls.count) {
             case 1:
             {
-                CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
-                CGFloat middleH = middleW; // 高度需要重新计算，用宽高比例计算#####################
+                CGFloat middleW = 100;//(WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
+                CGFloat middleH = 100;//middleW; // 高度需要重新计算，用宽高比例计算#####################
                 CGFloat middleX = WJWMargin;
-                CGFloat middleY = _cellHeight;
+                CGFloat middleY = cellHeight;
 
                 self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
                 
-                midHeight += middleH + WJWMargin;
+//              midHeight += middleH + WJWMargin;
+                midHeightTemp = middleH + WJWMargin;
                 break;
             }
-            case 2:
-            {
-                CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
-                CGFloat middleH = middleW;
-                CGFloat middleX = WJWMargin;
-                CGFloat middleY = _cellHeight;
-                
-                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
-                
-                midHeight += middleH + WJWMargin;
-                break;
-            }
-            case 3:
-            {
-                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
-                CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 1.0 /3.0;;
-                CGFloat middleX = WJWMargin;
-                CGFloat middleY = _cellHeight;
-                
-                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
-                
-                midHeight += middleH + WJWMargin;
-                break;
-            }
-            case 4:
-            case 5:
-            case 6:
-            {
-                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
-                CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
-                CGFloat middleX = WJWMargin;
-                CGFloat middleY = _cellHeight;
-                
-                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
-                
-                midHeight += middleH + WJWMargin;
-                break;
-            }
-            case 7:
-            case 8:
-            case 9:
-            {
-                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
-                CGFloat middleH = (WJWScreenW - 2 * WJWMargin);
-                CGFloat middleX = WJWMargin;
-                CGFloat middleY = _cellHeight;
-                
-                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
-                
-                midHeight += middleH + WJWMargin;
-                break;
-            }
+                //暂时只显示一张
+//            case 2:
+//            {
+//                CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
+//                CGFloat middleH = middleW;
+//                CGFloat middleX = WJWMargin;
+//                CGFloat middleY = cellHeight;
+//                
+//                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+//                
+//                midHeight += middleH + WJWMargin;
+//                break;
+//            }
+//            case 3:
+//            {
+//                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
+//                CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 1.0 /3.0;;
+//                CGFloat middleX = WJWMargin;
+//                CGFloat middleY = cellHeight;
+//                
+//                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+//                
+//                midHeight += middleH + WJWMargin;
+//                break;
+//            }
+//            case 4:
+//            case 5:
+//            case 6:
+//            {
+//                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
+//                CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
+//                CGFloat middleX = WJWMargin;
+//                CGFloat middleY = cellHeight;
+//                
+//                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+//                
+//                midHeight += middleH + WJWMargin;
+//                break;
+//            }
+//            case 7:
+//            case 8:
+//            case 9:
+//            {
+//                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
+//                CGFloat middleH = (WJWScreenW - 2 * WJWMargin);
+//                CGFloat middleX = WJWMargin;
+//                CGFloat middleY = cellHeight;
+//                
+//                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+//                
+//                midHeight += middleH + WJWMargin;
+//                break;
+//            }
             default:
                 WJWLog(@"Error: %s, %zd", __FUNCTION__, __LINE__);
                 break;
         }
     }
-    NSLog(@"啊啊啊啊啊啊：%@", NSStringFromCGRect(self.middleF));
-   return midHeight + WJWMargin;
+//    NSLog(@"啊啊啊啊啊啊：%@", NSStringFromCGRect(self.middleF));
+    return midHeightTemp;// + WJWMargin;
 }
 
 

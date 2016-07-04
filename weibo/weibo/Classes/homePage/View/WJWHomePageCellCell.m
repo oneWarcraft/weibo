@@ -336,7 +336,7 @@
 //    switch (self.topicItem.type) {
 //        case WJWTopicTypePicture: //图片
             self.pictureView.frame = self.hpCellItem.middleF;
-    NSLog(@"frame: %@", NSStringFromCGRect(self.pictureView.frame));
+//    NSLog(@"frame: %@", NSStringFromCGRect(self.pictureView.frame));
 //            break;
 //            
 //        case WJWTopicTypeVideo: //视频

@@ -632,7 +632,7 @@ NSString *ID = @"hompageCellID";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = self.hpWeiboArray[indexPath.item].cellHeight;
-    NSLog(@"heightForRowAtIndexPath   -------  %@", [NSString stringWithFormat:@"%f", height]);
+//    NSLog(@"heightForRowAtIndexPath   -------  %@", [NSString stringWithFormat:@"%f", height]);
     return height;
 }
 

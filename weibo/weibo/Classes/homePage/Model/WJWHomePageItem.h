@@ -24,6 +24,18 @@
 //    WJWTopicTypeVideo = 41
 //};
 
+
+typedef NS_ENUM(NSUInteger, WJWTopicType) {
+    /** 当前cell既没有图片也没有视频 */
+    WJWTopicTypeNone = 10,
+    /** 图片 */
+    WJWTopicTypePicture = 11,
+    /** 视频 */
+    WJWTopicTypeVideo = 12,
+    /** 文字 */
+    WJWTopicTypeWord = 13
+};
+
 typedef enum {
     kVerifiedTypeNone = - 1, // 没有认证
     kVerifiedTypePersonal = 0, // 个人认证
@@ -103,6 +115,9 @@ typedef enum {
 @property (nonatomic, assign) BOOL is_gif;
 /** 是否为超长图 */
 @property (nonatomic, assign, getter=isBigPicture) BOOL bigPicture;
+/** cell 中间内容，图片、视频、文字 */
+@property (nonatomic, assign) WJWTopicType topicType;
+
 
 #if 0 
 二组

@@ -35,6 +35,8 @@
 {
     _picItem = picItem;
     
+    NSLog(@"picItem.original_pic: %@", picItem.original_pic);
+    NSLog(@"picItem.thumbnail_pic: %@", picItem.thumbnail_pic);
     // 中间图片
     [self.imageView wjw_setImageWithOriginalImageURL:picItem.original_pic thumbnailImageURL:picItem.thumbnail_pic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         

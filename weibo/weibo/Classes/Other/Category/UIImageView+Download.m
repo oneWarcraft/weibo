@@ -34,7 +34,9 @@
         AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
         //如果有网络，则从网络上下载图片
         
-        if (manager.isReachableViaWiFi)
+#warning 目前本机测试，先不判断 根据网络状态下什么照片，一律下高清原图  ###################
+        //if (manager.isReachableViaWiFi)
+        if(1)
         { // 在使用Wifi, 下载原图
             [self sd_setImageWithURL:[NSURL URLWithString:originalImageURL] completed:completedBlock];
         }else if (manager.isReachableViaWWAN)  // 在使用手机自带网络,下载小图
