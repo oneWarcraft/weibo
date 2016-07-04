@@ -25,7 +25,7 @@
 //    [self layoutIfNeeded];
 //    CGFloat cellHeight = CGRectGetMaxY(self.text_Lable.frame);
 
-    // 文字的Y值
+    // 文字的Y值  写死的，后面需要修改：1. 改成在Cell里动态计算高度，无须写死；2. 其它方法。#######################
     _cellHeight += WJWMargin + 40 + WJWMargin; //间隔 + 头像图片高度 + 间隔
     
     // 文字的高度
@@ -34,8 +34,11 @@
     
     //中间内容的高度
 //    if (self.type != WJWTopicTypeWord) // 非段子，可能是图片、声音、视频帖子
+    if (self.pic_urls.count>0)
     {
-        _cellHeight += [self middleHeight];
+        _cellHeight += [self middleHeight:_cellHeight];
+        
+        
 //        CGFloat middleW = textMaxSize.width;
 //        CGFloat middleH = middleW * self.height / self.width;
 //        CGFloat middleX = WJWMargin;
@@ -69,11 +72,11 @@
 }
 
 //暂时这么写，应该不对，collection高度需要重新计算，还需要根据发来的图片等比例进行缩放
-- (CGFloat)middleHeight
+- (CGFloat)middleHeight:(CGFloat)cellHeight
 {//如果有视频或者其他的要修改这里，暂时只显示图片文字
 //看代码中的数据，貌似没有给出网络图片的宽高，就固定其大小
     
-    CGFloat slotViewHeight = 0;
+    CGFloat midHeight = cellHeight;
     if (self.pic_urls.count == 0) {
         //没有配图
         //        self.picturesView.hidden = YES;
@@ -85,37 +88,37 @@
             case 1:
             {
                 CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
-                CGFloat middleH = middleW;
-                CGFloat middleX = 0;
-                CGFloat middleY = 0;
+                CGFloat middleH = middleW; // 高度需要重新计算，用宽高比例计算#####################
+                CGFloat middleX = WJWMargin;
+                CGFloat middleY = _cellHeight;
 
                 self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
                 
-                _cellHeight += middleH + WJWMargin;
+                midHeight += middleH + WJWMargin;
                 break;
             }
             case 2:
             {
                 CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
                 CGFloat middleH = middleW;
-                CGFloat middleX = 0;
-                CGFloat middleY = 0;
+                CGFloat middleX = WJWMargin;
+                CGFloat middleY = _cellHeight;
                 
                 self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
                 
-                _cellHeight += middleH + WJWMargin;
+                midHeight += middleH + WJWMargin;
                 break;
             }
             case 3:
             {
                 CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
                 CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 1.0 /3.0;;
-                CGFloat middleX = 0;
-                CGFloat middleY = 0;
+                CGFloat middleX = WJWMargin;
+                CGFloat middleY = _cellHeight;
                 
                 self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
                 
-                _cellHeight += middleH + WJWMargin;
+                midHeight += middleH + WJWMargin;
                 break;
             }
             case 4:
@@ -124,12 +127,12 @@
             {
                 CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
                 CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
-                CGFloat middleX = 0;
-                CGFloat middleY = 0;
+                CGFloat middleX = WJWMargin;
+                CGFloat middleY = _cellHeight;
                 
                 self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
                 
-                _cellHeight += middleH + WJWMargin;
+                midHeight += middleH + WJWMargin;
                 break;
             }
             case 7:
@@ -138,12 +141,12 @@
             {
                 CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
                 CGFloat middleH = (WJWScreenW - 2 * WJWMargin);
-                CGFloat middleX = 0;
-                CGFloat middleY = 0;
+                CGFloat middleX = WJWMargin;
+                CGFloat middleY = _cellHeight;
                 
                 self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
                 
-                _cellHeight += middleH + WJWMargin;
+                midHeight += middleH + WJWMargin;
                 break;
             }
             default:
@@ -151,16 +154,10 @@
                 break;
         }
     }
-   return _cellHeight + WJWMargin;
+    NSLog(@"啊啊啊啊啊啊：%@", NSStringFromCGRect(self.middleF));
+   return midHeight + WJWMargin;
 }
-//                CGFloat middleW = textMaxSize.width;
-//                CGFloat middleH = middleW * self.height / self.width;
-//                CGFloat middleX = WJWMargin;
-//                CGFloat middleY = _cellHeight;
-//
-//                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
-//
-//                _cellHeight += middleH + WJWMargin;
+
 
 
 

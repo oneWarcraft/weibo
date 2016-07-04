@@ -11,7 +11,6 @@
 #import "UIImageView+WebCache.h"
 #import "WJWTopicPictureView.h"
 #import "WJWTopicVideoView.h"
-#import "WJWTopicVoiceView.h"
 
 // 获得RGB颜色
 #define kColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
@@ -25,7 +24,7 @@
 @interface WJWHomePageCellCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *headIcon_ImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *VType_ImageView; //
+@property (weak, nonatomic) IBOutlet UIImageView *VType_ImageView;
 @property (weak, nonatomic) IBOutlet UILabel *name_Lable;
 @property (weak, nonatomic) IBOutlet UIImageView *VIP_ImageView;
 @property (weak, nonatomic) IBOutlet UILabel *createTime_Lable;
@@ -44,14 +43,12 @@
 /* 中间控件 */
 /** 图片控件 */
 @property (nonatomic, weak) WJWTopicPictureView *pictureView;
-/** 声音控件 */
-@property (nonatomic, weak) WJWTopicVoiceView *voiceView;
 /** 视频控件 */
 @property (nonatomic, weak) WJWTopicVideoView *videoView;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *midSlotViewHeight_Constraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *midSlotViewWidth_Constraint;
-@property (weak, nonatomic) IBOutlet UIView *midSlot_View;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *midSlotViewHeight_Constraint;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *midSlotViewWidth_Constraint;
+//@property (weak, nonatomic) IBOutlet UIView *midSlot_View;
 
 @end
 
@@ -70,16 +67,16 @@
     return _pictureView;
 }
 
-- (WJWTopicVoiceView *)voiceView
-{
-    if (!_voiceView) {
-        WJWTopicVoiceView *voiceView = [WJWTopicVoiceView wjw_viewFromXib];
-        [self.contentView addSubview:voiceView];
-        
-        _voiceView = voiceView;
-    }
-    return _voiceView;
-}
+//- (WJWTopicVoiceView *)voiceView
+//{
+//    if (!_voiceView) {
+//        WJWTopicVoiceView *voiceView = [WJWTopicVoiceView wjw_viewFromXib];
+//        [self.contentView addSubview:voiceView];
+//        
+//        _voiceView = voiceView;
+//    }
+//    return _voiceView;
+//}
 
 - (WJWTopicVideoView *)videoView
 {
@@ -274,6 +271,11 @@
 #warning 待确定如何从返回的一堆数据中如何区分视频 声音 图片 再修改这里
 #warning 现在中间段先只添加图片
 //    // 添加中间段内容
+    if (self.hpCellItem.pic_urls.count > 0) {
+        self.pictureView.picItem = hpCellItem;
+    }
+    
+    
 //    switch (hpCellItem.type) {
 //        case WJWTopicTypePicture:
 //            self.voiceView.hidden = YES;
@@ -334,13 +336,10 @@
 //    switch (self.topicItem.type) {
 //        case WJWTopicTypePicture: //图片
             self.pictureView.frame = self.hpCellItem.middleF;
+    NSLog(@"frame: %@", NSStringFromCGRect(self.pictureView.frame));
 //            break;
 //            
-//        case WJWTopicTypeVoice: //声音
-//            self.voiceView.frame = self.topicItem.middleF;
-//            break;
-//            
-//        case WJWTopicTypeVideo: //声音
+//        case WJWTopicTypeVideo: //视频
 //            self.videoView.frame = self.topicItem.middleF;
 //            break;
 //            

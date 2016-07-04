@@ -14,6 +14,7 @@
 #ifdef __OBJC__
 #import "UIView+Frame.h"
 #import "WJWConst.h"
+#import "UIImageView+Download.h"
 
 #define iphone6P (WJWScreenH == 736)
 #define iphone6 (WJWScreenH == 667)

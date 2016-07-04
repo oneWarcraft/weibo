@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class WJWHomePageItem;
 @interface WJWTopicPictureView : UIView
-
+/** picture数据模型 */
+@property (nonatomic, strong) WJWHomePageItem *picItem;
 @end

@@ -21,7 +21,6 @@
 #import "WJWHomePageItem.h"
 #import <MJRefresh/MJRefresh.h>
 #import "WJWHomePageCellCell.h"
-#import "XMGVideo.h"
 #import "TFHpple.h"
 
 //#define MAS_SHORTHAND
@@ -97,8 +96,7 @@ NSString *ID = @"hompageCellID";
     self.page = 1;
 }
 
-
-- (void)loadNewTopics
+- (void)loadNewTopicsHTML
 {
     /* Configure session, choose between:
      * defaultSessionConfiguration
@@ -129,12 +127,16 @@ NSString *ID = @"hompageCellID";
         if (error == nil) {
             // Success
             NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
-  
-//            NSData * htmlData = data;
+            
+            //            NSData * htmlData = data;
             
             TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
             
+            NSLog(@"xpathParser: %@", xpathParser);
+            
             NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//embed"];
+            
+            NSLog(@"dataArray: %@", dataArray);
             
             for (TFHppleElement *hppleElement in dataArray)
             {
@@ -144,8 +146,8 @@ NSString *ID = @"hompageCellID";
             }
             
             
-
-           
+            
+            
             
             
             
@@ -162,7 +164,7 @@ NSString *ID = @"hompageCellID";
             //            //2.3 开始解析,该方法本身是阻塞的
             //            [parser parse];
             
-        } 
+        }
         else {
             // Failure
             NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
@@ -170,6 +172,247 @@ NSString *ID = @"hompageCellID";
     }];
     [task resume];
 }
+
+- (void)loadNewTopicsVideoWrite
+{
+    // 复杂的     NSURL* URL = [NSURL URLWithString:@http://t.cn/R5mbHNu""];
+    NSString *urlString1 = @"http://t.cn/R5mbHNu";//
+    NSString *urlString2 = @"http://video.weibo.com/show?fid=1034:8e07a2276315fc08461614607b4eeb43";
+//    NSString *urlString = @"http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm";//
+    NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:urlString2]];
+
+    TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+
+    NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//meta"];
+
+    for (TFHppleElement *hppleElement in dataArray)
+    {
+        if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
+        {
+            NSLog(@"1: %@", [hppleElement objectForKey:@"property"]);
+            NSLog(@"2: %@", hppleElement.raw);
+        }
+    }
+//
+//    <!-- 判断是否为播放页是否有视频信息 -->
+//    <meta property="og:type" content="video"/>
+//    <meta property="og:title" content="【用兔子找零，想得出哦】“愚蠢的人类，啥时候才能进化到用-新闻晨报的秒拍"/>
+//    <meta property="og:image" content="http://dlqncdn.miaopai.com/stream/aN5jDN72Ozy446jsbdoAgw___m.jpg"/>
+//    <meta property="og:url" content="http://p.weibo.com/show/aN5jDN72Ozy446jsbdoAgw__.htm"/>
+//    <meta property="og:videosrc" content="http://p.weibo.com/show/aN5jDN72Ozy446jsbdoAgw__.swf"/>
+//    <meta property="og:width" content="480" />
+//    <meta property="og:height" content="480" />
+//    <!--End -->
+    
+//    // 复杂的 OK 例子
+//    NSString *urlString = @"http://www.cnblogs.com/YouXianMing/";
+//    NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:urlString]];
+//    
+//    TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+//    
+//    NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//div"];
+//    
+//    for (TFHppleElement *hppleElement in dataArray)
+//    {
+//        if ([[hppleElement objectForKey:@"class"] isEqualToString:@"c_b_p_desc"])
+//        {
+////            NSLog(@"%@", hppleElement.raw);
+//            NSLog(@"%@", hppleElement.text);
+//            //        if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
+//            //            NSLog(@"%@", hppleElement.text);
+//        }
+//    }
+    
+    
+//    // 简单的  OK  例子
+//    NSString *urlString = @"http://www.cnblogs.com/YouXianMing/";
+//    NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:urlString]];
+//    
+//    TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+//    
+//    NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//title"];
+//    
+//    for (TFHppleElement *hppleElement in dataArray)
+//    {
+//        NSLog(@"%@", hppleElement.raw);
+//        NSLog(@"%@", hppleElement.text);
+//        //        if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
+//        //            NSLog(@"%@", hppleElement.text);
+//    }
+    
+//    // 复杂的 failed
+//    NSString *urlString = @"http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm";//
+//    NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:urlString]];
+//    
+//    TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+//    
+//    NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//meta"];
+//    
+//    for (TFHppleElement *hppleElement in dataArray)
+//    {
+//        if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
+//            NSLog(@"%@", hppleElement.text);
+//    }
+    
+}
+//    /* Configure session, choose between:
+//     * defaultSessionConfiguration
+//     * ephemeralSessionConfiguration
+//     * backgroundSessionConfigurationWithIdentifier:
+//     And set session-wide properties, such as: HTTPAdditionalHeaders,
+//     HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
+//     */
+//    NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    
+//    /* Create session, and optionally set a NSURLSessionDelegate. */
+//    NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+//    
+//    /* Create the Request:
+//     My API (GET http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm)
+//     */
+//    
+//    NSURL* URL = [NSURL URLWithString:@"http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm"];
+//    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+//    request.HTTPMethod = @"GET";
+//    
+//    // Headers
+//    
+//    [request addValue:@"U_TRS1=000000c4.2314f10.57765ae1.efc5ac50; U_TRS2=000000c4.2404f10.57765ae1.70a4ec99; cookie_id=57765ae118b7a; USRHAWB=usrmdinst_9" forHTTPHeaderField:@"Cookie"];
+//    
+//    /* Start a new Task */
+//    NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        if (error == nil) {
+//            // Success
+//            NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
+//            
+////            NSData * htmlData = data;
+//
+////            TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
+//            TFHpple *xpathParser = [[TFHpple alloc] initWithXMLData:data];
+//
+//            NSLog(@"xpathParser: %@", xpathParser);
+//
+//            NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//meta"];////title
+//
+////            NSLog(@"dataArray: %@", dataArray);
+//
+////            <!-- 判断是否为播放页是否有视频信息 -->
+////            <meta property="og:type" content="video"/>
+////            <meta property="og:title" content="【用兔子找零，想得出哦】“愚蠢的人类，啥时候才能进化到用-新闻晨报的秒拍"/>
+////            <meta property="og:image" content="http://dlqncdn.miaopai.com/stream/aN5jDN72Ozy446jsbdoAgw___m.jpg"/>
+////            <meta property="og:url" content="http://p.weibo.com/show/aN5jDN72Ozy446jsbdoAgw__.htm"/>
+////            <meta property="og:videosrc" content="http://p.weibo.com/show/aN5jDN72Ozy446jsbdoAgw__.swf"/>
+////            <meta property="og:width" content="480" />
+////            <meta property="og:height" content="480" />
+////            <!--End -->
+//            
+//            NSString *str = @"og:videosrc";
+//            
+//            NSInteger i = 0;
+//            for (TFHppleElement *hppleElement in dataArray)
+//            {
+////                NSLog(@"%@", [hppleElement objectForKey:@"property"]);
+//                if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
+//                {
+////                if ([objectForKey:@"property"]{
+//
+//                }
+//                NSLog(@"i=%zd  ---- %@", i, [hppleElement objectForKey:@"property"]);
+//                NSLog(@"%@", hppleElement.text);
+//                i++;
+//
+//                
+////                NSLog(@"%@", hppleElement.raw);
+////                NSLog(@"%@", hppleElement.content);
+////                NSLog(@"%@", hppleElement.attributes);
+////                NSLog(@"count = %lu", (unsigned long)hppleElement.attributes.count);
+////                NSLog(@"%@", hppleElement.description);
+////                
+////                NSLog(@"%@", hppleElement.text);
+////                NSLog(@"-------------------------------------");
+//////                NSLog(@"%@", hppleElement.image);
+//////                NSLog(@"%@", hppleElement.url);
+//////                NSLog(@"%@", hppleElement.videosrc);
+//////                NSLog(@"%@", hppleElement.width);
+//////                NSLog(@"%@", hppleElement.height);
+//            }
+//            //            }
+//        }
+//        else {
+//            // Failure
+//            NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
+//        }
+//    }];
+//    [task resume];
+//
+//    
+////    NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+////    
+////    /* Create session, and optionally set a NSURLSessionDelegate. */
+////    NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+////    
+////    /* Create the Request:
+////     My API (GET http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm)
+////     */
+////    
+////    NSURL* URL = [NSURL URLWithString:@"http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm"];
+////    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+////    request.HTTPMethod = @"GET";
+////    
+////    // Headers
+////    
+////    [request addValue:@"U_TRS1=000000c4.2314f10.57765ae1.efc5ac50; U_TRS2=000000c4.2404f10.57765ae1.70a4ec99; cookie_id=57765ae118b7a; USRHAWB=usrmdinst_9" forHTTPHeaderField:@"Cookie"];
+////    
+////    /* Start a new Task */
+////    NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+////        if (error == nil) {
+////            // Success
+////            NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
+////  
+//////            NSData * htmlData = data;
+////            
+////            TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
+////            
+//////            NSLog(@"xpathParser: %@", xpathParser);
+////            
+////            NSArray *dataArray = [xpathParser searchWithXPathQuery:@"meta property"];
+////            
+//////            NSLog(@"dataArray: %@", dataArray);
+////           
+////            for (TFHppleElement *hppleElement in dataArray)
+////            {
+////                NSLog(@"%@", hppleElement.raw);
+////                
+////                NSLog(@"%@", hppleElement.text);
+////            }
+////            
+////            
+////
+////           
+////            
+////            
+////            
+////            
+////            
+////            
+////            //            //解析XML Data
+////            //            //2.1 创建XML解析器
+////            //            NSXMLParser *parser = [[NSXMLParser alloc]initWithData:data];
+////            //
+////            //            //2.2 设置代理
+////            //            parser.delegate = self;
+////            //
+////            //            //2.3 开始解析,该方法本身是阻塞的
+////            //            [parser parse];
+////            
+////        } 
+////        else {
+////            // Failure
+////            NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
+////        }
+////    }];
+////    [task resume];
+//}
 
 //#pragma mark --------------------
 //#pragma mark NSXMLParserDelegate
@@ -212,7 +455,7 @@ NSString *ID = @"hompageCellID";
 
 #pragma mark -- 获取网络数据
 /** 加载最新微博 */
-- (void)loadNewTopics1
+- (void)loadNewTopics
 {
     WJWAccount *Caccount  = [WJWAccountTool shareAccountTool].currentAccount;
     
@@ -222,25 +465,87 @@ NSString *ID = @"hompageCellID";
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
 //    manager.responseSerializer.acceptableContentTypes =  [NSSet setWithObjects:@"text/html", nil];
    
-//    NSString *urlstr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@",token];
-     NSString *urlstr = [NSString stringWithFormat:@"http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm"];
-    NSLog(@"%@", urlstr);
+    NSString *urlstr = [NSString stringWithFormat:@"https://api.weibo.com/2/statuses/home_timeline.json?access_token=%@",token];
+//     NSString *urlstr = [NSString stringWithFormat:@"http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm"];
+//    NSLog(@"%@", urlstr);
     
     NSDictionary *dict = @{
-                           @"count":@(100),
+                           @"count":@(90),
                            @"max_id":@(0),
                            @"page":@(self.page)
                            };
    
     
-    [manager GET:urlstr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
+    [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
         
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         
         //解析JSON对象
         NSArray *array = responseObject[@"statuses"];
 
         self.hpWeiboArray = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:array];
+/*
+ 如果用从text里截取出来的网址不能正常播放，就要用到这段代码
+        // 如果是视频，则给模型添加视频相关配置 图片 播放网址  宽 高
+        // 这个办法有点笨，后面再优化
+        for (WJWHomePageItem *item in self.hpWeiboArray) {
+            // 如果微薄text有网址链接，则判断是否是视频播放网址，即是否cell中需要有视频播放
+
+            NSLog(@"%@", item.user[@"screen_name"]);
+            NSLog(@"%@", item.text);
+
+            
+            // 复杂的     NSURL* URL = [NSURL URLWithString:@http://t.cn/R5mbHNu""];
+            NSString *urlString1 = @"http://t.cn/R5mbHNu";//
+            NSString *urlString2 = @"http://video.weibo.com/show?fid=1034:8e07a2276315fc08461614607b4eeb43";
+            //    NSString *urlString = @"http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm";//
+            NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:urlString2]];
+            
+            TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+            
+            NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//meta"];
+            
+            for (TFHppleElement *hppleElement in dataArray)
+            {
+                if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
+                {
+                    NSLog(@"1: %@", [hppleElement objectForKey:@"property"]);
+                    NSLog(@"2: %@", hppleElement.raw);
+                }
+            }
+            
+//            // 从微薄text中如果解析出来这个网址，再判断是否是视频网址，如果是，则解析出播放网址
+//            // 复杂的
+//            NSString *urlString = @"http://www.miaopai.com/show/aN5jDN72Ozy446jsbdoAgw__.htm";
+//            NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:urlString]];
+//            
+//            TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+//            
+//            NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//meta"];
+//            
+//            for (TFHppleElement *hppleElement in dataArray)
+//            {
+//                if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
+//                {
+//                    NSLog(@"1: %@", [hppleElement objectForKey:@"property"]);
+//                    NSLog(@"2: %@", hppleElement.raw);
+//                }
+//            }
+//        }
+//        <!-- 判断是否为播放页是否有视频信息 -->
+//        <meta property="og:type" content="video"/>
+//        <meta property="og:title" content="【用兔子找零，想得出哦】“愚蠢的人类，啥时候才能进化到用-新闻晨报的秒拍"/>
+//        <meta property="og:image" content="http://dlqncdn.miaopai.com/stream/aN5jDN72Ozy446jsbdoAgw___m.jpg"/>
+//        <meta property="og:url" content="http://p.weibo.com/show/aN5jDN72Ozy446jsbdoAgw__.htm"/>
+//        <meta property="og:videosrc" content="http://p.weibo.com/show/aN5jDN72Ozy446jsbdoAgw__.swf"/>
+//        <meta property="og:width" content="480" />
+//        <meta property="og:height" content="480" />
+//        <!--End -->
+//        
+        
+        }
+  */
+        
         
         [self.tableView reloadData];
         
@@ -266,7 +571,7 @@ NSString *ID = @"hompageCellID";
     NSLog(@"%@", urlstr);
     
     NSDictionary *dict = @{
-                           @"count":@(100),
+                           @"count":@(50),
                            @"max_id":@(0),
                            @"page":@(self.page)
                            };

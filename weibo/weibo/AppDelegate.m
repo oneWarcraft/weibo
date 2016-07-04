@@ -28,7 +28,7 @@
 //    WJWTabBarController *RootVC = [[WJWTabBarController alloc] init];
 //    self.window.rootViewController = RootVC;
     //为了测试方便，暂时把启动界面屏蔽起来
-//    WJWAdvertViewController *adverVC = [[WJWAdvertViewController alloc] init];
+//    WJWAdvertViewController *authoVc = [[WJWAdvertViewController alloc] init];
     
     //正规做法
 //    WJWAuthoController *authoVc = [[WJWAuthoController alloc] init];
