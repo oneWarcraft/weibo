@@ -452,6 +452,137 @@ NSString *ID = @"hompageCellID";
 
 
 
+/**
+ *  从cell text里把视频短网址解析出来
+ */
+-(NSString *)parseURLString:(NSString *)urlString{
+    //组装一个字符串，需要把里面的网址解析出来
+    //    NSString *urlString=@"sfdsfhttp://www.baidu.com";
+    
+    //NSRegularExpression类里面调用表达的方法需要传递一个NSError的参数。下面定义一个
+    
+    NSError *error;
+    NSString *strURL = nil;
+    //http+:[^\\s]* 这个表达式是检测一个网址的。
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http+:[^\\s]*" options:0 error:&error];
+    
+    if (regex != nil)
+    {
+        NSTextCheckingResult *firstMatch=[regex firstMatchInString:urlString options:0 range:NSMakeRange(0, [urlString length])];
+        
+        if (firstMatch) {
+            NSRange resultRange = [firstMatch rangeAtIndex:0];
+            
+            //从urlString当中截取数据
+            strURL=[urlString substringWithRange:resultRange];
+            //输出结果
+            NSLog(@"%@",strURL);
+//            return result;
+        }
+        
+    }
+    
+    //去掉字符串微博非合法字符 截取
+//    NSString *testString = strURL;
+    NSUInteger strLength = [strURL length];
+    for (int i = 0; i<strLength; i++)
+    {
+        char commitChar = [strURL characterAtIndex:i];
+        NSString *temp = [strURL substringWithRange:NSMakeRange(i,1)];
+        const char *u8Temp = [temp UTF8String];
+        // 合法字符：大小写字母  数字 : 58   / 47  . 46
+        if (((commitChar>64)&&(commitChar<91)) || ((commitChar>96)&&(commitChar<123)) || ((commitChar>47)&&(commitChar<58)) || commitChar == 58 || commitChar == 47 || commitChar == 46 || 3!=strlen(u8Temp)) {
+            continue;
+        }
+        strURL = [strURL substringToIndex:i];
+        NSLog(@"获得视频网址 StrURL = %@", strURL);
+        return strURL;
+    }
+
+    return strURL;
+}
+
+
+- (NSString*)converShortToLongWebSite:(NSString*)strShortWebSite
+{
+    /* Configure session, choose between:
+     * defaultSessionConfiguration
+     * ephemeralSessionConfiguration
+     * backgroundSessionConfigurationWithIdentifier:
+     And set session-wide properties, such as: HTTPAdditionalHeaders,
+     HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
+     */
+    NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    /* Create session, and optionally set a NSURLSessionDelegate. */
+    NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+    
+    /* Create the Request:
+     My API (GET http://t.cn/R5mdENE)
+     */
+    
+//    NSURL* URL = [NSURL URLWithString:@"http://t.cn/R5mdENE"];
+    NSURL* URL = [NSURL URLWithString:strShortWebSite];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+    request.HTTPMethod = @"GET";
+    
+    /* Start a new Task */
+    NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error == nil) {
+            // Success
+            NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
+            
+            // 把长网址解析出来
+            TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
+            
+//            NSLog(@"xpathParser: %@", xpathParser);
+            
+            NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//H1"];
+            
+            NSLog(@"dataArray: %@", dataArray);
+            
+            for (TFHppleElement *hppleElement in dataArray)
+            {
+                NSLog(@"%@", hppleElement.raw);
+                
+                NSLog(@"%@", hppleElement.text);
+            }
+            
+            
+//            
+//            
+//            NSError *error;
+//            NSString *strURL = nil;
+//            //http+:[^\\s]* 这个表达式是检测一个网址的。
+//            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http+:[^\\s]*" options:0 error:&error];
+//            
+//            if (regex != nil)
+//            {
+//                NSTextCheckingResult *firstMatch=[regex firstMatchInString:urlString options:0 range:NSMakeRange(0, [urlString length])];
+//                
+//                if (firstMatch) {
+//                    NSRange resultRange = [firstMatch rangeAtIndex:0];
+//                    
+//                    //从urlString当中截取数据
+//                    strURL=[urlString substringWithRange:resultRange];
+//                    //输出结果
+//                    NSLog(@"%@",strURL);
+//                    //            return result;
+//                }
+//                
+//            }
+            
+
+        }
+        else {
+            // Failure
+            NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
+        }
+    }];
+    [task resume];
+    
+    return nil;
+}
 
 #pragma mark -- 获取网络数据
 /** 加载最新微博 */
@@ -484,6 +615,125 @@ NSString *ID = @"hompageCellID";
         NSArray *array = responseObject[@"statuses"];
 
         self.hpWeiboArray = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:array];
+         
+ /* 
+    说明：解析视频数据，暂时无法解决  无法把短地址转换为对应长地址，因为短地址转换后经常变，无法固定格式转换，暂时还未找到解决办法
+    暂时先放下，先解决其他问题，后面再解决（学到了或者有时间了）
+        // 从HTML XML里把视频网址相关信息解析出来
+        NSString *strURL = nil;
+        for (WJWHomePageItem *item in self.hpWeiboArray) {
+            NSLog(@"---- %@", item.text);
+            if (item.text != nil && [item.text containsString:@"http://t.cn"]) { //据手动统计视频网址都以短网址http://t.cn开头
+                // 拿到视频网址
+                strURL = [self parseURLString:item.text];
+                if (strURL == nil) {
+                    NSLog(@"网址解析失败！！！");
+                }
+
+//                // 短地址转换为长地址？？暂时用这个临时办法
+//                * Configure session, choose between:
+//                 * defaultSessionConfiguration
+//                 * ephemeralSessionConfiguration
+//                 * backgroundSessionConfigurationWithIdentifier:
+//                 And set session-wide properties, such as: HTTPAdditionalHeaders,
+//                 HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
+//                 *
+//                NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+//                
+//                * Create session, and optionally set a NSURLSessionDelegate. *
+//                NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+//                
+//                * Create the Request:
+//                 My API (GET http://t.cn/R5mdENE)
+//                 *
+//                
+//                //    NSURL* URL = [NSURL URLWithString:@"http://t.cn/R5mdENE"];
+//                NSURL* URL = [NSURL URLWithString:strURL];
+//                NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+//                request.HTTPMethod = @"GET";
+//                
+//                * Start a new Task *
+//                NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//                    if (error == nil) {
+//                        // Success
+//                        NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
+//                        
+//                        // 把长网址解析出来
+//                        TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
+//                        
+//                        NSLog(@"xpathParser: %@", xpathParser);
+//                        
+//                        NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//H1"];
+//                        
+//                        NSLog(@"dataArray: %@", dataArray);
+//                        
+//                        for (TFHppleElement *hppleElement in dataArray)
+//                        {
+//                            NSLog(@"%@", hppleElement.raw);
+//                            
+//                            NSLog(@"%@", hppleElement.text);
+//                        }
+//                        
+//                        
+//                        //
+//                        //
+//                        //            NSError *error;
+//                        //            NSString *strURL = nil;
+//                        //            //http+:[^\\s]* 这个表达式是检测一个网址的。
+//                        //            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http+:[^\\s]*" options:0 error:&error];
+//                        //
+//                        //            if (regex != nil)
+//                        //            {
+//                        //                NSTextCheckingResult *firstMatch=[regex firstMatchInString:urlString options:0 range:NSMakeRange(0, [urlString length])];
+//                        //                
+//                        //                if (firstMatch) {
+//                        //                    NSRange resultRange = [firstMatch rangeAtIndex:0];
+//                        //                    
+//                        //                    //从urlString当中截取数据
+//                        //                    strURL=[urlString substringWithRange:resultRange];
+//                        //                    //输出结果
+//                        //                    NSLog(@"%@",strURL);
+//                        //                    //            return result;
+//                        //                }
+//                        //                
+//                        //            }
+//                        
+//                        
+//                    }
+//                    else {
+//                        // Failure
+//                        NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
+//                    }
+//                }];
+//                [task resume];
+                
+         
+                
+                
+                // 解析HTML XML
+                // 正确视频网址  http://t.cn/R5nWSmn
+//                strURL = @"http://video.weibo.com/show?fid=1034:dfd697d40f8dc2706d731019604c70e1";
+                strURL = @"http://www.miaopai.com/show/LOZYBkLy9IRT3FyjVd2nqw__.htm";
+                NSLog(@"******** %@", strURL);
+                NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:strURL]];
+                
+                TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+                
+                NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//meta"];
+                
+                for (TFHppleElement *hppleElement in dataArray)
+                {
+                    if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
+                    {
+                        NSLog(@"1: %@", [hppleElement objectForKey:@"property"]);
+                        NSLog(@"2: %@", hppleElement.raw);
+                    }
+                }
+                
+                
+            }
+        }
+  */
 /*
  如果用从text里截取出来的网址不能正常播放，就要用到这段代码
         // 如果是视频，则给模型添加视频相关配置 图片 播放网址  宽 高

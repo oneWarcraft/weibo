@@ -89,8 +89,8 @@
         switch (1){ //self.pic_urls.count) {
             case 1:
             {
-                CGFloat middleW = 100;//(WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
-                CGFloat middleH = 100;//middleW; // 高度需要重新计算，用宽高比例计算#####################
+                CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
+                CGFloat middleH = middleW; // 高度需要重新计算，用宽高比例计算#####################
                 CGFloat middleX = WJWMargin;
                 CGFloat middleY = cellHeight;
 
