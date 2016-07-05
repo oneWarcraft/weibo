@@ -615,7 +615,7 @@ NSString *ID = @"hompageCellID";
         NSArray *array = responseObject[@"statuses"];
 
         self.hpWeiboArray = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:array];
-         
+        
  /* 
     说明：解析视频数据，暂时无法解决  无法把短地址转换为对应长地址，因为短地址转换后经常变，无法固定格式转换，暂时还未找到解决办法
     暂时先放下，先解决其他问题，后面再解决（学到了或者有时间了）

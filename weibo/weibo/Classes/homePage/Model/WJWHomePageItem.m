@@ -101,58 +101,58 @@
                 break;
             }
                 //暂时只显示一张
-//            case 2:
-//            {
-//                CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
-//                CGFloat middleH = middleW;
-//                CGFloat middleX = WJWMargin;
-//                CGFloat middleY = cellHeight;
-//                
-//                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
-//                
-//                midHeight += middleH + WJWMargin;
-//                break;
-//            }
-//            case 3:
-//            {
-//                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
-//                CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 1.0 /3.0;;
-//                CGFloat middleX = WJWMargin;
-//                CGFloat middleY = cellHeight;
-//                
-//                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
-//                
-//                midHeight += middleH + WJWMargin;
-//                break;
-//            }
-//            case 4:
-//            case 5:
-//            case 6:
-//            {
-//                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
-//                CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
-//                CGFloat middleX = WJWMargin;
-//                CGFloat middleY = cellHeight;
-//                
-//                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
-//                
-//                midHeight += middleH + WJWMargin;
-//                break;
-//            }
-//            case 7:
-//            case 8:
-//            case 9:
-//            {
-//                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
-//                CGFloat middleH = (WJWScreenW - 2 * WJWMargin);
-//                CGFloat middleX = WJWMargin;
-//                CGFloat middleY = cellHeight;
-//                
-//                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
-//                
-//                midHeight += middleH + WJWMargin;
-//                break;
-//            }
+            case 2:
+            {
+                CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
+                CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 1.0 /3.0;
+                CGFloat middleX = WJWMargin;
+                CGFloat middleY = cellHeight;
+                
+                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+                
+                midHeightTemp = middleH + WJWMargin;
+                break;
+            }
+            case 3:
+            {
+                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
+                CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 1.0 /3.0;;
+                CGFloat middleX = WJWMargin;
+                CGFloat middleY = cellHeight;
+                
+                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+                
+                midHeightTemp = middleH + WJWMargin;
+                break;
+            }
+            case 4:
+            case 5:
+            case 6:
+            {
+                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
+                CGFloat middleH = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
+                CGFloat middleX = WJWMargin;
+                CGFloat middleY = cellHeight;
+                
+                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+                
+                midHeightTemp = middleH + WJWMargin;
+                break;
+            }
+            case 7:
+            case 8:
+            case 9:
+            {
+                CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
+                CGFloat middleH = (WJWScreenW - 2 * WJWMargin);
+                CGFloat middleX = WJWMargin;
+                CGFloat middleY = cellHeight;
+                
+                self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+                
+                midHeightTemp = middleH + WJWMargin;
+                break;
+            }
             default:
                 WJWLog(@"Error: %s, %zd", __FUNCTION__, __LINE__);
                 break;

@@ -34,38 +34,48 @@
 - (void)setPicItem:(WJWHomePageItem *)picItem
 {
     _picItem = picItem;
-    
-    NSLog(@"picItem.original_pic: %@", picItem.original_pic);
-    NSLog(@"picItem.thumbnail_pic: %@", picItem.thumbnail_pic);
-    // 中间图片
-    [self.imageView wjw_setImageWithOriginalImageURL:picItem.original_pic thumbnailImageURL:picItem.thumbnail_pic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    if(picItem.pic_urls == 1)
+    {
+        NSLog(@"picItem.original_pic: %@", picItem.original_pic);
+        NSLog(@"picItem.thumbnail_pic: %@", picItem.thumbnail_pic);
+        // 中间图片
+        [self.imageView wjw_setImageWithOriginalImageURL:picItem.original_pic thumbnailImageURL:picItem.thumbnail_pic completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            //下载完成后，如果是长图，就要进行特殊处理一下
+            if (image == nil) return; //下载失败
+            if (!picItem.isBigPicture) return; //不是长图
+            
+            //开启图形上下文
+            CGFloat imageW = picItem.middleF.size.width;
+            CGFloat imageH = picItem.middleF.size.height;
+            UIGraphicsBeginImageContext(CGSizeMake(imageW, imageH));
+            //绘图
+    #warning 需要拿到真实高度后再优化这里!!!!  ################
+            [image drawInRect:CGRectMake(0, 0, imageW, imageW * 1.0)]; // picItem.height/picItem.width)];
+            
+            //获得图片
+            self.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+            
+            //关闭图形上下文
+            UIGraphicsEndImageContext();
+            
+        }];
         
-        //下载完成后，如果是长图，就要进行特殊处理一下
-        if (image == nil) return; //下载失败
-        if (!picItem.isBigPicture) return; //不是长图
+    //####################
+    #warning 后面再优化，加git标记，应该在右下角
+        self.gifView.hidden = !picItem.is_gif;
         
-        //开启图形上下文
-        CGFloat imageW = picItem.middleF.size.width;
-        CGFloat imageH = picItem.middleF.size.height;
-        UIGraphicsBeginImageContext(CGSizeMake(imageW, imageH));
-        //绘图
-#warning 需要拿到真实高度后再优化这里!!!!  ################
-        [image drawInRect:CGRectMake(0, 0, imageW, imageW * 1.0)]; // picItem.height/picItem.width)];
+        //查看大图按钮是否隐藏  ####################
+        self.seeBigPictureButton.hidden = !picItem.isBigPicture;
+    }else
+    {// 如果有多张图片，用collectionView显示
+        //先隐藏掉Cell上的其他控件
+        self.gifView.hidden = YES;
+        self.seeBigPictureButton.hidden = YES;
         
-        //获得图片
-        self.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
         
-        //关闭图形上下文
-        UIGraphicsEndImageContext();
         
-    }];
-    
-//####################
-#warning 后面再优化，加git标记，应该在右下角
-    self.gifView.hidden = !picItem.is_gif;
-    
-    //查看大图按钮是否隐藏  ####################
-    self.seeBigPictureButton.hidden = !picItem.isBigPicture;
+    }
 }
 
 
