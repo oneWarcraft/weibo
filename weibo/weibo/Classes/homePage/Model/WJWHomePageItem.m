@@ -32,23 +32,12 @@
     CGSize textMaxSize = CGSizeMake(WJWScreenW - 2 * WJWMargin, MAXFLOAT);
     _cellHeight += [self.text boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15]} context:nil].size.height + WJWMargin;
     
-    NSLog(@"文字的底部位置：%f ", _cellHeight);
-    CGFloat temp = _cellHeight;
     //中间内容的高度
-//    if (self.type != WJWTopicTypeWord) // 非段子，可能是图片、声音、视频帖子
+    // 非段子，可能是图片、声音、视频帖子
+    // if (self.type != WJWTopicTypeWord)
     if (self.pic_urls.count>0)
     {
         _cellHeight += [self middleHeight:_cellHeight];
-        
-        
-//        CGFloat middleW = textMaxSize.width;
-//        CGFloat middleH = middleW * self.height / self.width;
-//        CGFloat middleX = WJWMargin;
-//        CGFloat middleY = _cellHeight;
-//        
-//        self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
-//        
-//        _cellHeight += middleH + WJWMargin;
     }
     
     
@@ -66,10 +55,11 @@
 //        NSString *topCmtText = [NSString stringWithFormat:@"%@ : %@", username, content];
 //        _cellHeight += [topCmtText boundingRectWithSize:textMaxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:16]} context:nil].size.height + WJWMargin;
 //    }
-    NSLog(@"图片底部位置%f  到 Cell 底部的间距：%f ",_cellHeight, _cellHeight - temp);
+
+    
     //最下面第三部分 工具条的高度
     _cellHeight += 30 + WJWMargin;
-    NSLog(@"文字底部位置 到 Cell 底部的间距：%f ", _cellHeight - temp);
+    
     return _cellHeight;
 }
 
@@ -78,15 +68,13 @@
 {//如果有视频或者其他的要修改这里，暂时只显示图片文字
 //看代码中的数据，貌似没有给出网络图片的宽高，就固定其大小
     
+    NSLog(@"middleHeight  self.pic_urls.count:  %zd", self.pic_urls.count);
     CGFloat midHeightTemp = 0;
     if (self.pic_urls.count == 0) {
-        //没有配图
-        //        self.picturesView.hidden = YES;
         return 0.0;
     }else{
         //有配图
-//        self.picturesView.hidden = NO;
-        switch (1){ //self.pic_urls.count) {
+        switch (self.pic_urls.count){
             case 1:
             {
                 CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
@@ -96,11 +84,10 @@
 
                 self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
                 
-//              midHeight += middleH + WJWMargin;
                 midHeightTemp = middleH + WJWMargin;
                 break;
             }
-                //暂时只显示一张
+
             case 2:
             {
                 CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
@@ -113,6 +100,7 @@
                 midHeightTemp = middleH + WJWMargin;
                 break;
             }
+                
             case 3:
             {
                 CGFloat middleW = (WJWScreenW - 2 * WJWMargin);
@@ -125,6 +113,7 @@
                 midHeightTemp = middleH + WJWMargin;
                 break;
             }
+                
             case 4:
             case 5:
             case 6:
@@ -149,7 +138,7 @@
                 CGFloat middleY = cellHeight;
                 
                 self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
-                
+                NSLog(@"估算frame: %@", NSStringFromCGRect(self.middleF));
                 midHeightTemp = middleH + WJWMargin;
                 break;
             }
@@ -159,7 +148,7 @@
         }
     }
 
-    return midHeightTemp;// + WJWMargin;
+    return midHeightTemp;
 }
 
 

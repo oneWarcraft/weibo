@@ -30,10 +30,10 @@
 @property (nonatomic, strong) WJWHomePageItem *hpCellItem;
 
 //@property (nonatomic,strong ) userModel *userItem;
-/**
- *  返回cell的高度
- */
-- (CGFloat)cellHeight;
+///**
+// *  返回cell的高度
+// */
+//- (CGFloat)cellHeight;
 
 /** 代理属性 */
 @property (nonatomic, weak) id<WJWHPCellDelegate>delegate;

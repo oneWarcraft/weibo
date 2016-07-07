@@ -28,7 +28,7 @@
 //#import <Masonry.h>
 //pod 'Masonry'
 
-@interface WJWHomePageViewController () <UIViewControllerTransitioningDelegate> //, NSXMLParserDelegate
+@interface WJWHomePageViewController () <UIViewControllerTransitioningDelegate, WJWHPCellDelegate> //, NSXMLParserDelegate
 
 /** 保存首页微博全部模型数据 */
 @property (nonatomic, strong) NSMutableArray <WJWHomePageItem*> *hpWeiboArray;
@@ -601,7 +601,7 @@ NSString *ID = @"hompageCellID";
 //    NSLog(@"%@", urlstr);
     
     NSDictionary *dict = @{
-                           @"count":@(90),
+                           @"count":@(50),
                            @"max_id":@(0),
                            @"page":@(self.page)
                            };

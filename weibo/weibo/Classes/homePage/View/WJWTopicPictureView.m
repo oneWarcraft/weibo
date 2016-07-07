@@ -35,7 +35,7 @@
 - (void)setPicItem:(WJWHomePageItem *)picItem
 {
     _picItem = picItem;
-    if(picItem.pic_urls == 1)
+    if(picItem.pic_urls.count == 1)
     {
         NSLog(@"picItem.original_pic: %@", picItem.original_pic);
         NSLog(@"picItem.thumbnail_pic: %@", picItem.thumbnail_pic);
@@ -63,12 +63,20 @@
         }];
         
     //####################
-    #warning 后面再优化，加git标记，应该在右下角
-        self.gifView.hidden = !picItem.is_gif;
-        
-        //查看大图按钮是否隐藏  ####################
-        self.seeBigPictureButton.hidden = !picItem.isBigPicture;
+//    #warning 后面再优化，加git标记，应该在右下角
+        //Xib里这俩控件也设置为隐藏，暂不处理
+//        self.gifView.hidden = !picItem.is_gif;
+//        
+//        //查看大图按钮是否隐藏  ####################
+//        self.seeBigPictureButton.hidden = !picItem.isBigPicture;
     }
+    //    #warning 后面再优化，加git标记，应该在右下角
+    //Xib里这俩控件也设置为隐藏，暂不处理
+            self.gifView.hidden = !picItem.is_gif;
+    //
+    //        //查看大图按钮是否隐藏  ####################
+    self.seeBigPictureButton.hidden = !picItem.isBigPicture;
+    
 //    else
 //    {// 如果有多张图片，用collectionView显示
 //        //先隐藏掉Cell上的其他控件

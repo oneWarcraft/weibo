@@ -14,14 +14,14 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BAi-I0-Khz">
                     <rect key="frame" x="0.0" y="0.0" width="357" height="287"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="common-gif" translatesAutoresizingMaskIntoConstraints="NO" id="ZXo-j4-V9J">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="common-gif" translatesAutoresizingMaskIntoConstraints="NO" id="ZXo-j4-V9J">
                     <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Xaf-Id-T0N"/>
                         <constraint firstAttribute="width" constant="30" id="Xhv-pC-E9e"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3Y-jN-X3h">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3Y-jN-X3h">
                     <rect key="frame" x="0.0" y="244" width="357" height="43"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="43" id="NL5-Qu-JqD"/>

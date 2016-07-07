@@ -62,7 +62,7 @@
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    WJWLog(@"pushViewController");
+//    WJWLog(@"pushViewController");
     
     if (self.childViewControllers.count>0) {
         UIButton *btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
