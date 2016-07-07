@@ -8,6 +8,7 @@
 
 #import "WJWTopicPictureView.h"
 #import "WJWHomePageItem.h"
+#import <UIImageView+WebCache.h>
 //#import "WJWSeeBigPictureViewController.h"
 
 
@@ -67,15 +68,26 @@
         
         //查看大图按钮是否隐藏  ####################
         self.seeBigPictureButton.hidden = !picItem.isBigPicture;
-    }else
-    {// 如果有多张图片，用collectionView显示
-        //先隐藏掉Cell上的其他控件
-        self.gifView.hidden = YES;
-        self.seeBigPictureButton.hidden = YES;
-        
-        
-        
     }
+//    else
+//    {// 如果有多张图片，用collectionView显示
+//        //先隐藏掉Cell上的其他控件
+//        self.gifView.hidden = YES;
+//        self.seeBigPictureButton.hidden = YES;
+//        
+////        NSString *strImage =
+//        UIImageView *imageView2 = nil;
+//        for (NSInteger i=0; i<self.picItem.pic_urls.count; i++)
+//        {
+////            UIImageView *imageView = [[UIImageView alloc] init];
+////            imageView.image = [UIImage imageNamed:self.picItem.pic_urls[i]];
+//            UIImageView *imageView = [imageView2 sd_setIma ];
+//            imageView.frame = CGRectMake((i % 3) * 110, (i / 3) * 110, 100, 100);
+//            [self.view addSubview:imageView];
+//        }
+//
+//        
+//    }
 }
 
 

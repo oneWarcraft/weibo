@@ -158,7 +158,7 @@
                 break;
         }
     }
-//    NSLog(@"啊啊啊啊啊啊：%@", NSStringFromCGRect(self.middleF));
+
     return midHeightTemp;// + WJWMargin;
 }
 

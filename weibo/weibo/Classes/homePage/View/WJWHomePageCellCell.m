@@ -12,6 +12,7 @@
 #import "WJWTopicPictureView.h"
 #import "WJWTopicVideoView.h"
 
+
 // 获得RGB颜色
 #define kColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 //全局的背景色
@@ -21,7 +22,7 @@
 // 非会员昵称颜色
 #define kScreenNameColor kColor(93, 93, 93);
 
-@interface WJWHomePageCellCell()
+@interface WJWHomePageCellCell() <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIImageView *headIcon_ImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *VType_ImageView;
@@ -43,8 +44,14 @@
 /* 中间控件 */
 /** 图片控件 */
 @property (nonatomic, weak) WJWTopicPictureView *pictureView;
+///** 多图片控件（>=2） */
+//@property (nonatomic, weak) WJWPictureCollectionView *pictureCollectionView;
 /** 视频控件 */
 @property (nonatomic, weak) WJWTopicVideoView *videoView;
+
+@property (nonatomic, strong) NSArray *picCollectionArray;
+/** 创建的显示图片的collection */
+@property (nonatomic, strong) UICollectionView *picCollectView;
 
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *midSlotViewHeight_Constraint;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *midSlotViewWidth_Constraint;
@@ -66,6 +73,18 @@
     }
     return _pictureView;
 }
+
+//- (UICollectionView *)picCollectView
+//{
+//    if (!_picCollectView) {
+//        UICollectionView *CollecView = [UICollectionView wjw_viewFromXib];
+//        [self.contentView addSubview:CollecView];
+//        
+//        _picCollectView = CollecView;
+//    }
+//    
+//    return _picCollectView;
+//}
 
 //- (WJWTopicVoiceView *)voiceView
 //{
@@ -99,11 +118,39 @@
 //    
 //    return cell;
 //}
-
-- (void)awakeFromNib {
+NSString *collecNibID = @"collecNibID";
+- (void)awakeFromNib
+{
     [super awakeFromNib];
     // Initialization code
     
+    if (self.hpCellItem.pic_urls.count > 1)
+    {
+        //创建collectionView
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        UICollectionView *collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(20, 20, 270, 270) collectionViewLayout:flowLayout];
+
+        collectView.frame = self.hpCellItem.middleF; // CGRectMake(20, 20, 350, 350);
+        collectView.dataSource = self;
+        collectView.delegate = self;
+        collectView.allowsSelection = YES;
+        collectView.backgroundColor = [UIColor grayColor];
+        
+        CGFloat itemWidth = (WJWScreenW - 4 * WJWMargin) / 3.0;
+        flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth);
+        flowLayout.minimumLineSpacing = 5;
+        flowLayout.minimumInteritemSpacing = 5;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 10, 0);
+
+        NSLog(@"collectView.frame: %@", NSStringFromCGRect(collectView.frame));
+        [self.contentView addSubview:collectView];
+        self.picCollectView = collectView;
+
+            //保存当前cell的所有图片
+        self.picCollectionArray = self.hpCellItem.pic_urls;
+        
+        [self.picCollectView registerNib:[UINib nibWithNibName:@"WJWPictureCollectionView" bundle:nil] forCellWithReuseIdentifier:collecNibID];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -112,6 +159,31 @@
     // Configure the view for the selected state
 }
 
+#pragma mark -- collection dataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    NSLog(@"numberOfItemsInSection: %zd", self.picCollectionArray.count);
+    return self.picCollectionArray.count;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    NSLog(@"%@", self.picCollectionArray[indexPath.item]);
+    UIImageView *imageV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:self.picCollectionArray[indexPath.item]]];
+
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collecNibID forIndexPath:indexPath];
+
+    cell.backgroundView = imageV;
+    cell.backgroundColor = [UIColor greenColor];
+
+    return cell;
+}
 
 #pragma mark -- cell 第三部分的处理
 ////cell通知外面 用代理方法！！！！！！！
@@ -234,13 +306,15 @@
     if (hpCellItem.user[@"mbtype"] == 0) {
         self.name_Lable.textColor = kScreenNameColor;
         _VIP_ImageView.hidden = YES;
-    } else {
+    } else
+    {
         self.name_Lable.textColor = kMBScreenNameColor;
         _VIP_ImageView.hidden = NO;
         
         
 //        NSLog(@"会员等级是--%zd",[hpCellItem.user[@"mbrank"] integerValue]);
-        switch ([hpCellItem.user[@"mbrank"] integerValue]) {
+        switch ([hpCellItem.user[@"mbrank"] integerValue])
+        {
             case 1:
                 _VIP_ImageView.image = [UIImage imageNamed:@"common_icon_membership_level1"];
                 break;
@@ -272,8 +346,28 @@
 #warning 待确定如何从返回的一堆数据中如何区分视频 声音 图片 再修改这里
 #warning 现在中间段先只添加图片
 //    // 添加中间段内容
-    if (self.hpCellItem.pic_urls.count > 0) {
-        self.pictureView.picItem = hpCellItem;
+    WJWLog(@"HPVC 当前cell 有图片 %zd 张", self.hpCellItem.pic_urls.count);
+    if (self.hpCellItem.pic_urls.count > 0)
+    {
+        if (self.hpCellItem.pic_urls.count == 1) { //如果只有一张图片
+            self.pictureView.picItem = hpCellItem;
+            
+            self.pictureView.hidden = NO;
+            self.picCollectView.hidden = YES;
+        }
+        else
+        {
+            self.pictureView.hidden = YES;
+            self.picCollectView.hidden = NO;
+        }
+        
+        
+        
+//        else
+//        {
+//            如果多张图片，另外创建cell时，创建CollectionView另外处理
+//        }
+        
     }
     
     
@@ -334,9 +428,35 @@
 {
     [super layoutSubviews];
     
+    //目前只处理有图片的情况，对于视频暂不处理 ###############
+    if (self.hpCellItem.pic_urls.count <= 0) {
+        return;
+    }
+    
+    switch (self.hpCellItem.pic_urls.count) {
+        case 1:
+            self.pictureView.frame = self.hpCellItem.middleF;
+            break;
+            
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+            self.picCollectView.frame = self.hpCellItem.middleF;
+            break;
+            
+        default:
+            WJWLog(@"%s, %d: error count:%zd", __func__, __LINE__, self.hpCellItem.pic_urls.count);
+            break;
+    }
+    
 //    switch (self.topicItem.type) {
 //        case WJWTopicTypePicture: //图片
-            self.pictureView.frame = self.hpCellItem.middleF;
+//            self.pictureView.frame = self.hpCellItem.middleF;
 //    NSLog(@"frame: %@", NSStringFromCGRect(self.pictureView.frame));
 //            break;
 //            

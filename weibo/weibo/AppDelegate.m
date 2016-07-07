@@ -33,9 +33,9 @@
     //正规做法
 //    WJWAuthoController *authoVc = [[WJWAuthoController alloc] init];
 //    //为了测试方便，先把上一行注释了，跳过每次登陆都需要密码验证；
-//    WJWAuthoController *authoVc = [[WJWAuthoController alloc] init];
+    WJWAuthoController *authoVc = [[WJWAuthoController alloc] init];
     
-    WJWTabBarController *authoVc = [[WJWTabBarController alloc] init];
+//    WJWTabBarController *authoVc = [[WJWTabBarController alloc] init];
     
     self.window.rootViewController = authoVc;
     
