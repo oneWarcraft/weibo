@@ -39,7 +39,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *favourCount_Button;
 @property (weak, nonatomic) IBOutlet UIStackView *stackView_StackView;
 
-@property (weak, nonatomic) IBOutlet UIView *picturesView;
 
 
 /* 中间控件 */
@@ -82,7 +81,7 @@
         //只有本cell图片超过2张才会创建collectionView
         if (self.hpCellItem.pic_urls.count > 1)
         {//写个懒加载
-            NSLog(@"--- collectionView");
+//            NSLog(@"--- collectionView");
             
             //创建collectionView
             UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -93,6 +92,7 @@
             collectView.delegate = self;
             collectView.allowsSelection = YES;
             collectView.backgroundColor = [UIColor whiteColor];
+            collectView.scrollEnabled = NO;
             
             CGFloat itemWidth = (WJWScreenW - 3 * WJWMargin) / 3.0;
             flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth);
@@ -100,7 +100,7 @@
             flowLayout.minimumInteritemSpacing = 1;
             flowLayout.sectionInset = UIEdgeInsetsMake(5, 2, 5, 2);
             
-            NSLog(@"collectView.frame: %@", NSStringFromCGRect(collectView.frame));
+//            NSLog(@"collectView.frame: %@", NSStringFromCGRect(collectView.frame));
             [self.contentView addSubview:collectView];
             _picCollectView = collectView;
             
@@ -150,7 +150,7 @@ NSString *collecNibID = @"collecNibID";
     [super awakeFromNib];
     // Initialization code
     
-    WJWLog(@"cell awakeFromNib: %zd", self.hpCellItem.pic_urls.count);
+//    WJWLog(@"cell awakeFromNib: %zd", self.hpCellItem.pic_urls.count);
     //保存当前cell的所有图片
 //    [self.picCollectView registerNib:[UINib nibWithNibName:@"WJWPictureCollectionView" bundle:nil] forCellWithReuseIdentifier:collecNibID];
 }
@@ -176,7 +176,7 @@ NSString *collecNibID = @"collecNibID";
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSLog(@"cellForItemAtIndexPath:%@", self.picCollectionArray[indexPath.item][@"thumbnail_pic"]);
+//    NSLog(@"cellForItemAtIndexPath:%@", self.picCollectionArray[indexPath.item][@"thumbnail_pic"]);
     // [@"thumbnail_pic"] 大图呢？？？  ##################
 //    UIImageView *imageV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:self.picCollectionArray[indexPath.item][@"thumbnail_pic"]]];
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collecNibID forIndexPath:indexPath];
@@ -354,11 +354,11 @@ NSString *collecNibID = @"collecNibID";
 #warning 待确定如何从返回的一堆数据中如何区分视频 声音 图片 再修改这里
 #warning 现在中间段先只添加图片
 //    // 添加中间段内容
-    WJWLog(@"%@", hpCellItem.user[@"screen_name"]);
-    WJWLog(@"HPVC 当前cell 有图片 %zd 张", self.hpCellItem.pic_urls.count);
+//    WJWLog(@"%@", hpCellItem.user[@"screen_name"]);
+//    WJWLog(@"HPVC 当前cell 有图片 %zd 张", self.hpCellItem.pic_urls.count);
     
 
-    self.picCollectView;
+//    self.picCollectView;
   
     if (self.hpCellItem.pic_urls.count > 0)
     {
@@ -367,23 +367,31 @@ NSString *collecNibID = @"collecNibID";
             
             self.pictureView.hidden = NO;
             self.picCollectView.hidden = YES;
+            self.videoView.hidden = YES;
         }
         else
         {
             self.pictureView.hidden = YES;
             self.picCollectView.hidden = NO;
+            self.videoView.hidden = YES;
             
             self.picCollectionArray = self.hpCellItem.pic_urls;
             [self.picCollectView reloadData];
         }
         
-        // self.videoView.hidden = YES;
-        
-        
-    }else
+         self.videoView.hidden = YES;
+
+    }else if(self.hpCellItem.videoPlayPath != nil)
     {
         //如果是视频。。。。。。
-        // self.videoView.hidden = NO;
+        self.videoView.hidden = NO;
+        self.pictureView.hidden = YES;
+        self.picCollectView.hidden = YES;
+        
+        self.videoView.videoItem = hpCellItem;
+    }else
+    {
+        self.videoView.hidden = YES;
         self.pictureView.hidden = YES;
         self.picCollectView.hidden = YES;
     }
@@ -409,14 +417,15 @@ NSString *collecNibID = @"collecNibID";
     [super layoutSubviews];
     
     //目前只处理有图片的情况，对于视频暂不处理 ###############
-    if (self.hpCellItem.pic_urls.count <= 0) {
-        //处理视频播放
-        //self.videoView.frame = self.topicItem.middleF;
-        
-        return;
-    }
+//    if (self.hpCellItem.pic_urls.count <= 0) {
+//        //处理视频播放
+//        //self.videoView.frame = self.topicItem.middleF;
+//        
+//        return;
+//    }
     
-    switch (self.hpCellItem.pic_urls.count) {
+    switch (self.hpCellItem.pic_urls.count)
+    {
         case 1:
             self.pictureView.frame = self.hpCellItem.middleF;
             break;
@@ -433,8 +442,14 @@ NSString *collecNibID = @"collecNibID";
             break;
             
         default:
-            WJWLog(@"%s, %d: error count:%zd", __func__, __LINE__, self.hpCellItem.pic_urls.count);
+//            WJWLog(@"%s, %d: error count:%zd", __func__, __LINE__, self.hpCellItem.pic_urls.count);
             break;
+    }
+    
+    if (self.hpCellItem.pic_urls.count == 0 && self.hpCellItem.videoPlayPath != nil)
+    {
+        self.videoView.frame = self.hpCellItem.middleF;
+        WJWLog(@"layoutSubviews videoView: %@", NSStringFromCGRect(self.videoView.frame));
     }
 }
 

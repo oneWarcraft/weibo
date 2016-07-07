@@ -31,7 +31,7 @@
                     <state key="normal" title="点击查看大图" image="see-big-picture" backgroundImage="see-big-picture-background"/>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="F3Y-jN-X3h" secondAttribute="bottom" id="17c-yk-pHF"/>
                 <constraint firstItem="F3Y-jN-X3h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4vm-eX-O11"/>

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class WJWHomePageItem;
 @interface WJWTopicVideoView : UIView
-
+/** video帖子数据模型 */
+@property (nonatomic, strong) WJWHomePageItem *videoItem;
 @end

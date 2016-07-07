@@ -22,6 +22,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import "WJWHomePageCellCell.h"
 #import "TFHpple.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 //#define MAS_SHORTHAND
 //#define MAS_SHORTHAND_GLOBALS
@@ -49,19 +50,19 @@
 @property (nonatomic, strong) UILabel *hudLabel;
 
 
-/** 数据源*/
-@property (nonatomic ,strong) NSMutableArray *videos;
+///** 数据源*/
+//@property (nonatomic ,strong) NSMutableArray *videos;
 @end
 
 @implementation WJWHomePageViewController
 
--(NSMutableArray *)videos
-{
-    if (_videos == nil) {
-        _videos = [NSMutableArray array];
-    }
-    return _videos;
-}
+//-(NSMutableArray *)videos
+//{
+//    if (_videos == nil) {
+//        _videos = [NSMutableArray array];
+//    }
+//    return _videos;
+//}
 
 NSString *ID = @"hompageCellID";
 
@@ -502,6 +503,42 @@ NSString *ID = @"hompageCellID";
     return strURL;
 }
 
+/**
+ *  从XML里把视频真实播放网址解析出来
+ *  只截取秒拍网站的，其它网站的不太好截取
+ */
+-(NSString *)parseVedioRealURL:(NSString *)urlString
+{
+    
+    // NSString *strSource = @"<embed id=\"em\" src=\"http://wscdn.miaopai.com/splayer2.1.5.swf?scid=dVRsE0QGasz6rRgAC3laaA__&amp;token=&amp;autopause=false&amp;fromweibo=false\" type=\"application/x-shockwave-flash\" autostart=\"false\" width=\"100%\" height=\"100%\" quality=\"high\" allowfullscreen=\"true\" wmode=\"transparent\" allowscriptaccess=\"always\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\">    &#13;";
+    
+    NSString *str = urlString;
+    
+    
+    //####### 目前只限制秒拍的视频!!!!!!!!!!!!
+    if(![str containsString:@"wscdn.miaopai.com"])
+    {
+        return nil;
+    }
+    
+    
+    
+    // 1.动态获取截取的起始位置
+    NSUInteger location = [str rangeOfString:@"src=\""].location + 5;
+    // 2.动态获取截取的长度
+    // 注意:rangeOfString是从左至右的开始查找, 只要找到就不找了
+    //    NSUInteger length = [str rangeOfString:@"<" options:NSBackwardsSearch].location - location;
+    NSUInteger length = [str rangeOfString:@"\" type="].location - location;
+    length = length>10000?0:length;
+    location = location>10000?0:location;
+//    NSLog(@"location = %lu, length = %lu", location, length);
+    NSRange range = NSMakeRange(location, length);
+    NSString *newStr = [str substringWithRange:range];
+//    NSLog(@"%@", str);
+//    NSLog(@"%@", newStr);
+    
+    return newStr;
+}
 
 - (NSString*)converShortToLongWebSite:(NSString*)strShortWebSite
 {
@@ -616,9 +653,7 @@ NSString *ID = @"hompageCellID";
 
         self.hpWeiboArray = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:array];
         
- /* 
-    说明：解析视频数据，暂时无法解决  无法把短地址转换为对应长地址，因为短地址转换后经常变，无法固定格式转换，暂时还未找到解决办法
-    暂时先放下，先解决其他问题，后面再解决（学到了或者有时间了）
+
         // 从HTML XML里把视频网址相关信息解析出来
         NSString *strURL = nil;
         for (WJWHomePageItem *item in self.hpWeiboArray) {
@@ -629,8 +664,22 @@ NSString *ID = @"hompageCellID";
                 if (strURL == nil) {
                     NSLog(@"网址解析失败！！！");
                 }
+                
+                NSLog(@"*********** %@", strURL);
 
-//                // 短地址转换为长地址？？暂时用这个临时办法
+//                // **********短地址转换为长地址****************************************************
+//                L秒拍视频
+//                http://t.cn/R5889Pi
+//                http://www.miaopai.com/show/TcCLd74hdfnYcr3CruS2zw__.htm
+//                
+//                L秒拍视频
+//                http://t.cn/R58rTzP
+//                http://video.weibo.com/show?fid=1034:550e267c7333789608105611bb3b0132
+//                
+//                优酷 L催泪！毕没毕业的都该看看！
+//                http://t.cn/R5RjKN3
+//                http://v.youku.com/v_show/id_XMTYyNjY4MDQ5Ng==.html
+                // 短地址转换为长地址？？暂时用这个临时办法
 //                * Configure session, choose between:
 //                 * defaultSessionConfiguration
 //                 * ephemeralSessionConfiguration
@@ -638,102 +687,131 @@ NSString *ID = @"hompageCellID";
 //                 And set session-wide properties, such as: HTTPAdditionalHeaders,
 //                 HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
 //                 *
-//                NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-//                
+                NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+                
 //                * Create session, and optionally set a NSURLSessionDelegate. *
-//                NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
-//                
+                NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+                
 //                * Create the Request:
 //                 My API (GET http://t.cn/R5mdENE)
 //                 *
-//                
-//                //    NSURL* URL = [NSURL URLWithString:@"http://t.cn/R5mdENE"];
-//                NSURL* URL = [NSURL URLWithString:strURL];
-//                NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
-//                request.HTTPMethod = @"GET";
-//                
+                /*
+                 <embed id="em" src="http://wscdn.miaopai.com/splayer2.1.5.swf?scid=0yWBK8MQQTVz5xGBhuCEJw__&amp;token=&amp;autopause=false&amp;fromweibo=false" type="application/x-shockwave-flash" autostart="false" width="100%" height="100%" quality="high" allowfullscreen="true" wmode="transparent" allowscriptaccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer">    &#13;
+                 </embed>
+                 */
+                //    NSURL* URL = [NSURL URLWithString:@"http://t.cn/R5mdENE"];
+                NSURL* URL = [NSURL URLWithString:strURL];
+                NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+                request.HTTPMethod = @"GET";
+                
 //                * Start a new Task *
-//                NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//                    if (error == nil) {
-//                        // Success
-//                        NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
-//                        
-//                        // 把长网址解析出来
-//                        TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
-//                        
+                NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    if (error == nil) {
+                        // Success
+                        NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
+                        
+                        // 把长网址解析出来
+                        TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
+                        
 //                        NSLog(@"xpathParser: %@", xpathParser);
-//                        
-//                        NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//H1"];
-//                        
+                        
+                        NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//embed"];
+                        
 //                        NSLog(@"dataArray: %@", dataArray);
-//                        
-//                        for (TFHppleElement *hppleElement in dataArray)
-//                        {
-//                            NSLog(@"%@", hppleElement.raw);
-//                            
-//                            NSLog(@"%@", hppleElement.text);
-//                        }
-//                        
-//                        
-//                        //
-//                        //
-//                        //            NSError *error;
-//                        //            NSString *strURL = nil;
-//                        //            //http+:[^\\s]* 这个表达式是检测一个网址的。
-//                        //            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http+:[^\\s]*" options:0 error:&error];
-//                        //
-//                        //            if (regex != nil)
-//                        //            {
-//                        //                NSTextCheckingResult *firstMatch=[regex firstMatchInString:urlString options:0 range:NSMakeRange(0, [urlString length])];
-//                        //                
-//                        //                if (firstMatch) {
-//                        //                    NSRange resultRange = [firstMatch rangeAtIndex:0];
-//                        //                    
-//                        //                    //从urlString当中截取数据
-//                        //                    strURL=[urlString substringWithRange:resultRange];
-//                        //                    //输出结果
-//                        //                    NSLog(@"%@",strURL);
-//                        //                    //            return result;
-//                        //                }
-//                        //                
-//                        //            }
-//                        
-//                        
-//                    }
-//                    else {
-//                        // Failure
-//                        NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
-//                    }
-//                }];
-//                [task resume];
+                        
+                        for (TFHppleElement *hppleElement in dataArray)
+                        {
+//                            if ([[hppleElement objectForKey:@""] isEqualToString:@""])
+                            {
+//                              NSLog(@"%@", hppleElement);
+//                                NSLog(@"raw: %@", hppleElement.raw);
+                                
+//                                NSLog(@"text: %@", hppleElement.text);
+                                
+                                NSString *strVedioPlayURL = [self parseVedioRealURL:hppleElement.raw];
+                                
+                                WJWLog(@"1：strVedioPlayURL= %@", strVedioPlayURL);
+                                
+                                // 检验所获取IP是否有效
+                                UIApplication *app = [UIApplication sharedApplication];
+                                item.videoPlayPath = nil;
+                                if ([app canOpenURL:[NSURL URLWithString:strVedioPlayURL]])
+                                {
+//                                    [app openURL:[NSURL URLWithString:strVedioPlayURL]];
+                                    WJWLog(@"2：strVedioPlayURL= %@", strVedioPlayURL);
+                                    
+                                    item.videoPlayPath = strVedioPlayURL;
+                                }else
+                                {
+                                    item.videoPlayPath = nil;
+                                }
+                                
+                            }
+                        }
+
+                        
+                        //
+                        //
+                        //            NSError *error;
+                        //            NSString *strURL = nil;
+                        //            //http+:[^\\s]* 这个表达式是检测一个网址的。
+                        //            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http+:[^\\s]*" options:0 error:&error];
+                        //
+                        //            if (regex != nil)
+                        //            {
+                        //                NSTextCheckingResult *firstMatch=[regex firstMatchInString:urlString options:0 range:NSMakeRange(0, [urlString length])];
+                        //                
+                        //                if (firstMatch) {
+                        //                    NSRange resultRange = [firstMatch rangeAtIndex:0];
+                        //                    
+                        //                    //从urlString当中截取数据
+                        //                    strURL=[urlString substringWithRange:resultRange];
+                        //                    //输出结果
+                        //                    NSLog(@"%@",strURL);
+                        //                    //            return result;
+                        //                }
+                        //                
+                        //            }
+                        
+                        
+                    }
+                    else {
+                        // Failure
+                        NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
+                    }
+                }];
+                [task resume];
                 
          
-                
-                
-                // 解析HTML XML
-                // 正确视频网址  http://t.cn/R5nWSmn
-//                strURL = @"http://video.weibo.com/show?fid=1034:dfd697d40f8dc2706d731019604c70e1";
-                strURL = @"http://www.miaopai.com/show/LOZYBkLy9IRT3FyjVd2nqw__.htm";
-                NSLog(@"******** %@", strURL);
-                NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:strURL]];
-                
-                TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
-                
-                NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//meta"];
-                
-                for (TFHppleElement *hppleElement in dataArray)
-                {
-                    if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
-                    {
-                        NSLog(@"1: %@", [hppleElement objectForKey:@"property"]);
-                        NSLog(@"2: %@", hppleElement.raw);
-                    }
-                }
+//                // **********解析出视频网址****************************************************
+//                
+//                // 解析HTML XML
+//                // 正确视频网址  http://t.cn/R5nWSmn
+////                strURL = @"http://video.weibo.com/show?fid=1034:dfd697d40f8dc2706d731019604c70e1";
+//                 //        @"http://v.youku.com/v_show/id_XMTYyNjY4MDQ5Ng==.html"     优酷
+//                 //        @"http://www.miaopai.com/show/LOZYBkLy9IRT3FyjVd2nqw__.htm"
+//                
+//                strURL = @"http://www.miaopai.com/show/LOZYBkLy9IRT3FyjVd2nqw__.htm";
+//                NSLog(@"******** %@", strURL);
+//                NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:strURL]];
+//                
+//                TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+//                
+//                NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//meta"];
+//                
+//                for (TFHppleElement *hppleElement in dataArray)
+//                {
+//                    if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
+//                    {
+//                        NSLog(@"1: %@", [hppleElement objectForKey:@"property"]);
+//                        NSLog(@"2: %@", hppleElement.raw);
+//                    }
+//                }
                 
                 
             }
         }
-  */
+  
 /*
  如果用从text里截取出来的网址不能正常播放，就要用到这段代码
         // 如果是视频，则给模型添加视频相关配置 图片 播放网址  宽 高
@@ -884,6 +962,25 @@ NSString *ID = @"hompageCellID";
     CGFloat height = self.hpWeiboArray[indexPath.item].cellHeight;
 //    NSLog(@"heightForRowAtIndexPath   -------  %@", [NSString stringWithFormat:@"%f", height]);
     return height;
+}
+
+#pragma mark UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //1.拿到该cell对应的数据
+    WJWHomePageItem *videoPath  = self.hpWeiboArray[indexPath.row];
+
+    if (videoPath.videoPlayPath != nil) {
+        NSLog(@"%@", videoPath.videoPlayPath);
+        //2.创建视频播放控制器
+        //######## Use AVPlayerViewController in AVKit.
+        MPMoviePlayerViewController *vc = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:videoPath.videoPlayPath]];
+        
+        
+        //3.弹出控制器
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+
 }
 
 #pragma mark -- 点击Cell下拉按钮，弹出遮罩的处理

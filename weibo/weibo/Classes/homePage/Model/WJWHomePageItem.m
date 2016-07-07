@@ -12,8 +12,6 @@
 @implementation WJWHomePageItem
 
 
-
-
 //计算cell的高度有两种算法，一种是在模型文件里计算(baisibudejie)，一种是在cell里计算（sinaweibo,other）
 //模型里计算要注意很多值是写死的，比较简单，xib修改后要注意这里也要手动改，而Cell里计算时不存在这个问题，但是计算起来复杂一些。
 - (CGFloat)cellHeight
@@ -35,10 +33,10 @@
     //中间内容的高度
     // 非段子，可能是图片、声音、视频帖子
     // if (self.type != WJWTopicTypeWord)
-    if (self.pic_urls.count>0)
-    {
+//    if (self.pic_urls.count>0)
+//    {
         _cellHeight += [self middleHeight:_cellHeight];
-    }
+//    }
     
     
 //    // 最热评论的高度
@@ -68,9 +66,31 @@
 {//如果有视频或者其他的要修改这里，暂时只显示图片文字
 //看代码中的数据，貌似没有给出网络图片的宽高，就固定其大小
     
-    NSLog(@"middleHeight  self.pic_urls.count:  %zd", self.pic_urls.count);
+//    NSLog(@"middleHeight  self.pic_urls.count:  %zd", self.pic_urls.count);
     CGFloat midHeightTemp = 0;
-    if (self.pic_urls.count == 0) {
+    NSLog(@"self.pic_urls.count:%zd", self.pic_urls.count);
+    if (self.pic_urls.count == 0)
+    {
+        //如果没有图片，那么如果有视频：
+        if (self.videoPlayPath != nil) {
+            CGFloat middleW = (WJWScreenW - 2 * WJWMargin) * 2.0 /3.0;
+            CGFloat middleH = middleW; // 高度需要重新计算，用宽高比例计算#####################
+            CGFloat middleX = WJWMargin;
+            CGFloat middleY = cellHeight;
+            
+            self.middleF = CGRectMake(middleX, middleY, middleW, middleH);
+            
+            midHeightTemp = middleH + WJWMargin;
+
+            WJWLog(@"视频控件frame: %@", NSStringFromCGRect(self.middleF));
+            WJWLog(@"视频高度 H: %f", midHeightTemp);
+            return midHeightTemp;
+            //WJWTopicVideoView
+        }else
+        {
+            NSLog(@"middleHeight: self.pic_urls:%@", self.pic_urls);
+        }
+
         return 0.0;
     }else{
         //有配图

@@ -7,11 +7,68 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WJWTopicVideoView">
+            <rect key="frame" x="0.0" y="0.0" width="317" height="262"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video" translatesAutoresizingMaskIntoConstraints="NO" id="bPg-wq-H84">
+                    <rect key="frame" x="0.0" y="0.0" width="317" height="262"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8e4-1d-WEF">
+                    <rect key="frame" x="123" y="95" width="71" height="71"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="71" id="cWX-gh-gW1"/>
+                        <constraint firstAttribute="height" constant="71" id="oI7-ia-r4f"/>
+                    </constraints>
+                    <state key="normal" image="video-play"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:25" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVq-7l-w5O">
+                    <rect key="frame" x="239" y="241" width="78" height="21"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.3852143158783784" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="78" id="ga2-d0-Rr6"/>
+                        <constraint firstAttribute="height" constant="21" id="npb-Aw-qJd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggv-zi-B9U">
+                    <rect key="frame" x="0.0" y="232" width="80" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40041701858108109" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="gbP-r7-6tu"/>
+                        <constraint firstAttribute="height" constant="30" id="pck-po-Zfs"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="375" y="280"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="bPg-wq-H84" secondAttribute="trailing" id="2ft-gJ-F1F"/>
+                <constraint firstItem="bPg-wq-H84" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5Wb-Am-oRc"/>
+                <constraint firstItem="8e4-1d-WEF" firstAttribute="centerX" secondItem="bPg-wq-H84" secondAttribute="centerX" id="DXk-p5-MoI"/>
+                <constraint firstItem="8e4-1d-WEF" firstAttribute="centerY" secondItem="bPg-wq-H84" secondAttribute="centerY" id="Fuc-G2-HMY"/>
+                <constraint firstAttribute="bottom" secondItem="ggv-zi-B9U" secondAttribute="bottom" id="GWJ-8l-4xf"/>
+                <constraint firstAttribute="trailing" secondItem="dVq-7l-w5O" secondAttribute="trailing" id="Ndb-xn-yqs"/>
+                <constraint firstAttribute="bottom" secondItem="bPg-wq-H84" secondAttribute="bottom" id="NsB-G1-o2r"/>
+                <constraint firstAttribute="bottom" secondItem="dVq-7l-w5O" secondAttribute="bottom" id="PZW-Pf-7jd"/>
+                <constraint firstItem="bPg-wq-H84" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YHE-OP-IZ9"/>
+                <constraint firstItem="ggv-zi-B9U" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ryA-uz-qOf"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageView" destination="bPg-wq-H84" id="3Vb-yA-wYg"/>
+                <outlet property="playcountLabel" destination="ggv-zi-B9U" id="1zy-z9-9vG"/>
+                <outlet property="videotimeLabel" destination="dVq-7l-w5O" id="hxO-XY-u9f"/>
+            </connections>
+            <point key="canvasLocation" x="297.5" y="126"/>
         </view>
     </objects>
+    <resources>
+        <image name="video" width="604" height="350"/>
+        <image name="video-play" width="71" height="71"/>
+    </resources>
 </document>

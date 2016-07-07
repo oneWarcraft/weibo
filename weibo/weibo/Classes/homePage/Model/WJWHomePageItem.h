@@ -111,6 +111,12 @@ typedef enum {
 @property (nonatomic, assign) CGFloat videoWidth;
 /** Video的高 */
 @property (nonatomic, assign) CGFloat videoHeight;
+/** 播放数量 */
+@property (nonatomic, assign) NSInteger playcount;
+/** 视频文件的长度 */
+@property (nonatomic, assign) NSInteger videotime;
+
+
 /** 是否为动态图 */
 @property (nonatomic, assign) BOOL is_gif;
 /** 是否为超长图 */
