@@ -68,7 +68,9 @@
     
 //    NSLog(@"middleHeight  self.pic_urls.count:  %zd", self.pic_urls.count);
     CGFloat midHeightTemp = 0;
-    NSLog(@"self.pic_urls.count:%zd", self.pic_urls.count);
+    
+//    NSLog(@"111 self.pic_urls.count:%zd", self.pic_urls.count);
+//    NSLog(@"111 self.user.username:%@", self.user[@"username"]);
     if (self.pic_urls.count == 0)
     {
         //如果没有图片，那么如果有视频：
@@ -88,7 +90,7 @@
             //WJWTopicVideoView
         }else
         {
-            NSLog(@"middleHeight: self.pic_urls:%@", self.pic_urls);
+//            NSLog(@"middleHeight: self.pic_urls:%@", self.pic_urls);
         }
 
         return 0.0;

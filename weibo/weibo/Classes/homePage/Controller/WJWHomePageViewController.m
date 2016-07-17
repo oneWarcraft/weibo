@@ -133,11 +133,11 @@ NSString *ID = @"hompageCellID";
             
             TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
             
-            NSLog(@"xpathParser: %@", xpathParser);
+//            NSLog(@"xpathParser: %@", xpathParser);
             
             NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//embed"];
             
-            NSLog(@"dataArray: %@", dataArray);
+//            NSLog(@"dataArray: %@", dataArray);
             
             for (TFHppleElement *hppleElement in dataArray)
             {
@@ -576,7 +576,7 @@ NSString *ID = @"hompageCellID";
             
             NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//H1"];
             
-            NSLog(@"dataArray: %@", dataArray);
+//            NSLog(@"dataArray: %@", dataArray);
             
             for (TFHppleElement *hppleElement in dataArray)
             {
@@ -638,7 +638,7 @@ NSString *ID = @"hompageCellID";
 //    NSLog(@"%@", urlstr);
     
     NSDictionary *dict = @{
-                           @"count":@(50),
+                           @"count":@(60),
                            @"max_id":@(0),
                            @"page":@(self.page)
                            };
@@ -647,17 +647,37 @@ NSString *ID = @"hompageCellID";
     [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
         
 //        NSLog(@"%@", responseObject);
-        
+        NSLog(@"wwwwwwwwwwwww: %@", [NSThread currentThread]);
         //解析JSON对象
         NSArray *array = responseObject[@"statuses"];
 
         self.hpWeiboArray = [WJWHomePageItem mj_objectArrayWithKeyValuesArray:array];
         
+        NSLog(@"添加视频前的数组内容:-----");
+        for (WJWHomePageItem *item in self.hpWeiboArray)
+        {
+            NSLog(@"昵称: %@", item.user[@"screen_name"]);
+            NSLog(@"视频网址: %@", item.videoPlayPath);
+        }
+        
 
+//        [self getVideoPlayPath:self.hpWeiboArray ];
+        
+        
         // 从HTML XML里把视频网址相关信息解析出来
-        NSString *strURL = nil;
-        for (WJWHomePageItem *item in self.hpWeiboArray) {
-            NSLog(@"---- %@", item.text);
+        //0.获得队列组,管理队列
+//        dispatch_group_t group = dispatch_group_create();
+//        
+//        //1.获得并发队列
+        dispatch_queue_t queue = dispatch_queue_create("resolvingURL", DISPATCH_QUEUE_CONCURRENT);
+    NSLog(@"******************************************************************************************************************************************************************************");
+        
+//        NSInteger indexWJW = 0;
+//        NSInteger count = self.hpWeiboArray.count;
+        for (WJWHomePageItem *item in self.hpWeiboArray)
+        {
+            NSString *strURL = nil;
+            //            NSLog(@"---- %@", item.text);
             if (item.text != nil && [item.text containsString:@"http://t.cn"]) { //据手动统计视频网址都以短网址http://t.cn开头
                 // 拿到视频网址
                 strURL = [self parseURLString:item.text];
@@ -666,35 +686,38 @@ NSString *ID = @"hompageCellID";
                 }
                 
                 NSLog(@"*********** %@", strURL);
-
-//                // **********短地址转换为长地址****************************************************
-//                L秒拍视频
-//                http://t.cn/R5889Pi
-//                http://www.miaopai.com/show/TcCLd74hdfnYcr3CruS2zw__.htm
-//                
-//                L秒拍视频
-//                http://t.cn/R58rTzP
-//                http://video.weibo.com/show?fid=1034:550e267c7333789608105611bb3b0132
-//                
-//                优酷 L催泪！毕没毕业的都该看看！
-//                http://t.cn/R5RjKN3
-//                http://v.youku.com/v_show/id_XMTYyNjY4MDQ5Ng==.html
-                // 短地址转换为长地址？？暂时用这个临时办法
-//                * Configure session, choose between:
-//                 * defaultSessionConfiguration
-//                 * ephemeralSessionConfiguration
-//                 * backgroundSessionConfigurationWithIdentifier:
-//                 And set session-wide properties, such as: HTTPAdditionalHeaders,
-//                 HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
-//                 *
+                /*
+                 //                // **********短地址转换为长地址****************************************************
+                 //                L秒拍视频
+                 //                http://t.cn/R5889Pi
+                 //                http://www.miaopai.com/show/TcCLd74hdfnYcr3CruS2zw__.htm
+                 //
+                 //                L秒拍视频
+                 //                http://t.cn/R58rTzP
+                 //                http://video.weibo.com/show?fid=1034:550e267c7333789608105611bb3b0132
+                 //
+                 //                优酷 L催泪！毕没毕业的都该看看！
+                 //                http://t.cn/R5RjKN3
+                 //                http://v.youku.com/v_show/id_XMTYyNjY4MDQ5Ng==.html
+                 // 短地址转换为长地址？？暂时用这个临时办法
+                 //                * Configure session, choose between:
+                 //                 * defaultSessionConfiguration
+                 //                 * ephemeralSessionConfiguration
+                 //                 * backgroundSessionConfigurationWithIdentifier:
+                 //                 And set session-wide properties, such as: HTTPAdditionalHeaders,
+                 //                 HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
+                 //                 *
+                 */
+                
+                //短地址转换为长地址,并解析出来视频网址
                 NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
                 
-//                * Create session, and optionally set a NSURLSessionDelegate. *
+                //                * Create session, and optionally set a NSURLSessionDelegate. *
                 NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
                 
-//                * Create the Request:
-//                 My API (GET http://t.cn/R5mdENE)
-//                 *
+                //                * Create the Request:
+                //                 My API (GET http://t.cn/R5mdENE)
+                //                 *
                 /*
                  <embed id="em" src="http://wscdn.miaopai.com/splayer2.1.5.swf?scid=0yWBK8MQQTVz5xGBhuCEJw__&amp;token=&amp;autopause=false&amp;fromweibo=false" type="application/x-shockwave-flash" autostart="false" width="100%" height="100%" quality="high" allowfullscreen="true" wmode="transparent" allowscriptaccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer">    &#13;
                  </embed>
@@ -704,29 +727,29 @@ NSString *ID = @"hompageCellID";
                 NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
                 request.HTTPMethod = @"GET";
                 
-//                * Start a new Task *
+                //                * Start a new Task *
                 NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     if (error == nil) {
                         // Success
-                        NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
+                        NSLog(@"URL Session Task Succeeded: HTTP %ld, thread:%@", ((NSHTTPURLResponse*)response).statusCode, [NSThread currentThread]);
                         
                         // 把长网址解析出来
                         TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
                         
-//                        NSLog(@"xpathParser: %@", xpathParser);
+                        //                        NSLog(@"xpathParser: %@", xpathParser);
                         
                         NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//embed"];
                         
-//                        NSLog(@"dataArray: %@", dataArray);
+                        //                        NSLog(@"dataArray: %@", dataArray);
                         
                         for (TFHppleElement *hppleElement in dataArray)
                         {
-//                            if ([[hppleElement objectForKey:@""] isEqualToString:@""])
+                            //                            if ([[hppleElement objectForKey:@""] isEqualToString:@""])
                             {
-//                              NSLog(@"%@", hppleElement);
-//                                NSLog(@"raw: %@", hppleElement.raw);
+                                //                              NSLog(@"%@", hppleElement);
+                                //                                NSLog(@"raw: %@", hppleElement.raw);
                                 
-//                                NSLog(@"text: %@", hppleElement.text);
+                                //                                NSLog(@"text: %@", hppleElement.text);
                                 
                                 NSString *strVedioPlayURL = [self parseVedioRealURL:hppleElement.raw];
                                 
@@ -734,84 +757,120 @@ NSString *ID = @"hompageCellID";
                                 
                                 // 检验所获取IP是否有效
                                 UIApplication *app = [UIApplication sharedApplication];
-                                item.videoPlayPath = nil;
+                                //                                item.videoPlayPath = nil;
                                 if ([app canOpenURL:[NSURL URLWithString:strVedioPlayURL]])
                                 {
-//                                    [app openURL:[NSURL URLWithString:strVedioPlayURL]];
-                                    WJWLog(@"2：strVedioPlayURL= %@", strVedioPlayURL);
+                                    //                                    [app openURL:[NSURL URLWithString:strVedioPlayURL]];
+                                    
+                                    //                                        NSLog(@"--- %@",item.videoPlayPath);
                                     
                                     item.videoPlayPath = strVedioPlayURL;
+                                    NSLog(@"------------------------+++++--------------------------xian");
+                                    WJWLog(@"2：strVedioPlayURL= %@", strVedioPlayURL);
+                                    
+                                    //                                        NSLog(@"++++--- %@",item.videoPlayPath);
+                                    
                                 }else
                                 {
-                                    item.videoPlayPath = nil;
+                                    //                                        item.videoPlayPath = nil;
+                                    
                                 }
                                 
                             }
                         }
-
                         
-                        //
-                        //
-                        //            NSError *error;
-                        //            NSString *strURL = nil;
-                        //            //http+:[^\\s]* 这个表达式是检测一个网址的。
-                        //            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http+:[^\\s]*" options:0 error:&error];
-                        //
-                        //            if (regex != nil)
-                        //            {
-                        //                NSTextCheckingResult *firstMatch=[regex firstMatchInString:urlString options:0 range:NSMakeRange(0, [urlString length])];
-                        //                
-                        //                if (firstMatch) {
-                        //                    NSRange resultRange = [firstMatch rangeAtIndex:0];
-                        //                    
-                        //                    //从urlString当中截取数据
-                        //                    strURL=[urlString substringWithRange:resultRange];
-                        //                    //输出结果
-                        //                    NSLog(@"%@",strURL);
-                        //                    //            return result;
-                        //                }
-                        //                
-                        //            }
-                        
+                        /*
+                         //
+                         //
+                         //            NSError *error;
+                         //            NSString *strURL = nil;
+                         //            //http+:[^\\s]* 这个表达式是检测一个网址的。
+                         //            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http+:[^\\s]*" options:0 error:&error];
+                         //
+                         //            if (regex != nil)
+                         //            {
+                         //                NSTextCheckingResult *firstMatch=[regex firstMatchInString:urlString options:0 range:NSMakeRange(0, [urlString length])];
+                         //
+                         //                if (firstMatch) {
+                         //                    NSRange resultRange = [firstMatch rangeAtIndex:0];
+                         //
+                         //                    //从urlString当中截取数据
+                         //                    strURL=[urlString substringWithRange:resultRange];
+                         //                    //输出结果
+                         //                    NSLog(@"%@",strURL);
+                         //                    //            return result;
+                         //                }
+                         //
+                         //            }
+                         */
                         
                     }
                     else {
                         // Failure
                         NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
                     }
+                    
+//                    if (indexWJW >= count - 2)
+//                    {
+//                        [self.tableView reloadData];
+//                        NSLog(@"----------------------------------------------------------->hou");
+//                        for (WJWHomePageItem *item in self.hpWeiboArray)
+//                        {
+//                            NSLog(@"之后昵称: %@", item.user[@"screen_name"]);
+//                            NSLog(@"之后视频网址: %@", item.videoPlayPath);
+//                        }
+//                    }
                 }];
                 [task resume];
                 
-         
-//                // **********解析出视频网址****************************************************
-//                
-//                // 解析HTML XML
-//                // 正确视频网址  http://t.cn/R5nWSmn
-////                strURL = @"http://video.weibo.com/show?fid=1034:dfd697d40f8dc2706d731019604c70e1";
-//                 //        @"http://v.youku.com/v_show/id_XMTYyNjY4MDQ5Ng==.html"     优酷
-//                 //        @"http://www.miaopai.com/show/LOZYBkLy9IRT3FyjVd2nqw__.htm"
-//                
-//                strURL = @"http://www.miaopai.com/show/LOZYBkLy9IRT3FyjVd2nqw__.htm";
-//                NSLog(@"******** %@", strURL);
-//                NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:strURL]];
-//                
-//                TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
-//                
-//                NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//meta"];
-//                
-//                for (TFHppleElement *hppleElement in dataArray)
-//                {
-//                    if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
-//                    {
-//                        NSLog(@"1: %@", [hppleElement objectForKey:@"property"]);
-//                        NSLog(@"2: %@", hppleElement.raw);
-//                    }
-//                }
                 
+                /*
+                 //                // **********解析出视频网址****************************************************
+                 //
+                 //                // 解析HTML XML
+                 //                // 正确视频网址  http://t.cn/R5nWSmn
+                 ////                strURL = @"http://video.weibo.com/show?fid=1034:dfd697d40f8dc2706d731019604c70e1";
+                 //                 //        @"http://v.youku.com/v_show/id_XMTYyNjY4MDQ5Ng==.html"     优酷
+                 //                 //        @"http://www.miaopai.com/show/LOZYBkLy9IRT3FyjVd2nqw__.htm"
+                 //
+                 //                strURL = @"http://www.miaopai.com/show/LOZYBkLy9IRT3FyjVd2nqw__.htm";
+                 //                NSLog(@"******** %@", strURL);
+                 //                NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:strURL]];
+                 //
+                 //                TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+                 //
+                 //                NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//meta"];
+                 //
+                 //                for (TFHppleElement *hppleElement in dataArray)
+                 //                {
+                 //                    if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
+                 //                    {
+                 //                        NSLog(@"1: %@", [hppleElement objectForKey:@"property"]);
+                 //                        NSLog(@"2: %@", hppleElement.raw);
+                 //                    }
+                 //                }
+                 */
                 
             }
+//            indexWJW++;
         }
-  
+        
+//        });
+        
+        // 由于是子线程里处理播放路径, 因此重新加载tableView就不能在这里了,需要全部任务执行完成后,在执行
+        // 打算在GCD数组里
+        //拦截通知
+        //当队列组中所有的任务都执行完毕的时候回调用下面方法block
+        NSLog(@"@@@@@@@@@@@@@@  %@", [NSThread currentThread]);
+        
+        //5.回到主线程设置UI
+        
+        //            self.imageView.image = image;
+        NSLog(@"############### ---- %@",[NSThread currentThread]);
+        
+//        [self.tableView reloadData];
+        
+        NSLog(@"添加视频后的数组内容:-----");
 /*
  如果用从text里截取出来的网址不能正常播放，就要用到这段代码
         // 如果是视频，则给模型添加视频相关配置 图片 播放网址  宽 高
@@ -873,15 +932,242 @@ NSString *ID = @"hompageCellID";
         
         }
   */
-        
-        
         [self.tableView reloadData];
+        NSLog(@"----------------------------------------------------------->hou");
+        for (WJWHomePageItem *item in self.hpWeiboArray)
+        {
+            NSLog(@"之后昵称: %@", item.user[@"screen_name"]);
+            NSLog(@"之后视频网址: %@", item.videoPlayPath);
+        }
         
         [self.tableView.mj_header endRefreshing];
+        
+
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.tableView.mj_header endRefreshing];
         NSLog(@"error===%@",error);
     }];
+}
+
+//废弃
+- (void) getVideoPlayPath:(NSMutableArray *)AllDataPath
+{
+    // 从HTML XML里把视频网址相关信息解析出来
+    //0.获得队列组,管理队列
+    dispatch_group_t group = dispatch_group_create();
+    
+    //1.获得并发队列
+    dispatch_queue_t queue = dispatch_queue_create("resolvingURL", DISPATCH_QUEUE_CONCURRENT);
+
+    
+//    //1.创建队列
+//    dispatch_queue_t queue = dispatch_queue_create("WJW", DISPATCH_QUEUE_CONCURRENT);
+//
+
+    for (WJWHomePageItem *item in self.hpWeiboArray)
+    {
+//        //控制顺序:必须等任务完毕之后才能执行后面任务
+//        dispatch_barrier_async(queue, ^{
+
+        //2.使用函数添加任务
+        //把当前的任务的执行情况纳入到队列组的监听范围
+        dispatch_group_async(group, queue, ^{
+            NSString *strURL = nil;
+//            NSLog(@"---- %@", item.text);
+            if (item.text != nil && [item.text containsString:@"http://t.cn"]) { //据手动统计视频网址都以短网址http://t.cn开头
+                // 拿到视频网址
+                strURL = [self parseURLString:item.text];
+                if (strURL == nil) {
+                    NSLog(@"网址解析失败！！！");
+                }
+                
+                NSLog(@"*********** %@", strURL);
+                /*
+                 //                // **********短地址转换为长地址****************************************************
+                 //                L秒拍视频
+                 //                http://t.cn/R5889Pi
+                 //                http://www.miaopai.com/show/TcCLd74hdfnYcr3CruS2zw__.htm
+                 //
+                 //                L秒拍视频
+                 //                http://t.cn/R58rTzP
+                 //                http://video.weibo.com/show?fid=1034:550e267c7333789608105611bb3b0132
+                 //
+                 //                优酷 L催泪！毕没毕业的都该看看！
+                 //                http://t.cn/R5RjKN3
+                 //                http://v.youku.com/v_show/id_XMTYyNjY4MDQ5Ng==.html
+                 // 短地址转换为长地址？？暂时用这个临时办法
+                 //                * Configure session, choose between:
+                 //                 * defaultSessionConfiguration
+                 //                 * ephemeralSessionConfiguration
+                 //                 * backgroundSessionConfigurationWithIdentifier:
+                 //                 And set session-wide properties, such as: HTTPAdditionalHeaders,
+                 //                 HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
+                 //                 *
+                 */
+                
+                //短地址转换为长地址,并解析出来视频网址
+                NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+                
+                //                * Create session, and optionally set a NSURLSessionDelegate. *
+                NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+                
+                //                * Create the Request:
+                //                 My API (GET http://t.cn/R5mdENE)
+                //                 *
+                /*
+                 <embed id="em" src="http://wscdn.miaopai.com/splayer2.1.5.swf?scid=0yWBK8MQQTVz5xGBhuCEJw__&amp;token=&amp;autopause=false&amp;fromweibo=false" type="application/x-shockwave-flash" autostart="false" width="100%" height="100%" quality="high" allowfullscreen="true" wmode="transparent" allowscriptaccess="always" pluginspage="http://www.macromedia.com/go/getflashplayer">    &#13;
+                 </embed>
+                 */
+                //    NSURL* URL = [NSURL URLWithString:@"http://t.cn/R5mdENE"];
+                NSURL* URL = [NSURL URLWithString:strURL];
+                NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+                request.HTTPMethod = @"GET";
+                
+                //                * Start a new Task *
+                NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    if (error == nil) {
+                        // Success
+                        NSLog(@"URL Session Task Succeeded: HTTP %ld, thread:%@", ((NSHTTPURLResponse*)response).statusCode, [NSThread currentThread]);
+                        
+                        // 把长网址解析出来
+                        TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:data];
+                        
+                        //                        NSLog(@"xpathParser: %@", xpathParser);
+                        
+                        NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//embed"];
+                        
+                        //                        NSLog(@"dataArray: %@", dataArray);
+                        
+                        for (TFHppleElement *hppleElement in dataArray)
+                        {
+                            //                            if ([[hppleElement objectForKey:@""] isEqualToString:@""])
+                            {
+                                //                              NSLog(@"%@", hppleElement);
+                                //                                NSLog(@"raw: %@", hppleElement.raw);
+                                
+                                //                                NSLog(@"text: %@", hppleElement.text);
+                                
+                                NSString *strVedioPlayURL = [self parseVedioRealURL:hppleElement.raw];
+                                
+                                WJWLog(@"1：strVedioPlayURL= %@", strVedioPlayURL);
+                                
+                                // 检验所获取IP是否有效
+                                UIApplication *app = [UIApplication sharedApplication];
+                                //                                item.videoPlayPath = nil;
+                                if ([app canOpenURL:[NSURL URLWithString:strVedioPlayURL]])
+                                {
+                                    //                                    [app openURL:[NSURL URLWithString:strVedioPlayURL]];
+                                    WJWLog(@"2：strVedioPlayURL= %@", strVedioPlayURL);
+                                    
+                                    NSLog(@"--- %@",item.videoPlayPath);
+                                    
+                                    item.videoPlayPath = strVedioPlayURL;
+                                    
+                                    NSLog(@"++++--- %@",item.videoPlayPath);
+                                    
+                                }else
+                                {
+                                    item.videoPlayPath = nil;
+                                }
+                                //                                item.videoPlayPath = @"asophiasophiasophiasophiasophiasophiasophiasophiasophia";
+                            }
+                        }
+                        
+                        /*
+                         //
+                         //
+                         //            NSError *error;
+                         //            NSString *strURL = nil;
+                         //            //http+:[^\\s]* 这个表达式是检测一个网址的。
+                         //            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"http+:[^\\s]*" options:0 error:&error];
+                         //
+                         //            if (regex != nil)
+                         //            {
+                         //                NSTextCheckingResult *firstMatch=[regex firstMatchInString:urlString options:0 range:NSMakeRange(0, [urlString length])];
+                         //
+                         //                if (firstMatch) {
+                         //                    NSRange resultRange = [firstMatch rangeAtIndex:0];
+                         //
+                         //                    //从urlString当中截取数据
+                         //                    strURL=[urlString substringWithRange:resultRange];
+                         //                    //输出结果
+                         //                    NSLog(@"%@",strURL);
+                         //                    //            return result;
+                         //                }
+                         //
+                         //            }
+                         */
+                        
+                    }
+                    else {
+                        // Failure
+                        NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
+                    }
+                }];
+                [task resume];
+                
+                /*
+                 //                // **********解析出视频网址****************************************************
+                 //
+                 //                // 解析HTML XML
+                 //                // 正确视频网址  http://t.cn/R5nWSmn
+                 ////                strURL = @"http://video.weibo.com/show?fid=1034:dfd697d40f8dc2706d731019604c70e1";
+                 //                 //        @"http://v.youku.com/v_show/id_XMTYyNjY4MDQ5Ng==.html"     优酷
+                 //                 //        @"http://www.miaopai.com/show/LOZYBkLy9IRT3FyjVd2nqw__.htm"
+                 //
+                 //                strURL = @"http://www.miaopai.com/show/LOZYBkLy9IRT3FyjVd2nqw__.htm";
+                 //                NSLog(@"******** %@", strURL);
+                 //                NSData *htmlData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:strURL]];
+                 //
+                 //                TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+                 //
+                 //                NSArray *dataArray = [xpathParser searchWithXPathQuery:@"//meta"];
+                 //
+                 //                for (TFHppleElement *hppleElement in dataArray)
+                 //                {
+                 //                    if ([[hppleElement objectForKey:@"property"] isEqualToString:@"og:videosrc"])
+                 //                    {
+                 //                        NSLog(@"1: %@", [hppleElement objectForKey:@"property"]);
+                 //                        NSLog(@"2: %@", hppleElement.raw);
+                 //                    }
+                 //                }
+                 */
+                
+            }
+        });
+//        });
+    }
+ 
+
+        
+//        NSLog(@"+++++++++++++++++++++++++++");
+
+    
+    // 由于是子线程里处理播放路径, 因此重新加载tableView就不能在这里了,需要全部任务执行完成后,在执行
+    // 打算在GCD数组里
+    //拦截通知
+    //当队列组中所有的任务都执行完毕的时候回调用下面方法block
+    dispatch_group_notify(group, queue, ^{
+//        [self.tableView reloadData];
+        
+            NSLog(@"@@@@@@@@@@@@@@  %@", [NSThread currentThread]);
+        //5.回到主线程设置UI
+            dispatch_async(dispatch_get_main_queue(), ^{
+    //            self.imageView.image = image;
+            NSLog(@"############### ---- %@",[NSThread currentThread]);
+
+            [self.tableView reloadData];
+                
+            NSLog(@"添加视频后的数组内容:-----");
+            for (WJWHomePageItem *item in self.hpWeiboArray)
+            {
+                NSLog(@"之后昵称: %@", item.user[@"screen_name"]);
+                NSLog(@"之后视频网址: %@", item.videoPlayPath);
+            }
+            
+           });
+    });
 }
 
 /** 加载更多微博 */
@@ -907,7 +1193,7 @@ NSString *ID = @"hompageCellID";
     
     [manager GET:urlstr parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary* responseObject) {
         
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         
         //解析JSON对象
         self.page++;
@@ -981,6 +1267,13 @@ NSString *ID = @"hompageCellID";
         [self presentViewController:vc animated:YES completion:nil];
     }
 
+    
+    NSLog(@"didSelectRowAtIndexPath: 添加视频后的数组内容:-----");
+    for (WJWHomePageItem *item in self.hpWeiboArray)
+    {
+        NSLog(@"之后昵称: %@", item.user[@"screen_name"]);
+        NSLog(@"之后视频网址: %@", item.videoPlayPath);
+    }
 }
 
 #pragma mark -- 点击Cell下拉按钮，弹出遮罩的处理

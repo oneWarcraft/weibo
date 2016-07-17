@@ -450,6 +450,8 @@ NSString *collecNibID = @"collecNibID";
     {
         self.videoView.frame = self.hpCellItem.middleF;
         WJWLog(@"layoutSubviews videoView: %@", NSStringFromCGRect(self.videoView.frame));
+        WJWLog(@"layoutSubviews videoPlayPath: %@", self.hpCellItem.videoPlayPath);
+        WJWLog(@"layoutSubviews self.hpCellItem.pic_urls: %@", self.hpCellItem.pic_urls);
     }
 }
 
